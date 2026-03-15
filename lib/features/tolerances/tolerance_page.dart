@@ -67,6 +67,13 @@ class _TolerancePageState extends State<TolerancePage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/'),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            tooltip: "Informacje o tolerancjach",
+            onPressed: () => _showInfoModal(context),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -241,6 +248,93 @@ class _TolerancePageState extends State<TolerancePage> {
           fontSize: 18,
         ),
       ),
+    );
+  }
+
+  void _showInfoModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => SingleChildScrollView(
+          controller: scrollController,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              Text(
+                "Tolerancje i Pasowania",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                "System pasowań ISO określa dopuszczalne odchyłki wymiarów. Litery określają położenie pola tolerancji względem linii zerowej.",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              _buildInfoSection(
+                context,
+                "Co oznaczają litery?",
+                _selectedType == ToleranceType.shaft
+                    ? "• a – g: Pasowania luźne (wałek zawsze mniejszy)\n• h: Odchyłka górna = 0 (standard)\n• j – n: Pasowania mieszane\n• p – zc: Pasowania ciasne (wcisk)"
+                    : "• A – G: Pasowania luźne (otwór zawsze większy)\n• H: Odchyłka dolna = 0 (najczęstszy standard)\n• J – N: Pasowania mieszane\n• P – ZC: Pasowania ciasne (wcisk)",
+              ),
+              const SizedBox(height: 20),
+              _buildInfoSection(
+                context,
+                "Klasa dokładności (Liczba)",
+                "Im mniejsza liczba, tym węższe pole tolerancji:\n• 5-6: Wysoka precyzja (szlifowanie)\n• 7-9: Dokładność warsztatowa (toczenie/frezowanie)\n• 10+: Wykonania zgrubne",
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("Rozumiem"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInfoSection(BuildContext context, String title, String content) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(content, style: const TextStyle(fontSize: 15, height: 1.4)),
+      ],
     );
   }
 }
