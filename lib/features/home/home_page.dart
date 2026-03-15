@@ -1,6 +1,6 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/features/home/tool_tile.dart';
 import 'package:cnc_toolbox/features/home/tools_list.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("app.title".tr()),
+        title: Text(AppInfo.appName),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),

@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:cnc_toolbox/core/theme/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,7 +14,7 @@ class MyApp extends ConsumerWidget {
     final themeMode = ref.watch(themeProvider);
 
     return MaterialApp.router(
-      title: 'CNC Toolbox',
+      title: AppInfo.appName,
       debugShowCheckedModeBanner: false,
 
       routerConfig: router,
