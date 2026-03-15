@@ -1,28 +1,24 @@
 import 'package:cnc_toolbox/core/shared_prefs_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final themeProvider = NotifierProvider<ThemeNotifier, ThemeMode>(
-  ThemeNotifier.new,
-);
+part 'theme_provider.g.dart';
 
-class ThemeNotifier extends Notifier<ThemeMode> {
+@riverpod
+class ThemeNotifier extends _$ThemeNotifier {
   static const _themeKey = 'isDarkMode';
 
   @override
   ThemeMode build() {
-    final prefs = ref.read(sharedPrefsProvider);
-
+    // To jest bezpieczne, bo robimy override w bootstrap
+    final prefs = ref.watch(sharedPrefsProvider);
     final isDark = prefs.getBool(_themeKey) ?? false;
-
     return isDark ? ThemeMode.dark : ThemeMode.light;
   }
 
   Future<void> toggleTheme(bool isDark) async {
     final prefs = ref.read(sharedPrefsProvider);
-
     state = isDark ? ThemeMode.dark : ThemeMode.light;
-
     await prefs.setBool(_themeKey, isDark);
   }
 }

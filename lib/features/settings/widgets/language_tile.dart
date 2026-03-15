@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/localization/app_languages.dart';
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,6 @@ class LanguageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Wyciągamy dane o aktualnym języku na podstawie locale z contextu
     final currentLocale = context.locale;
     final currentLanguage = AppLanguage.values.firstWhere(
       (l) => l.locale.languageCode == currentLocale.languageCode,
@@ -29,7 +29,7 @@ class LanguageTile extends StatelessWidget {
     return ListTile(
       title: Text(currentLanguage.name),
       leading: Text(currentLanguage.flag, style: const TextStyle(fontSize: 20)),
-      subtitle: Text('change_language_desc'.tr()),
+      subtitle: Text(LocaleKeys.change_language_desc.tr()),
       onTap: () => _showLanguagePicker(context),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       tileColor: Theme.of(

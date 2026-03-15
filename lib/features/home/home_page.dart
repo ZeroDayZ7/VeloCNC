@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () => context.go("/settings"),
+            onPressed: () => context.go(Routes.settings),
           ),
         ],
       ),

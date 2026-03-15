@@ -16,6 +16,10 @@
     "unit_converter": "Konwersja mm/inch, m/min ↔ ft/min",
     "tolerances": "Oblicz tolerancje i pasowania otworów oraz wałków"
   },
+
+  "contact": "Kontakt",
+  "website": "Strona internetowa",
+
   "select_language": "Wybierz język",
   "settings": "Ustawienia",
   "dark_mode": "Tryb ciemny",

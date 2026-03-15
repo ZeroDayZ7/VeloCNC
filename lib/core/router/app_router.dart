@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/features/cutting_speed/cutting_speed_page.dart';
 import 'package:cnc_toolbox/features/feed_rate/feed_rate_page.dart';
 import 'package:cnc_toolbox/features/home/home_page.dart';
@@ -14,42 +15,42 @@ final routerProvider = Provider<GoRouter>((ref) {
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
-        path: '/',
+        path: Routes.home,
         name: 'home',
         builder: (context, state) => const HomePage(),
       ),
       GoRoute(
-        path: '/settings',
+        path: Routes.settings,
         name: 'settings',
         builder: (context, state) => const SettingsPage(),
       ),
       GoRoute(
-        path: '/cutting-speed',
+        path: Routes.cuttingSpeed,
         name: 'cutting_speed',
         builder: (context, state) => const CuttingSpeedPage(),
       ),
       GoRoute(
-        path: '/feed-rate',
+        path: Routes.feedRate,
         name: 'feed_rate',
         builder: (context, state) => const FeedRatePage(),
       ),
       GoRoute(
-        path: '/spindle-speed',
+        path: Routes.spindleSpeed,
         name: 'spindle_speed',
         builder: (context, state) => const SpindleSpeedPage(),
       ),
       GoRoute(
-        path: '/tap-drill',
+        path: Routes.tapDrill,
         name: 'tap_drill',
         builder: (context, state) => const TapDrillPage(),
       ),
       GoRoute(
-        path: '/converter',
+        path: Routes.converter,
         name: 'converter',
         builder: (context, state) => const TapDrillPage(),
       ),
       GoRoute(
-        path: '/tolerances',
+        path: Routes.tolerances,
         name: 'tolerances',
         builder: (context, state) => const TolerancePage(),
       ),

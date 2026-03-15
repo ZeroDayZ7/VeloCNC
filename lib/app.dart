@@ -1,6 +1,7 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
+import 'package:cnc_toolbox/core/theme/theme_data.dart';
 import 'package:cnc_toolbox/core/theme/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,8 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: context.localizationDelegates,
 
       themeMode: themeMode,
-      theme: ThemeData(colorSchemeSeed: Colors.blue, useMaterial3: true),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorSchemeSeed: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
     );
   }
 }

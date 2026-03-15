@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/theme/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,12 @@ class DarkModeSwitch extends ConsumerWidget {
     final isDarkMode = themeMode == ThemeMode.dark;
 
     return SwitchListTile(
-      title: Text('dark_mode'.tr()),
-      subtitle: Text('dark_mode_desc'.tr()),
+      title: Text(LocaleKeys.dark_mode.tr()),
+      subtitle: Text(LocaleKeys.dark_mode_desc.tr()),
       value: isDarkMode,
       onChanged: (val) => themeNotifier.toggleTheme(val),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      tileColor: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.1),
     );
   }
 }

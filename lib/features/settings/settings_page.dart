@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
 import 'package:cnc_toolbox/features/settings/widgets/language_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,9 +15,10 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(localeProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('settings'.tr()),
+        title: Text(LocaleKeys.settings.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/'),
@@ -26,29 +28,29 @@ class SettingsPage extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         children: [
           _SettingsContainer(
-            title: 'appearance'.tr(),
-            child: const DarkModeSwitch(),
+            title: LocaleKeys.appearance.tr(),
+            child: DarkModeSwitch(),
           ),
           const SizedBox(height: 16),
 
           _SettingsContainer(
-            title: 'language'.tr(),
+            title: LocaleKeys.language.tr(),
             child: const LanguageTile(),
           ),
           const SizedBox(height: 16),
 
           _SettingsContainer(
-            title: 'preferences'.tr(),
+            title: LocaleKeys.preferences.tr(),
             child: Column(
               children: [
                 ListTile(
-                  title: Text('unit_system'.tr()),
-                  subtitle: Text('unit_system_desc'.tr()),
+                  title: Text(LocaleKeys.unit_system.tr()),
+                  subtitle: Text(LocaleKeys.unit_system_desc.tr()),
                   leading: const Icon(Icons.straighten),
                 ),
                 ListTile(
-                  title: Text('notifications'.tr()),
-                  subtitle: Text('notifications_desc'.tr()),
+                  title: Text(LocaleKeys.notifications.tr()),
+                  subtitle: Text(LocaleKeys.notifications_desc.tr()),
                   leading: const Icon(Icons.notifications),
                 ),
               ],
@@ -56,14 +58,16 @@ class SettingsPage extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
 
-          _SettingsContainer(title: 'about'.tr(), child: const AboutSection()),
+          _SettingsContainer(
+            title: LocaleKeys.about.tr(),
+            child: AboutSection(),
+          ),
         ],
       ),
     );
   }
 }
 
-/// Prywatny pomocnik do stylowania sekcji, aby nie powtarzać dekoracji
 class _SettingsContainer extends StatelessWidget {
   final String title;
   final Widget child;

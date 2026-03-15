@@ -1,31 +1,33 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
+import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-class AboutSection extends StatelessWidget {
+class AboutSection extends ConsumerWidget {
   const AboutSection({super.key});
 
   void _showAppInfo(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('about'.tr()),
+        title: Text(LocaleKeys.about.tr()),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${'version'.tr()}: ${AppInfo.appVersion}'),
+            Text('${LocaleKeys.version.tr()}: ${AppInfo.appVersion}'),
             const SizedBox(height: 8),
-            const Text('Contact: support@velocnc.com'),
+            Text('${LocaleKeys.contact.tr()}: ${AppInfo.contactEmail}'),
             const SizedBox(height: 4),
-            const Text('Website: https://velocnc.com'),
+            Text('${LocaleKeys.website.tr()}: ${AppInfo.websiteUrl}'),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('close'.tr()),
+            child: Text(LocaleKeys.close.tr()),
           ),
         ],
       ),
@@ -33,12 +35,16 @@ class AboutSection extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(localeProvider);
+
     return ListTile(
-      title: Text('${'version'.tr()}: ${AppInfo.appVersion}'),
-      subtitle: Text('about_desc'.tr()),
+      title: Text('${LocaleKeys.version.tr()}: ${AppInfo.appVersion}'),
+      subtitle: Text(LocaleKeys.about_desc.tr()),
       leading: const Icon(Icons.info_outline),
       onTap: () => _showAppInfo(context),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      tileColor: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.1),
     );
   }
 }

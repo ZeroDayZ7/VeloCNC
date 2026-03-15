@@ -17,6 +17,8 @@ abstract class  LocaleKeys {
   static const descriptions_unit_converter = 'descriptions.unit_converter';
   static const descriptions_tolerances = 'descriptions.tolerances';
   static const descriptions = 'descriptions';
+  static const contact = 'contact';
+  static const website = 'website';
   static const select_language = 'select_language';
   static const settings = 'settings';
   static const dark_mode = 'dark_mode';

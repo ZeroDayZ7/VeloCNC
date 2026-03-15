@@ -19,7 +19,7 @@
   "dart.completeFunctionCalls": true,
   // (Explorer)
   "files.exclude": {
-    ".dart_tool": true,
+    "**/.dart_tool": true,
     ".idea": true,
     ".flutter-plugins-dependencies": true,
     ".metadata": true,
