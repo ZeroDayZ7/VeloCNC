@@ -13,12 +13,13 @@
     "cutting_speed": "Calculate cutting speed based on diameter and RPM",
     "spindle_rpm": "Calculate RPM for material and tool",
     "feed_rate": "Calculate optimal feed rate",
-    "unit_converter": "Convert mm/inch, m/min ↔ ft/min"
+    "unit_converter": "Convert mm/inch, m/min ↔ ft/min",
+    "tolerances": "Calculate tolerances and fits for holes and shafts"
   },
+  "select_language": "Select Language",
   "settings": "Settings",
   "dark_mode": "Dark Mode",
   "language": "Language",
-  "app_title": "CNC Toolbox",
   "cutting_speed": "Cutting Speed",
   "cutting_speed_calculator": "Cutting Speed Calculator",
   "tool_diameter": "Tool Diameter (mm)",

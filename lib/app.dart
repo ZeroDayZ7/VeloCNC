@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
+import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:cnc_toolbox/core/theme/theme_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -12,6 +13,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(themeProvider);
+    ref.watch(localeProvider);
 
     return MaterialApp.router(
       title: AppInfo.appName,

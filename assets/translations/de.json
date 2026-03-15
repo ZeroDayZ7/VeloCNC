@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "CNC Toolbox"
+  },
+  "tools": {
+    "cutting_speed": "Schnittgeschwindigkeit",
+    "spindle_rpm": "Spindeldrehzahl",
+    "feed_rate": "Vorschubgeschwindigkeit",
+    "unit_converter": "Einheitenrechner",
+    "tolerances": "Passungstoleranzen"
+  },
+  "descriptions": {
+    "cutting_speed": "Schnittgeschwindigkeit basierend auf Durchmesser und Drehzahl berechnen",
+    "spindle_rpm": "Drehzahl für Material und Werkzeug berechnen",
+    "feed_rate": "Optimalen Vorschub berechnen",
+    "unit_converter": "Umrechnung mm/Zoll, m/min ↔ ft/min",
+    "tolerances": "Toleranzen und Passungen für Bohrungen und Wellen berechnen"
+  },
+  "select_language": "Sprache wählen",
+  "settings": "Einstellungen",
+  "dark_mode": "Dunkelmodus",
+  "language": "Sprache",
+  "cutting_speed": "Schnittgeschwindigkeit",
+  "cutting_speed_calculator": "Schnittgeschwindigkeitsrechner",
+  "tool_diameter": "Werkzeugdurchmesser (mm)",
+  "spindle_rpm": "Spindeldrehzahl (U/min)",
+  "calculate_cutting_speed": "Schnittgeschwindigkeit berechnen",
+  "calculation_not_implemented": "Berechnung noch nicht implementiert",
+  "material": "Material",
+  "fz_per_tooth": "Vorschub pro Zahn (mm/z)",
+  "teeth_count": "Zähnezahl (Z)",
+  "cutting_speed_vc": "Schnittgeschwindigkeit Vc",
+  "feed_rate_f": "Vorschub F",
+  "copied": "Kopiert",
+  "copy_result": "Ergebnis kopieren",
+  "safety_high_rpm": "Achtung: Drehzahl zu hoch!",
+  "safety_low_feed": "Achtung: Vorschub zu niedrig!",
+  "Steel": "Stahl",
+  "Aluminum": "Aluminium",
+  "Stainless": "Edelstahl",
+  "Titanium": "Titan",
+  "appearance": "Erscheinungsbild",
+  "dark_mode_desc": "Dunkelmodus aktivieren",
+  "change_language_desc": "App-Sprache auswählen",
+  "preferences": "Präferenzen",
+  "unit_system": "Einheitensystem",
+  "unit_system_desc": "Metrisch oder Imperial",
+  "notifications": "Benachrichtigungen",
+  "notifications_desc": "Push-Benachrichtigungen",
+  "about": "Über die App",
+  "version": "Version",
+  "about_desc": "App-Version und Kontakt",
+  "close": "Schließen",
+  "tolerance": {
+    "diameter": "Nenndurchmesser",
+    "grade": "Toleranzklasse",
+    "upper_dev": "Oberes Abmaß",
+    "lower_dev": "Unteres Abmaß",
+    "result_range": "Grenzmaß (min ÷ max)"
+  },
+  "error": {
+    "out_of_range": "Durchmesser außerhalb des Datenbankbereichs"
+  }
+}

@@ -1,0 +1,64 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+// ignore_for_file: constant_identifier_names
+
+abstract class  LocaleKeys {
+  static const app_title = 'app.title';
+  static const app = 'app';
+  static const tools_cutting_speed = 'tools.cutting_speed';
+  static const tools_spindle_rpm = 'tools.spindle_rpm';
+  static const tools_feed_rate = 'tools.feed_rate';
+  static const tools_unit_converter = 'tools.unit_converter';
+  static const tools_tolerances = 'tools.tolerances';
+  static const tools = 'tools';
+  static const descriptions_cutting_speed = 'descriptions.cutting_speed';
+  static const descriptions_spindle_rpm = 'descriptions.spindle_rpm';
+  static const descriptions_feed_rate = 'descriptions.feed_rate';
+  static const descriptions_unit_converter = 'descriptions.unit_converter';
+  static const descriptions_tolerances = 'descriptions.tolerances';
+  static const descriptions = 'descriptions';
+  static const select_language = 'select_language';
+  static const settings = 'settings';
+  static const dark_mode = 'dark_mode';
+  static const language = 'language';
+  static const cutting_speed = 'cutting_speed';
+  static const cutting_speed_calculator = 'cutting_speed_calculator';
+  static const tool_diameter = 'tool_diameter';
+  static const spindle_rpm = 'spindle_rpm';
+  static const calculate_cutting_speed = 'calculate_cutting_speed';
+  static const calculation_not_implemented = 'calculation_not_implemented';
+  static const material = 'material';
+  static const fz_per_tooth = 'fz_per_tooth';
+  static const teeth_count = 'teeth_count';
+  static const cutting_speed_vc = 'cutting_speed_vc';
+  static const feed_rate_f = 'feed_rate_f';
+  static const copied = 'copied';
+  static const copy_result = 'copy_result';
+  static const safety_high_rpm = 'safety_high_rpm';
+  static const safety_low_feed = 'safety_low_feed';
+  static const Steel = 'Steel';
+  static const Aluminum = 'Aluminum';
+  static const Stainless = 'Stainless';
+  static const Titanium = 'Titanium';
+  static const appearance = 'appearance';
+  static const dark_mode_desc = 'dark_mode_desc';
+  static const change_language_desc = 'change_language_desc';
+  static const preferences = 'preferences';
+  static const unit_system = 'unit_system';
+  static const unit_system_desc = 'unit_system_desc';
+  static const notifications = 'notifications';
+  static const notifications_desc = 'notifications_desc';
+  static const about = 'about';
+  static const version = 'version';
+  static const about_desc = 'about_desc';
+  static const close = 'close';
+  static const tolerance_diameter = 'tolerance.diameter';
+  static const tolerance_grade = 'tolerance.grade';
+  static const tolerance_upper_dev = 'tolerance.upper_dev';
+  static const tolerance_lower_dev = 'tolerance.lower_dev';
+  static const tolerance_result_range = 'tolerance.result_range';
+  static const tolerance = 'tolerance';
+  static const error_out_of_range = 'error.out_of_range';
+  static const error = 'error';
+
+}
