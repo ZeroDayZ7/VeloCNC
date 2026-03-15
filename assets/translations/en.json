@@ -3,66 +3,110 @@
     "title": "CNC Toolbox"
   },
   "tools": {
-    "cutting_speed": "Cutting Speed",
-    "spindle_rpm": "Spindle RPM",
-    "feed_rate": "Feed Rate",
-    "unit_converter": "Unit Converter",
-    "tolerances": "Tolerances fitting"
+    "cutting_speed": "Prędkość skrawania",
+    "spindle_rpm": "Obroty wrzeciona",
+    "feed_rate": "Posuw",
+    "unit_converter": "Konwerter jednostek",
+    "tolerances": "Tolerancje pasowania",
+    "gd_symbols": "Symbole GD&T"
   },
   "descriptions": {
-    "cutting_speed": "Calculate cutting speed based on diameter and RPM",
-    "spindle_rpm": "Calculate RPM for material and tool",
-    "feed_rate": "Calculate optimal feed rate",
-    "unit_converter": "Convert mm/inch, m/min ↔ ft/min",
-    "tolerances": "Calculate tolerances and fits for holes and shafts"
+    "cutting_speed": "Oblicz prędkość skrawania na podstawie średnicy i RPM",
+    "spindle_rpm": "Oblicz RPM dla materiału i narzędzia",
+    "feed_rate": "Oblicz optymalny posuw",
+    "unit_converter": "Konwersja mm/inch, m/min ↔ ft/min",
+    "tolerances": "Oblicz tolerancje i pasowania otworów oraz wałków",
+    "gd_symbols": "Tolerancje geometryczne kształtu i położenia"
+  },
+  "gd_symbols": {
+    "title": "Symbole GD&T",
+    "info_tooltip": "Co to jest GD&T?",
+    "modal_title": "Czym jest GD&T?",
+    "modal_p1": "GD&T (Geometric Dimensioning and Tolerancing) to system symboli służący do precyzyjnego definiowania dopuszczalnych odchyłek kształtu, osiowości, bicia i położenia elementów na rysunku technicznym.",
+    "modal_p2": "W odróżnieniu od zwykłych tolerancji wymiarowych, GD&T pozwala kontrolować geometrię detalu, co jest kluczowe dla poprawnego montażu i działania maszyn. System ten opiera się na tzw. bazach (Datums), które wyznaczają punkty odniesienia dla pomiarów.",
+    "understand_btn": "Rozumiem",
+    "categories": {
+      "form": "Kształt",
+      "orientation": "Kierunek",
+      "location": "Położenie",
+      "runout": "Bicie"
+    },
+    "details": {
+      "requires_datum": "Wymaga bazy (Datum): TAK",
+      "no_datum": "Wymaga bazy: NIE",
+      "description": "Opis techniczny"
+    },
+    "items": {
+      "straightness": {
+        "name": "Prostoliniowość",
+        "desc": "Określa tolerancję, w jakiej musi mieścić się linia na powierzchni lub oś elementu. Powierzchnia musi znajdować się między dwiema równoległymi liniami prostymi."
+      },
+      "flatness": {
+        "name": "Płaskość",
+        "desc": "Określa, jak bardzo powierzchnia może odbiegać od idealnej płaszczyzny. Wszystkie punkty powierzchni muszą mieścić się między dwiema równoległymi płaszczyznami."
+      },
+      "parallelism": {
+        "name": "Równoległość",
+        "desc": "Określa odchyłkę powierzchni lub osi, która musi być równoległa do bazy (datumu). Pole tolerancji to obszar między dwiema płaszczyznami równoległymi do bazy."
+      },
+      "perpendicularity": {
+        "name": "Prostopadłość",
+        "desc": "Określa, jak dokładnie powierzchnia lub oś musi zachować kąt 90° względem bazy. Pole tolerancji jest zorientowane prostopadle do płaszczyzny odniesienia."
+      }
+    }
   },
   "contact": "Kontakt",
   "website": "Strona internetowa",
-  "select_language": "Select Language",
-  "settings": "Settings",
-  "dark_mode": "Dark Mode",
-  "language": "Language",
-  "cutting_speed": "Cutting Speed",
-  "cutting_speed_calculator": "Cutting Speed Calculator",
-  "tool_diameter": "Tool Diameter (mm)",
-  "spindle_rpm": "Spindle Speed (RPM)",
-  "calculate_cutting_speed": "Calculate Cutting Speed",
-  "calculation_not_implemented": "Calculation not implemented yet",
-  "material": "Material",
-  "fz_per_tooth": "Feed per tooth (mm/z)",
-  "teeth_count": "Number of flutes (Z)",
-  "cutting_speed_vc": "Cutting speed Vc",
-  "feed_rate_f": "Feed rate F",
-  "copied": "Copied",
-  "copy_result": "Copy result",
-  "safety_high_rpm": "Warning: RPM too high!",
-  "safety_low_feed": "Warning: Feed rate too low!",
-  "Steel": "Steel",
-  "Aluminum": "Aluminum",
-  "Stainless": "Stainless Steel",
-  "Titanium": "Titanium",
-  "appearance": "Appearance",
-  "dark_mode_desc": "Enables dark mode",
-  "change_language_desc": "Choose application language",
-  "preferences": "Preferences",
-  "unit_system": "Unit System",
-  "unit_system_desc": "Metric or Imperial",
-  "notifications": "Notifications",
-  "notifications_desc": "Push notifications",
-  "about": "About",
-  "version": "Version",
-  "about_desc": "App version and contact",
 
-  "close": "Close",
+  "select_language": "Wybierz język",
+  "settings": "Ustawienia",
+  "dark_mode": "Tryb ciemny",
+  "language": "Język",
+  "cutting_speed": "Prędkość skrawania",
+  "cutting_speed_calculator": "Kalkulator prędkości skrawania",
+  "tool_diameter": "Średnica narzędzia (mm)",
+  "spindle_rpm": "Obroty wrzeciona (RPM)",
+  "calculate_cutting_speed": "Oblicz prędkość skrawania",
+  "calculation_not_implemented": "Kalkulacja jeszcze nie zaimplementowana",
+  "material": "Materiał",
+  "fz_per_tooth": "Posuw na ząb (mm/z)",
+  "teeth_count": "Liczba ostrzy (Z)",
+  "cutting_speed_vc": "Prędkość skrawania Vc",
+  "feed_rate_f": "Posuw F",
+  "copied": "Skopiowano",
+  "copy_result": "Kopiuj wynik",
+  "safety_high_rpm": "Uwaga: Zbyt wysokie obroty!",
+  "safety_low_feed": "Uwaga: Zbyt niski posuw!",
+  "Steel": "Stal",
+  "Aluminum": "Aluminium",
+  "Stainless": "Stal nierdzewna",
+  "Titanium": "Tytan",
+  "appearance": "Wygląd",
+  "dark_mode_desc": "Włącza tryb ciemny",
+  "change_language_desc": "Wybierz język aplikacji",
+  "preferences": "Preferencje",
+  "unit_system": "System jednostek",
+  "unit_system_desc": "Metryczne lub imperialne",
+  "notifications": "Powiadomienia",
+  "notifications_desc": "Powiadomienia push",
+  "about": "O aplikacji",
+  "version": "Wersja",
+  "about_desc": "Wersja aplikacji i kontakt",
+
+  "close": "Zamknij",
 
   "tolerance": {
-    "diameter": "Nominal diameter",
-    "grade": "Tolerance grade",
-    "upper_dev": "Upper deviation",
-    "lower_dev": "Lower deviation",
-    "result_range": "Dimension limit (min ÷ max)"
+    "hole": "Otwór",
+    "shaft": "Wałek",
+    "letter": "Litera",
+    "grade_number": "Klasa",
+    "diameter": "Średnica nominalna",
+    "grade": "Klasa pasowania",
+    "upper_dev": "Odchyłka górna",
+    "lower_dev": "Odchyłka dolna",
+    "result_range": "Wymiar graniczny (min ÷ max)"
   },
   "error": {
-    "out_of_range": "Diameter out of database range"
+    "out_of_range": "Średnica poza zakresem bazy danych"
   }
 }

@@ -1,6 +1,9 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/features/cutting_speed/cutting_speed_page.dart';
 import 'package:cnc_toolbox/features/feed_rate/feed_rate_page.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/domain/gd_symbol_model.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/presentation/symbol_details_page.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/presentation/symbols_page.dart';
 import 'package:cnc_toolbox/features/home/home_page.dart';
 import 'package:cnc_toolbox/features/settings/settings_page.dart';
 import 'package:cnc_toolbox/features/spindle_speed/spindle_speed_page.dart';
@@ -53,6 +56,20 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.tolerances,
         name: 'tolerances',
         builder: (context, state) => const TolerancePage(),
+      ),
+      GoRoute(
+        path: '/gd-symbols',
+        builder: (context, state) => const GdSymbolsPage(),
+        routes: [
+          GoRoute(
+            path: 'details', // finalna ścieżka to /gd-symbols/details
+            builder: (context, state) {
+              final symbol =
+                  state.extra as GdSymbol; // Przekazujemy obiekt symbolu
+              return GdSymbolDetailsPage(symbol: symbol);
+            },
+          ),
+        ],
       ),
     ],
   );

@@ -8,6 +8,7 @@ class Routes {
   static const tolerances = '/tolerances';
   static const settings = '/settings';
   static const tapDrill = '/tap-drill';
+  static const gdSymbols = '/gd-symbols';
 }
 
 /// --- APP INFO ---

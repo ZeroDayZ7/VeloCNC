@@ -7,16 +7,54 @@
     "spindle_rpm": "Obroty wrzeciona",
     "feed_rate": "Posuw",
     "unit_converter": "Konwerter jednostek",
-    "tolerances": "Tolerancje pasowania"
+    "tolerances": "Tolerancje pasowania",
+    "gd_symbols": "Symbole GD&T"
   },
   "descriptions": {
     "cutting_speed": "Oblicz prędkość skrawania na podstawie średnicy i RPM",
     "spindle_rpm": "Oblicz RPM dla materiału i narzędzia",
     "feed_rate": "Oblicz optymalny posuw",
     "unit_converter": "Konwersja mm/inch, m/min ↔ ft/min",
-    "tolerances": "Oblicz tolerancje i pasowania otworów oraz wałków"
+    "tolerances": "Oblicz tolerancje i pasowania otworów oraz wałków",
+    "gd_symbols": "Tolerancje geometryczne kształtu i położenia"
   },
-
+  "gd_symbols": {
+    "title": "Symbole GD&T",
+    "info_tooltip": "Co to jest GD&T?",
+    "modal_title": "Czym jest GD&T?",
+    "modal_p1": "GD&T (Geometric Dimensioning and Tolerancing) to system symboli służący do precyzyjnego definiowania dopuszczalnych odchyłek kształtu, osiowości, bicia i położenia elementów na rysunku technicznym.",
+    "modal_p2": "W odróżnieniu od zwykłych tolerancji wymiarowych, GD&T pozwala kontrolować geometrię detalu, co jest kluczowe dla poprawnego montażu i działania maszyn. System ten opiera się na tzw. bazach (Datums), które wyznaczają punkty odniesienia dla pomiarów.",
+    "understand_btn": "Rozumiem",
+    "categories": {
+      "form": "Kształt",
+      "orientation": "Kierunek",
+      "location": "Położenie",
+      "runout": "Bicie"
+    },
+    "details": {
+      "requires_datum": "Wymaga bazy (Datum): TAK",
+      "no_datum": "Wymaga bazy: NIE",
+      "description": "Opis techniczny"
+    },
+    "items": {
+      "straightness": {
+        "name": "Prostoliniowość",
+        "desc": "Określa tolerancję, w jakiej musi mieścić się linia na powierzchni lub oś elementu. Powierzchnia musi znajdować się między dwiema równoległymi liniami prostymi."
+      },
+      "flatness": {
+        "name": "Płaskość",
+        "desc": "Określa, jak bardzo powierzchnia może odbiegać od idealnej płaszczyzny. Wszystkie punkty powierzchni muszą mieścić się między dwiema równoległymi płaszczyznami."
+      },
+      "parallelism": {
+        "name": "Równoległość",
+        "desc": "Określa odchyłkę powierzchni lub osi, która musi być równoległa do bazy (datumu). Pole tolerancji to obszar między dwiema płaszczyznami równoległymi do bazy."
+      },
+      "perpendicularity": {
+        "name": "Prostopadłość",
+        "desc": "Określa, jak dokładnie powierzchnia lub oś musi zachować kąt 90° względem bazy. Pole tolerancji jest zorientowane prostopadle do płaszczyzny odniesienia."
+      }
+    }
+  },
   "contact": "Kontakt",
   "website": "Strona internetowa",
 
@@ -58,6 +96,10 @@
   "close": "Zamknij",
 
   "tolerance": {
+    "hole": "Otwór",
+    "shaft": "Wałek",
+    "letter": "Litera",
+    "grade_number": "Klasa",
     "diameter": "Średnica nominalna",
     "grade": "Klasa pasowania",
     "upper_dev": "Odchyłka górna",

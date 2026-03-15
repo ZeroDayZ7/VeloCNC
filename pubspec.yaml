@@ -82,6 +82,7 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/
+    - assets/data/tolerances.json
 
 flutter_launcher_icons:
   android: true

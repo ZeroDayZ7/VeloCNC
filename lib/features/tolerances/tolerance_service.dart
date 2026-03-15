@@ -1,124 +1,113 @@
+import 'dart:convert';
 
+import 'package:flutter/services.dart';
 
-class ToleranceRange {
-  final double minDiameter;
-  final double maxDiameter;
-  final Map<String, List<double>> grades;
-
-  const ToleranceRange({
-    required this.minDiameter,
-    required this.maxDiameter,
-    required this.grades,
-  });
-}
+enum ToleranceType { hole, shaft }
 
 class ToleranceService {
-  static final List<ToleranceRange> _data = [
-    ToleranceRange(
-      minDiameter: 0.0,
-      maxDiameter: 3.0,
-      grades: {
-        'h6': [0.0, -0.006],
-        'h7': [0.0, -0.010],
-        'H6': [0.006, 0.0],
-        'H7': [0.010, 0.0],
-        'g6': [-0.002, -0.008],
-        'JS7': [0.005, -0.005],
-      },
-    ),
-    ToleranceRange(
-      minDiameter: 3.0,
-      maxDiameter: 6.0,
-      grades: {
-        'h6': [0.0, -0.008],
-        'h7': [0.0, -0.012],
-        'H6': [0.008, 0.0],
-        'H7': [0.012, 0.0],
-        'g6': [-0.004, -0.012],
-        'JS7': [0.006, -0.006],
-      },
-    ),
-    ToleranceRange(
-      minDiameter: 6.0,
-      maxDiameter: 10.0,
-      grades: {
-        'h6': [0.0, -0.009],
-        'h7': [0.0, -0.015],
-        'H6': [0.009, 0.0],
-        'H7': [0.015, 0.0],
-        'g6': [-0.005, -0.014],
-        'JS7': [0.007, -0.007],
-      },
-    ),
-    ToleranceRange(
-      minDiameter: 10.0,
-      maxDiameter: 18.0,
-      grades: {
-        'h6': [0.0, -0.011],
-        'h7': [0.0, -0.018],
-        'H6': [0.011, 0.0],
-        'H7': [0.018, 0.0],
-        'g6': [-0.006, -0.017],
-        'JS7': [0.009, -0.009],
-      },
-    ),
-    ToleranceRange(
-      minDiameter: 18.0,
-      maxDiameter: 30.0,
-      grades: {
-        'h6': [0.0, -0.013],
-        'h7': [0.0, -0.021],
-        'H6': [0.013, 0.0],
-        'H7': [0.021, 0.0],
-        'g6': [-0.007, -0.020],
-        'JS7': [0.010, -0.010],
-      },
-    ),
-    ToleranceRange(
-      minDiameter: 30.0,
-      maxDiameter: 50.0,
-      grades: {
-        'h6': [0.0, -0.016],
-        'h7': [0.0, -0.025],
-        'H6': [0.016, 0.0],
-        'H7': [0.025, 0.0],
-        'g6': [-0.009, -0.025],
-        'JS7': [0.012, -0.012],
-      },
-    ),
-    ToleranceRange(
-      minDiameter: 50.0,
-      maxDiameter: 80.0,
-      grades: {
-        'h6': [0.0, -0.019],
-        'h7': [0.0, -0.030],
-        'H6': [0.019, 0.0],
-        'H7': [0.030, 0.0],
-        'g6': [-0.010, -0.029],
-        'JS7': [0.015, -0.015],
-      },
-    ),
-  ];
+  static Map<ToleranceType, Map<String, List<_ToleranceRange>>>? _data;
 
-  static List<String> getAvailableGrades() {
-    return ['h6', 'h7', 'H6', 'H7', 'g6', 'JS7'];
-  }
+  static bool get isLoaded => _data != null;
 
-  static Map<String, double>? calculate(double diameter, String grade) {
+  static Future<void> init() async {
+    if (_data != null) return;
+
     try {
-      final range = _data.firstWhere(
-        (r) => diameter > r.minDiameter && diameter <= r.maxDiameter,
+      final jsonString = await rootBundle.loadString(
+        'assets/data/tolerances.json',
       );
-      final dev = range.grades[grade];
-      if (dev == null) return null;
-      return {
-        'upper': dev[0],
-        'lower': dev[1],
-        'max': diameter + dev[0],
-        'min': diameter + dev[1],
+      final Map<String, dynamic> decoded = json.decode(jsonString);
+
+      _data = {
+        ToleranceType.hole: _parseSection(decoded['holes']),
+        ToleranceType.shaft: _parseSection(decoded['shafts']),
       };
     } catch (e) {
-      return null;
+      _data = {ToleranceType.hole: {}, ToleranceType.shaft: {}};
     }
   }
+
+  static Map<String, List<_ToleranceRange>> _parseSection(
+    Map<String, dynamic>? section,
+  ) {
+    if (section == null) return {};
+    return section.map(
+      (grade, ranges) => MapEntry(
+        grade,
+        (ranges as List).map((e) => _ToleranceRange.fromJson(e)).toList(),
+      ),
+    );
+  }
+
+  /// Pobiera dostępne litery (np. H, G, Js lub h, g, f)
+  static List<String> getLetters(ToleranceType type) {
+    if (_data == null) return [];
+    return _data![type]!.keys
+        .map((e) => e.replaceAll(RegExp(r'[0-9]'), ''))
+        .toSet()
+        .toList()
+      ..sort();
+  }
+
+  /// Pobiera dostępne cyfry dla konkretnej litery (np. 6, 7, 8 dla H)
+  static List<String> getNumbersForLetter(ToleranceType type, String letter) {
+    if (_data == null) return [];
+    return _data![type]!.keys
+        .where((e) => e.startsWith(letter))
+        .map((e) => e.replaceFirst(letter, ''))
+        .toList()
+      ..sort((a, b) => int.parse(a).compareTo(int.parse(b)));
+  }
+
+  static ToleranceResult? calculate(
+    double diameter,
+    String letter,
+    String number,
+    ToleranceType type,
+  ) {
+    if (_data == null) return null;
+    final grade = '$letter$number';
+    final ranges = _data![type]![grade];
+    if (ranges == null) return null;
+
+    for (final range in ranges) {
+      if (diameter >= range.min && diameter <= range.max) {
+        return ToleranceResult(
+          upperDeviation: range.upper,
+          lowerDeviation: range.lower,
+          minSize: diameter + range.lower,
+          maxSize: diameter + range.upper,
+        );
+      }
+    }
+    return null;
+  }
+}
+
+class _ToleranceRange {
+  final double min, max, upper, lower;
+  const _ToleranceRange({
+    required this.min,
+    required this.max,
+    required this.upper,
+    required this.lower,
+  });
+
+  factory _ToleranceRange.fromJson(Map<String, dynamic> json) =>
+      _ToleranceRange(
+        min: (json['min'] as num).toDouble(),
+        max: (json['max'] as num).toDouble(),
+        upper: (json['upper'] as num).toDouble(),
+        lower: (json['lower'] as num).toDouble(),
+      );
+}
+
+class ToleranceResult {
+  final double upperDeviation, lowerDeviation, minSize, maxSize;
+  const ToleranceResult({
+    required this.upperDeviation,
+    required this.lowerDeviation,
+    required this.minSize,
+    required this.maxSize,
+  });
 }
