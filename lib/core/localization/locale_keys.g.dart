@@ -11,6 +11,7 @@ abstract class  LocaleKeys {
   static const tools_unit_converter = 'tools.unit_converter';
   static const tools_tolerances = 'tools.tolerances';
   static const tools_gd_symbols = 'tools.gd_symbols';
+  static const tools_g_codes = 'tools.g_codes';
   static const tools = 'tools';
   static const descriptions_cutting_speed = 'descriptions.cutting_speed';
   static const descriptions_spindle_rpm = 'descriptions.spindle_rpm';
@@ -18,6 +19,7 @@ abstract class  LocaleKeys {
   static const descriptions_unit_converter = 'descriptions.unit_converter';
   static const descriptions_tolerances = 'descriptions.tolerances';
   static const descriptions_gd_symbols = 'descriptions.gd_symbols';
+  static const descriptions_g_codes = 'descriptions.g_codes';
   static const descriptions = 'descriptions';
   static const gd_symbols_title = 'gd_symbols.title';
   static const gd_symbols_info_tooltip = 'gd_symbols.info_tooltip';
@@ -95,6 +97,30 @@ abstract class  LocaleKeys {
   static const tolerance_lower_dev = 'tolerance.lower_dev';
   static const tolerance_result_range = 'tolerance.result_range';
   static const tolerance = 'tolerance';
+  static const gcodes_title = 'gcodes.title';
+  static const gcodes_example = 'gcodes.example';
+  static const gcodes_g00_title = 'gcodes.g00_title';
+  static const gcodes_g00_desc = 'gcodes.g00_desc';
+  static const gcodes_g01_title = 'gcodes.g01_title';
+  static const gcodes_g01_desc = 'gcodes.g01_desc';
+  static const gcodes_g02_title = 'gcodes.g02_title';
+  static const gcodes_g02_desc = 'gcodes.g02_desc';
+  static const gcodes_g03_title = 'gcodes.g03_title';
+  static const gcodes_g03_desc = 'gcodes.g03_desc';
+  static const gcodes_g17_title = 'gcodes.g17_title';
+  static const gcodes_g17_desc = 'gcodes.g17_desc';
+  static const gcodes_g18_title = 'gcodes.g18_title';
+  static const gcodes_g18_desc = 'gcodes.g18_desc';
+  static const gcodes_g19_title = 'gcodes.g19_title';
+  static const gcodes_g19_desc = 'gcodes.g19_desc';
+  static const gcodes_g20_title = 'gcodes.g20_title';
+  static const gcodes_g20_desc = 'gcodes.g20_desc';
+  static const gcodes_g21_title = 'gcodes.g21_title';
+  static const gcodes_g21_desc = 'gcodes.g21_desc';
+  static const gcodes_g28_title = 'gcodes.g28_title';
+  static const gcodes_g28_desc = 'gcodes.g28_desc';
+  static const gcodes = 'gcodes';
+  static const search_hint = 'search_hint';
   static const error_out_of_range = 'error.out_of_range';
   static const error = 'error';
 

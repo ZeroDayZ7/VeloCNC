@@ -9,6 +9,7 @@ class Routes {
   static const settings = '/settings';
   static const tapDrill = '/tap-drill';
   static const gdSymbols = '/gd-symbols';
+  static const gCodes = '/g-codes';
 }
 
 /// --- APP INFO ---

@@ -40,4 +40,10 @@ const tools = [
     descriptionKey: "descriptions.gd_symbols",
     route: Routes.gdSymbols,
   ),
+  ToolItem(
+    icon: Icons.code,
+    labelKey: "tools.g_codes",
+    descriptionKey: "descriptions.g_codes",
+    route: Routes.gCodes,
+  ),
 ];

@@ -8,7 +8,8 @@
     "feed_rate": "Posuw",
     "unit_converter": "Konwerter jednostek",
     "tolerances": "Tolerancje pasowania",
-    "gd_symbols": "Symbole GD&T"
+    "gd_symbols": "Symbole GD&T",
+    "g_codes": "G Codes"
   },
   "descriptions": {
     "cutting_speed": "Oblicz prędkość skrawania na podstawie średnicy i RPM",
@@ -16,7 +17,8 @@
     "feed_rate": "Oblicz optymalny posuw",
     "unit_converter": "Konwersja mm/inch, m/min ↔ ft/min",
     "tolerances": "Oblicz tolerancje i pasowania otworów oraz wałków",
-    "gd_symbols": "Tolerancje geometryczne kształtu i położenia"
+    "gd_symbols": "Tolerancje geometryczne kształtu i położenia",
+    "g_codes": "Reference of CNC G codes"
   },
   "gd_symbols": {
     "title": "Symbole GD&T",
@@ -106,6 +108,31 @@
     "lower_dev": "Odchyłka dolna",
     "result_range": "Wymiar graniczny (min ÷ max)"
   },
+  "gcodes": {
+    "title": "Kody G",
+    "example": "Przykład",
+    "g00_title": "Szybki przejazd",
+    "g00_desc": "Szybkie przesunięcie narzędzia bez skrawania.",
+    "g01_title": "Interpolacja liniowa",
+    "g01_desc": "Ruch liniowy z posuwem roboczym.",
+    "g02_title": "Łuk zgodnie z ruchem wskazówek zegara",
+    "g02_desc": "Interpolacja kołowa w prawo.",
+    "g03_title": "Łuk przeciwnie do ruchu wskazówek zegara",
+    "g03_desc": "Interpolacja kołowa w lewo.",
+    "g17_title": "Płaszczyzna XY",
+    "g17_desc": "Wybór płaszczyzny XY.",
+    "g18_title": "Płaszczyzna XZ",
+    "g18_desc": "Wybór płaszczyzny XZ (tokarka).",
+    "g19_title": "Płaszczyzna YZ",
+    "g19_desc": "Wybór płaszczyzny YZ.",
+    "g20_title": "Jednostki cale",
+    "g20_desc": "Ustawienie jednostek na cale.",
+    "g21_title": "Jednostki milimetry",
+    "g21_desc": "Ustawienie jednostek na milimetry.",
+    "g28_title": "Powrót do zera maszyny",
+    "g28_desc": "Powrót osi do punktu referencyjnego."
+  },
+  "search_hint": "Szukaj kodu G...",
   "error": {
     "out_of_range": "Średnica poza zakresem bazy danych"
   }
