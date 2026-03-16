@@ -3,7 +3,7 @@ import 'package:cnc_toolbox/features/converter/converter_page.dart';
 import 'package:cnc_toolbox/features/cutting_speed/cutting_speed_page.dart';
 import 'package:cnc_toolbox/features/feed_rate/feed_rate_page.dart';
 import 'package:cnc_toolbox/features/g_codes/presentation/g_codes_page.dart';
-import 'package:cnc_toolbox/features/gd&t_symbols/domain/gd_symbol_model.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/data/symbols_data.dart';
 import 'package:cnc_toolbox/features/gd&t_symbols/presentation/symbol_details_page.dart';
 import 'package:cnc_toolbox/features/gd&t_symbols/presentation/symbols_page.dart';
 import 'package:cnc_toolbox/features/home/home_page.dart';
@@ -71,7 +71,8 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: 'details',
             builder: (context, state) {
-              final symbol = state.extra as GdSymbol;
+              final name = state.extra as String;
+              final symbol = gdSymbolsList.firstWhere((s) => s.name == name);
               return GdSymbolDetailsPage(symbol: symbol);
             },
           ),

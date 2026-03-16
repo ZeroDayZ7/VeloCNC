@@ -138,7 +138,7 @@ class GdSymbolsPage extends StatelessWidget {
             final s = symbols[index];
             return InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () => context.push('/gd-symbols/details', extra: s),
+              onTap: () => context.push('/gd-symbols/details', extra: s.name),
               child: Card(
                 elevation: 0,
                 shape: RoundedRectangleBorder(

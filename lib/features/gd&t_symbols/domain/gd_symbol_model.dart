@@ -7,6 +7,7 @@ class GdSymbol {
   final String description;
   final SymbolCategory category;
   final bool requiresDatum;
+  final String? assetImage;
 
   const GdSymbol({
     required this.name,
@@ -14,5 +15,6 @@ class GdSymbol {
     required this.description,
     required this.category,
     this.requiresDatum = false,
+    this.assetImage,
   });
 }

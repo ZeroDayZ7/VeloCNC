@@ -8,23 +8,37 @@ class GdSymbolDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(title: Text(symbol.name.tr())),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 4.0,
+        ), // padding tylko w osi X
         child: Column(
           children: [
             Center(
               child: Container(
-                padding: const EdgeInsets.all(40),
+                padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Text(
-                  symbol.symbol,
-                  style: const TextStyle(fontSize: 80),
-                ),
+                child: symbol.assetImage != null
+                    ? InteractiveViewer(
+                        panEnabled: true,
+                        minScale: 0.5,
+                        maxScale: 4.0,
+                        child: Image.asset(
+                          symbol.assetImage!,
+                          fit: BoxFit.contain,
+                          width:
+                              screenWidth -
+                              8, // maksymalna szerokość z paddingiem
+                        ),
+                      )
+                    : Text(symbol.symbol, style: const TextStyle(fontSize: 80)),
               ),
             ),
             const SizedBox(height: 32),
