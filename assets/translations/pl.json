@@ -149,7 +149,14 @@
     "result_range": "Wymiar graniczny (min ÷ max)",
 
     "warning_it14_it16_min_size": "Klasy tolerancji IT14 do IT16 nie powinny być stosowane dla wymiarów nominalnych ≤ 1 mm.",
-    "info_missing_up_to_3mm": "Norma nie podaje danych dla wymiarów nominalnych do 3 mm."
+    "info_missing_up_to_3mm": "Norma nie podaje danych dla wymiarów nominalnych do 3 mm.",
+    "info_symmetric_deviation": "W celu uniknięcia powtarzania tych samych wartości, w tabeli przyjęto zapis „±x”, co oznacza, że odchyłka górna es = +x, a dolna ei = -x.",
+    "info_symmetric_js_replacement": "Gdy wartości dla j5, j6 i j7 są podane jako „±x”, są one identyczne z klasą tolerancji odpowiednio js5, js6 lub js7 dla danego zakresu wymiaru nominalnego.",
+    "info_not_defined": "Norma ISO nie określa wartości odchyłek dla tej klasy w tym zakresie wymiarowym.",
+    "t_u_usage_note": "Klasy tolerancji t5 do t8 (włącznie) nie zostały ujęte w tabeli dla wymiarów nominalnych mniejszych lub równych 24 mm. Zaleca się zamiast nich stosowanie klas tolerancji u5 do u8 (włącznie).",
+    "warning_vxy_max_size": "Odchyłki podstawowe v, x oraz y nie są określone dla wymiarów nominalnych powyżej 500 mm.",
+    "v_usage_note": "Klasy tolerancji v5 do v8 (włącznie) nie zostały ujęte w tabeli dla wymiarów nominalnych mniejszych lub równych 14 mm. Zaleca się zamiast nich stosowanie klas tolerancji x5 do x8 (włącznie).",
+    "y_usage_note": "Klasy tolerancji y6 do y10 (włącznie) nie zostały ujęte w tabeli dla wymiarów nominalnych mniejszych lub równych 18 mm. Zaleca się zamiast nich stosowanie klas tolerancji z6 do z10 (włącznie)."
   },
 
   "gcodes": {

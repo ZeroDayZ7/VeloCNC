@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,7 +12,7 @@ class SpindleSpeedPage extends StatelessWidget {
         title: const Text('CNC Calculator'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.push(Routes.home),
         ),
       ),
       body: Padding(

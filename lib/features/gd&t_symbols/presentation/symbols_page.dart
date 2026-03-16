@@ -78,7 +78,7 @@ class GdSymbolsPage extends StatelessWidget {
         title: Text(LocaleKeys.gd_symbols_title.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go(Routes.home),
+          onPressed: () => context.push(Routes.home),
         ),
         actions: [
           IconButton(

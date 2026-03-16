@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
 import 'package:cnc_toolbox/features/settings/widgets/language_tile.dart';
@@ -21,7 +22,7 @@ class SettingsPage extends ConsumerWidget {
         title: Text(LocaleKeys.settings.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.push(Routes.home),
         ),
       ),
       body: ListView(

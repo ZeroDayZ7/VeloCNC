@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _TolerancePageState extends State<TolerancePage> {
         title: Text(LocaleKeys.tools_tolerances.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.push(Routes.home),
         ),
       ),
       body: SingleChildScrollView(

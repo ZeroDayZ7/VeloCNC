@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/g_codes/data/g_codes_data.dart';
 import 'package:cnc_toolbox/features/g_codes/presentation/widgets/g_code_tile.dart';
@@ -37,7 +38,7 @@ class _GCodesPageState extends State<GCodesPage> {
         title: Text(LocaleKeys.tools_g_codes.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/'),
+          onPressed: () => context.push(Routes.home),
         ),
         actions: [
           IconButton(

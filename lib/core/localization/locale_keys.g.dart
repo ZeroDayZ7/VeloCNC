@@ -128,6 +128,9 @@ abstract class  LocaleKeys {
   static const tolerance_result_range = 'tolerance.result_range';
   static const tolerance_warning_it14_it16_min_size = 'tolerance.warning_it14_it16_min_size';
   static const tolerance_info_missing_up_to_3mm = 'tolerance.info_missing_up_to_3mm';
+  static const tolerance_info_symmetric_deviation = 'tolerance.info_symmetric_deviation';
+  static const tolerance_info_symmetric_js_replacement = 'tolerance.info_symmetric_js_replacement';
+  static const tolerance_info_not_defined = 'tolerance.info_not_defined';
   static const tolerance = 'tolerance';
   static const gcodes_title = 'gcodes.title';
   static const gcodes_example = 'gcodes.example';

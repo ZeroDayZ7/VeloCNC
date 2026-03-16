@@ -50,11 +50,14 @@ class ToleranceService {
   }
 
   /// Pobiera dostępne cyfry dla konkretnej litery (np. 6, 7, 8 dla H)
-  static List<String> getNumbersForLetter(ToleranceType type, String letter) {
+ static List<String> getNumbersForLetter(ToleranceType type, String letter) {
     if (_data == null) return [];
+    
     return _data![type]!.keys
         .where((e) => e.startsWith(letter))
         .map((e) => e.replaceFirst(letter, ''))
+        // Filtrujemy tylko te elementy, które faktycznie są liczbami
+        .where((e) => int.tryParse(e) != null) 
         .toList()
       ..sort((a, b) => int.parse(a).compareTo(int.parse(b)));
   }
@@ -75,8 +78,8 @@ class ToleranceService {
         return ToleranceResult(
           upperDeviation: range.upper,
           lowerDeviation: range.lower,
-          minSize: diameter + range.lower,
-          maxSize: diameter + range.upper,
+          minSize: range.lower != null ? diameter + range.lower! : null,
+          maxSize: range.upper != null ? diameter + range.upper! : null,
           restrictionKey: range.restrictionKey,
           infoKey: range.infoKey,
         );
@@ -87,7 +90,8 @@ class ToleranceService {
 }
 
 class _ToleranceRange {
-  final double min, max, upper, lower;
+  final double min, max;
+  final double? upper, lower;
   final String? restrictionKey;
   final String? infoKey;
   const _ToleranceRange({
@@ -103,15 +107,15 @@ class _ToleranceRange {
       _ToleranceRange(
         min: (json['min'] as num).toDouble(),
         max: (json['max'] as num).toDouble(),
-        upper: (json['upper'] as num).toDouble(),
-        lower: (json['lower'] as num).toDouble(),
+        upper: json['upper'] != null ? (json['upper'] as num).toDouble() : null,
+        lower: json['lower'] != null ? (json['lower'] as num).toDouble() : null,
         restrictionKey: json['restriction_key'] as String?,
         infoKey: json['info_key'] as String?,
       );
 }
 
 class ToleranceResult {
-  final double upperDeviation, lowerDeviation, minSize, maxSize;
+  final double? upperDeviation, lowerDeviation, minSize, maxSize;
   final String? restrictionKey;
   final String? infoKey;
   const ToleranceResult({

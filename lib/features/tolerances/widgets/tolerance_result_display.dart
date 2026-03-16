@@ -8,11 +8,19 @@ class ToleranceResultDisplay extends StatelessWidget {
 
   const ToleranceResultDisplay({super.key, required this.res});
 
+  // Pomocnicza funkcja do formatowania liczb lub zwracania kreski
+  String _formatValue(double? value, {bool showPlus = false}) {
+    if (value == null) return "-";
+    final formatted = value.toStringAsFixed(3);
+    // Dodajemy "+" tylko jeśli wartość jest dodatnia i flaga jest aktywna
+    if (showPlus && value > 0) return "+$formatted";
+    return formatted;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Wyświetlanie banerów na podstawie kluczy z JSON
         if (res.infoKey != null)
           _buildBanner(
             context,
@@ -31,13 +39,13 @@ class ToleranceResultDisplay extends StatelessWidget {
 
         _buildDeviationTile(
           "Odchyłka górna",
-          "+${res.upperDeviation.toStringAsFixed(3)} mm",
-          Colors.green,
+          "${_formatValue(res.upperDeviation, showPlus: true)} mm",
+          res.upperDeviation != null ? Colors.green : Colors.grey,
         ),
         _buildDeviationTile(
           "Odchyłka dolna",
-          "${res.lowerDeviation.toStringAsFixed(3)} mm",
-          Colors.red,
+          "${_formatValue(res.lowerDeviation)} mm",
+          res.lowerDeviation != null ? Colors.red : Colors.grey,
         ),
 
         const SizedBox(height: 16),
@@ -57,7 +65,8 @@ class ToleranceResultDisplay extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                "Ø${res.minSize.toStringAsFixed(3)} – Ø${res.maxSize.toStringAsFixed(3)}",
+                // Ø- lub Ø10.000 – Ø10.005
+                "Ø${_formatValue(res.minSize)} – Ø${_formatValue(res.maxSize)}",
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -80,9 +89,9 @@ class ToleranceResultDisplay extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withValues(alpha:0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withValues(alpha:0.5)),
+        border: Border.all(color: color.withValues(alpha: 0.5)),
       ),
       child: Row(
         children: [

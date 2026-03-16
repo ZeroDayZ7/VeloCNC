@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () => context.go(Routes.settings),
+            onPressed: () => context.push(Routes.settings),
           ),
         ],
       ),
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                   icon: tool.icon,
                   label: tool.labelKey,
                   description: tool.descriptionKey,
-                  onTap: () => context.go(tool.route),
+                  onTap: () => context.push(tool.route),
                 );
               },
             );
