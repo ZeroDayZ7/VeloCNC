@@ -65,7 +65,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const GCodesPage(),
       ),
       GoRoute(
-        path: '/gd-symbols',
+        path: Routes.gdSymbols,
         builder: (context, state) => const GdSymbolsPage(),
         routes: [
           GoRoute(

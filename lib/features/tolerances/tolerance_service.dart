@@ -77,6 +77,8 @@ class ToleranceService {
           lowerDeviation: range.lower,
           minSize: diameter + range.lower,
           maxSize: diameter + range.upper,
+          restrictionKey: range.restrictionKey,
+          infoKey: range.infoKey,
         );
       }
     }
@@ -86,11 +88,15 @@ class ToleranceService {
 
 class _ToleranceRange {
   final double min, max, upper, lower;
+  final String? restrictionKey;
+  final String? infoKey;
   const _ToleranceRange({
     required this.min,
     required this.max,
     required this.upper,
     required this.lower,
+    this.restrictionKey,
+    this.infoKey,
   });
 
   factory _ToleranceRange.fromJson(Map<String, dynamic> json) =>
@@ -99,15 +105,21 @@ class _ToleranceRange {
         max: (json['max'] as num).toDouble(),
         upper: (json['upper'] as num).toDouble(),
         lower: (json['lower'] as num).toDouble(),
+        restrictionKey: json['restriction_key'] as String?,
+        infoKey: json['info_key'] as String?,
       );
 }
 
 class ToleranceResult {
   final double upperDeviation, lowerDeviation, minSize, maxSize;
+  final String? restrictionKey;
+  final String? infoKey;
   const ToleranceResult({
     required this.upperDeviation,
     required this.lowerDeviation,
     required this.minSize,
     required this.maxSize,
+    this.restrictionKey,
+    this.infoKey,
   });
 }

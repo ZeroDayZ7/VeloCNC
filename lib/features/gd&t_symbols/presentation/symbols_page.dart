@@ -1,6 +1,5 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
-import 'package:cnc_toolbox/features/gd&t_symbols/domain/gd_symbol_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -89,90 +88,59 @@ class GdSymbolsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          _buildCategorySection(context, "Kształt", SymbolCategory.form),
-          _buildCategorySection(
-            context,
-            "Kierunek",
-            SymbolCategory.orientation,
-          ),
-        ],
-      ),
+      // Tu pokazujemy wszystkie symbole w jednej siatce
+      body: _buildAllSymbolsGrid(context),
     );
   }
 
-  Widget _buildCategorySection(
-    BuildContext context,
-    String title,
-    SymbolCategory category,
-  ) {
-    final symbols = gdSymbolsList.where((s) => s.category == category).toList();
-
-    if (symbols.isEmpty) return const SizedBox.shrink();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-          child: Text(
-            title.toUpperCase(),
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: Theme.of(context).colorScheme.secondary,
-              letterSpacing: 1.2,
-            ),
-          ),
+  Widget _buildAllSymbolsGrid(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: GridView.builder(
+        itemCount: gdSymbolsList.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-          ),
-          itemCount: symbols.length,
-          itemBuilder: (context, index) {
-            final s = symbols[index];
-            return InkWell(
-              borderRadius: BorderRadius.circular(12),
-              onTap: () => context.push('/gd-symbols/details', extra: s.name),
-              child: Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Theme.of(context).dividerColor),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      s.symbol,
-                      style: const TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: Text(
-                        s.name.tr(),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 10),
-                      ),
-                    ),
-                  ],
-                ),
+        // Usuń shrinkWrap i NeverScrollableScrollPhysics
+        physics: const AlwaysScrollableScrollPhysics(),
+        // shrinkWrap: false domyślnie
+        itemBuilder: (context, index) {
+          final s = gdSymbolsList[index];
+          return InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: () => context.push('/gd-symbols/details', extra: s.name),
+            child: Card(
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Theme.of(context).dividerColor),
+                borderRadius: BorderRadius.circular(12),
               ),
-            );
-          },
-        ),
-      ],
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    s.symbol,
+                    style: const TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    s.name.tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 10),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
