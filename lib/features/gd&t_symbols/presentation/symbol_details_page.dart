@@ -6,60 +6,98 @@ class GdSymbolDetailsPage extends StatelessWidget {
   final GdSymbol symbol;
   const GdSymbolDetailsPage({super.key, required this.symbol});
 
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+@override
+Widget build(BuildContext context) {
+  final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      appBar: AppBar(title: Text(symbol.name.tr())),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 4.0,
-        ), // padding tylko w osi X
-        child: Column(
-          children: [
-            Center(
-              child: Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: symbol.assetImage != null
-                    ? InteractiveViewer(
-                        panEnabled: true,
-                        minScale: 0.5,
-                        maxScale: 4.0,
+  return Scaffold(
+    appBar: AppBar(title: Text(symbol.name.tr())),
+    body: SingleChildScrollView( 
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        children: [
+
+          Container(
+            height: screenHeight * 0.5,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.5),
+                width: 1,
+              ),
+            ),
+            child: ClipRRect( 
+              borderRadius: BorderRadius.circular(24),
+              child: symbol.assetImage != null
+                  ? InteractiveViewer(
+                      clipBehavior: Clip.none,
+                      panEnabled: true,
+                      minScale: 1.0,
+                      maxScale: 4.0,
+                      child: Center(
                         child: Image.asset(
                           symbol.assetImage!,
                           fit: BoxFit.contain,
-                          width:
-                              screenWidth -
-                              8, // maksymalna szerokość z paddingiem
+                          width: double.infinity,
                         ),
-                      )
-                    : Text(symbol.symbol, style: const TextStyle(fontSize: 80)),
-              ),
+                      ),
+                    )
+                  : Center(
+                      child: Text(
+                        symbol.symbol,
+                        style: const TextStyle(fontSize: 80),
+                      ),
+                    ),
             ),
-            const SizedBox(height: 32),
-            Text(
-              symbol.requiresDatum
-                  ? "gd_symbols.details.requires_datum".tr()
-                  : "gd_symbols.details.no_datum".tr(),
-              style: TextStyle(
-                color: symbol.requiresDatum ? Colors.orange : Colors.grey,
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          const SizedBox(height: 24),
+          
+          // Sekcja statusu bazy (Datum)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: symbol.requiresDatum 
+                  ? Colors.orange.withValues(alpha: 0.1) 
+                  : Colors.grey.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
             ),
-            const SizedBox(height: 16),
-            Text(
-              symbol.description.tr(),
-              style: const TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  symbol.requiresDatum ? Icons.link : Icons.link_off,
+                  size: 18,
+                  color: symbol.requiresDatum ? Colors.orange : Colors.grey,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  symbol.requiresDatum
+                      ? "gd_symbols.details.requires_datum".tr()
+                      : "gd_symbols.details.no_datum".tr(),
+                  style: TextStyle(
+                    color: symbol.requiresDatum ? Colors.orange : Colors.grey[700],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // Opis
+          Text(
+            symbol.description.tr(),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              height: 1.5, // Większy interlinia dla czytelności
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 }

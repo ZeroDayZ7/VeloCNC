@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppInfo.appName),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -35,7 +36,7 @@ class HomePage extends StatelessWidget {
                 crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.85,
+                childAspectRatio: 0.90,
               ),
               itemBuilder: (context, index) {
                 final tool = tools[index];
@@ -44,7 +45,7 @@ class HomePage extends StatelessWidget {
                   icon: tool.icon,
                   label: tool.labelKey,
                   description: tool.descriptionKey,
-                  onTap: () => context.push(tool.route),
+                  onTap: () => context.go(tool.route),
                 );
               },
             );

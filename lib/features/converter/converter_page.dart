@@ -4,48 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ConverterPage extends StatefulWidget {
+class ConverterPage extends StatelessWidget {
   const ConverterPage({super.key});
-
-  @override
-  State<ConverterPage> createState() => _ConverterPageState();
-}
-
-class _ConverterPageState extends State<ConverterPage> {
-  final TextEditingController _inputController = TextEditingController();
-  String _fromUnit = 'mm';
-  String _toUnit = 'inch';
-  double _result = 0.0;
-
-  final Map<String, List<String>> _unitCategories = {
-    'length': ['mm', 'cm', 'm', 'inch', 'ft'],
-    'speed': ['m/min', 'ft/min'],
-    'feed': ['mm/min', 'mm/rev', 'inch/min'],
-    'rpm': ['RPM', 'Hz'],
-  };
-
-  List<String> get _currentUnits => _unitCategories['length']!;
-
-  void _convert() {
-    final value = double.tryParse(_inputController.text);
-    if (value == null) return;
-
-    double res = value;
-
-    // PROSTY PRZYKŁAD konwersji długości
-    if (_fromUnit == _toUnit) {
-      res = value;
-    } else if (_fromUnit == 'mm' && _toUnit == 'inch') {
-      res = value / 25.4;
-    } else if (_fromUnit == 'inch' && _toUnit == 'mm') {
-      res = value * 25.4;
-    }
-    // inne konwersje można dodać analogicznie
-
-    setState(() {
-      _result = res;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,70 +14,58 @@ class _ConverterPageState extends State<ConverterPage> {
         title: Text(LocaleKeys.tools_unit_converter.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.push(Routes.home),
+          onPressed: () => context.go(Routes.home),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: _inputController,
-              keyboardType: const TextInputType.numberWithOptions(
-                decimal: true,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Ikona placeholder
+              Icon(
+                Icons.construction_rounded,
+                size: 80,
               ),
-              decoration: InputDecoration(
-                labelText: LocaleKeys.converter_input.tr(),
-                border: const OutlineInputBorder(),
-              ),
-              onChanged: (_) => _convert(),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(child: _buildDropdown(from: true)),
-                const SizedBox(width: 12),
-                const Icon(Icons.arrow_forward),
-                const SizedBox(width: 12),
-                Expanded(child: _buildDropdown(from: false)),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Text(
-              '${LocaleKeys.converter_result.tr()}: $_result $_toUnit',
-              style: Theme.of(
-                context,
-              ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+              const SizedBox(height: 24),
 
-  Widget _buildDropdown({required bool from}) {
-    final selected = from ? _fromUnit : _toUnit;
-    return DropdownButtonFormField<String>(
-      initialValue: selected,
-      decoration: InputDecoration(
-        labelText: from
-            ? LocaleKeys.converter_from.tr()
-            : LocaleKeys.converter_to.tr(),
-        border: const OutlineInputBorder(),
+              // Nagłówek
+              Text(
+                "Funkcja w przygotowaniu",
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+
+              // Opis
+              Text(
+                "Przelicznik jednostek (mm/inch, m/min, RPM) będzie dostępny wkrótce w kolejnej aktualizacji.",
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+
+              // Przycisk powrotu
+              ElevatedButton.icon(
+                onPressed: () => context.go(Routes.home),
+                icon: const Icon(Icons.home),
+                label: const Text("Wróć do menu głównego"),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
-      items: _currentUnits
-          .map((u) => DropdownMenuItem(value: u, child: Text(u)))
-          .toList(),
-      onChanged: (val) {
-        if (val == null) return;
-        setState(() {
-          if (from)
-            _fromUnit = val;
-          else
-            _toUnit = val;
-          _convert();
-        });
-      },
     );
   }
 }
