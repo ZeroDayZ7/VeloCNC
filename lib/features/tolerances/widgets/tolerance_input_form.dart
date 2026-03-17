@@ -1,4 +1,6 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/tolerances/tolerance_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 
@@ -44,9 +46,9 @@ class ToleranceInputForm extends StatelessWidget {
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
-              decoration: const InputDecoration(
-                labelText: "Średnica nominalna",
-                suffixText: "mm",
+              decoration: InputDecoration(
+                labelText: LocaleKeys.tolerance_nominal_diameter.tr(),
+                suffixText: LocaleKeys.tolerance_unit_mm.tr(),
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.straighten),
               ),
@@ -57,9 +59,10 @@ class ToleranceInputForm extends StatelessWidget {
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
+                    key: ValueKey('letter_$selectedLetter'),
                     initialValue: selectedLetter,
-                    decoration: const InputDecoration(
-                      labelText: "Litera",
+                    decoration: InputDecoration(
+                      labelText: LocaleKeys.tolerance_letter.tr(),
                       border: OutlineInputBorder(),
                     ),
                     items: letters
@@ -71,9 +74,10 @@ class ToleranceInputForm extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: DropdownButtonFormField<String>(
+                    key: ValueKey('number_$selectedNumber'),
                     initialValue: selectedNumber,
-                    decoration: const InputDecoration(
-                      labelText: "Klasa",
+                    decoration: InputDecoration(
+                      labelText: LocaleKeys.tolerance_grade_number.tr(),
                       border: OutlineInputBorder(),
                     ),
                     items: numbers

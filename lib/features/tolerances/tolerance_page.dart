@@ -104,15 +104,15 @@ class _TolerancePageState extends State<TolerancePage> {
 
   Widget _buildTypeSelector() {
     return SegmentedButton<ToleranceType>(
-      segments: const [
+      segments: [
         ButtonSegment(
           value: ToleranceType.hole,
-          label: Text("Otwór"),
+          label: Text(LocaleKeys.tolerance_hole.tr()),
           icon: Icon(Icons.circle_outlined),
         ),
         ButtonSegment(
           value: ToleranceType.shaft,
-          label: Text("Wałek"),
+          label: Text(LocaleKeys.tolerance_shaft.tr()),
           icon: Icon(Icons.panorama_fish_eye),
         ),
       ],

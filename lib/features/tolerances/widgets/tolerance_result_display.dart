@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -8,17 +9,17 @@ class ToleranceResultDisplay extends StatelessWidget {
 
   const ToleranceResultDisplay({super.key, required this.res});
 
-  // Pomocnicza funkcja do formatowania liczb lub zwracania kreski
   String _formatValue(double? value, {bool showPlus = false}) {
     if (value == null) return "-";
     final formatted = value.toStringAsFixed(3);
-    // Dodajemy "+" tylko jeśli wartość jest dodatnia i flaga jest aktywna
     if (showPlus && value > 0) return "+$formatted";
     return formatted;
   }
 
   @override
   Widget build(BuildContext context) {
+    final hasCalculations =
+        res.upperDeviation != null && res.lowerDeviation != null;
     return Column(
       children: [
         if (res.infoKey != null)
@@ -37,44 +38,43 @@ class ToleranceResultDisplay extends StatelessWidget {
             Colors.orange,
           ),
 
-        _buildDeviationTile(
-          "Odchyłka górna",
-          "${_formatValue(res.upperDeviation, showPlus: true)} mm",
-          res.upperDeviation != null ? Colors.green : Colors.grey,
-        ),
-        _buildDeviationTile(
-          "Odchyłka dolna",
-          "${_formatValue(res.lowerDeviation)} mm",
-          res.lowerDeviation != null ? Colors.red : Colors.grey,
-        ),
-
-        const SizedBox(height: 16),
-
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(16),
+        if (hasCalculations) ...[
+          _buildDeviationTile(
+            LocaleKeys.tolerance_upper_dev.tr(),
+            "${_formatValue(res.upperDeviation, showPlus: true)} mm",
+            Colors.green,
           ),
-          child: Column(
-            children: [
-              Text(
-                "Wymiar rzeczywisty",
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                // Ø- lub Ø10.000 – Ø10.005
-                "Ø${_formatValue(res.minSize)} – Ø${_formatValue(res.maxSize)}",
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+          _buildDeviationTile(
+            LocaleKeys.tolerance_lower_dev.tr(),
+            "${_formatValue(res.lowerDeviation)} mm",
+            Colors.red,
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  LocaleKeys.tolerance_real_size.tr(),
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
-              ),
-            ],
+                const SizedBox(height: 8),
+                Text(
+                  "Ø${_formatValue(res.minSize)} - Ø${_formatValue(res.maxSize)}",
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ],
     );
   }

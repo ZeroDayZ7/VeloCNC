@@ -146,8 +146,10 @@
     "grade": "Klasa pasowania",
     "upper_dev": "Odchyłka górna",
     "lower_dev": "Odchyłka dolna",
+    "real_size": "Wymiar rzeczywisty",
     "result_range": "Wymiar graniczny (min ÷ max)",
-
+    "nominal_diameter": "Średnica nominalna",
+    "unit_mm": "mm",
     "warning_it14_it16_min_size": "Klasy tolerancji IT14 do IT16 nie powinny być stosowane dla wymiarów nominalnych ≤ 1 mm.",
     "info_missing_up_to_3mm": "Norma nie podaje danych dla wymiarów nominalnych do 3 mm.",
     "info_symmetric_deviation": "W celu uniknięcia powtarzania tych samych wartości, w tabeli przyjęto zapis „±x”, co oznacza, że odchyłka górna es = +x, a dolna ei = -x.",
@@ -156,7 +158,10 @@
     "t_u_usage_note": "Klasy tolerancji t5 do t8 (włącznie) nie zostały ujęte w tabeli dla wymiarów nominalnych mniejszych lub równych 24 mm. Zaleca się zamiast nich stosowanie klas tolerancji u5 do u8 (włącznie).",
     "warning_vxy_max_size": "Odchyłki podstawowe v, x oraz y nie są określone dla wymiarów nominalnych powyżej 500 mm.",
     "v_usage_note": "Klasy tolerancji v5 do v8 (włącznie) nie zostały ujęte w tabeli dla wymiarów nominalnych mniejszych lub równych 14 mm. Zaleca się zamiast nich stosowanie klas tolerancji x5 do x8 (włącznie).",
-    "y_usage_note": "Klasy tolerancji y6 do y10 (włącznie) nie zostały ujęte w tabeli dla wymiarów nominalnych mniejszych lub równych 18 mm. Zaleca się zamiast nich stosowanie klas tolerancji z6 do z10 (włącznie)."
+    "y_usage_note": "Klasy tolerancji y6 do y10 (włącznie) nie zostały ujęte w tabeli dla wymiarów nominalnych mniejszych lub równych 18 mm. Zaleca się zamiast nich stosowanie klas tolerancji z6 do z10 (włącznie).",
+    "warning_ab_min_size": "Odchyłki podstawowe A oraz B nie powinny być stosowane dla żadnych tolerancji normalnych przy wymiarach nominalnych ≤ 1 mm.",
+    "ef_usage_note": "Pośrednia odchyłka podstawowa EF jest przewidziana głównie dla mechanizmów precyzyjnych i zegarmistrzostwa. Jeśli wymagane są klasy tolerancji z tą odchyłką dla innych wymiarów nominalnych, można je obliczyć zgodnie z normą ISO 286-1.",
+    "fg_usage_note": "Pośrednia odchyłka podstawowa FG jest przewidziana głównie dla mechanizmów precyzyjnych i zegarmistrzostwa. Jeśli wymagane są klasy tolerancji z tą odchyłką dla innych wymiarów nominalnych, można je obliczyć zgodnie z normą ISO 286-1."
   },
 
   "gcodes": {
