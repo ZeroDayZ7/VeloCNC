@@ -1,32 +1,40 @@
+import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FeedInputFields extends StatelessWidget {
-  final FeedRateNotifier notifier;
+class FeedInputFields extends ConsumerWidget {
+  final FeedType type;
   final TextEditingController nController;
   final TextEditingController zController;
   final TextEditingController fzController;
 
   const FeedInputFields({
     super.key,
-    required this.notifier,
+    required this.type,
     required this.nController,
     required this.zController,
     required this.fzController,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(feedRateProvider(type).notifier);
+
     return Column(
       children: [
         TextField(
           controller: nController,
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: const InputDecoration(
             labelText: "Obroty (n)",
             suffixText: "obr/min",
           ),
-          onChanged: notifier.updateSpindleSpeed,
+          onChanged: (v) {
+            final val = AppNumberFormatter.tryParse(v);
+            if (val != null) notifier.updateSpindleSpeed(val);
+          },
         ),
         const SizedBox(height: 10),
         TextField(
@@ -41,12 +49,15 @@ class FeedInputFields extends StatelessWidget {
         const SizedBox(height: 10),
         TextField(
           controller: fzController,
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: const InputDecoration(
             labelText: "Posuw na ostrze (fz)",
             suffixText: "mm",
           ),
-          onChanged: notifier.updateFeedPerTooth,
+          onChanged: (v) {
+            final val = AppNumberFormatter.tryParse(v);
+            if (val != null) notifier.updateFeedPerTooth(val);
+          },
         ),
       ],
     );

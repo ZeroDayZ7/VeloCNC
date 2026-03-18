@@ -1,4 +1,4 @@
-import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
+import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_controller.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +31,7 @@ class FeedRateActions extends ConsumerWidget {
           onPressed: () async {
             final tabIndex = DefaultTabController.of(context).index;
             final type = tabIndex == 0 ? FeedType.basic : FeedType.arc;
-            await ref.read(feedRateProvider(type).notifier).saveCurrentToDb();
+            await ref.read(feedRateControllerProvider.notifier).save(type);
             if (context.mounted) {
               ScaffoldMessenger.of(
                 context,

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'local_settings_repository.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 LocalSettingsRepository localSettingsRepository(Ref ref) {
   final prefs = ref.watch(sharedPrefsProvider);
   return LocalSettingsRepository(prefs);

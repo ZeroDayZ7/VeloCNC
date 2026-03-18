@@ -17,15 +17,6 @@ class ConverterPage extends ConsumerStatefulWidget {
 
 class _ConverterPageState extends ConsumerState<ConverterPage> {
   int _selectedIndex = 0;
-  final Map<String, TextEditingController> _controllers = {};
-
-  @override
-  void dispose() {
-    for (final c in _controllers.values) {
-      c.dispose();
-    }
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +46,12 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
             categories: converterCategories,
             onSelect: (index) => setState(() {
               _selectedIndex = index;
-              _controllers.clear();
             }),
             onToggle: () => ref.read(settingsProvider.notifier).toggleSidebar(),
           ),
           const VerticalDivider(width: 1),
           Expanded(
-            child: ConverterInputs(
-              units: visibleUnits,
-              controllers: _controllers,
-              category: currentCat,
-            ),
+            child: ConverterInputs(units: visibleUnits, category: currentCat),
           ),
         ],
       ),

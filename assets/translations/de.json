@@ -72,59 +72,59 @@
     "items": {
       "straightness": {
         "name": "Geradheit",
-        "desc": "Geradheitstoleranz – begrenzt durch zwei parallele Linien im Abstand des Toleranzwertes."
+        "description": "Geradheitstoleranz – begrenzt durch zwei parallele Linien im Abstand des Toleranzwertes."
       },
       "flatness": {
         "name": "Ebenheit",
-        "desc": "Ebenheitstoleranz – begrenzt durch zwei parallele Ebenen im Abstand des Toleranzwertes."
+        "description": "Ebenheitstoleranz – begrenzt durch zwei parallele Ebenen im Abstand des Toleranzwertes."
       },
       "circularity": {
         "name": "Rundheit",
-        "desc": "Rundheitstoleranz – begrenzt durch zwei konzentrische Kreise, Differenz der Radien = Toleranzwert."
+        "description": "Rundheitstoleranz – begrenzt durch zwei konzentrische Kreise, Differenz der Radien = Toleranzwert."
       },
       "cylindricity": {
         "name": "Zylindrizität",
-        "desc": "Zylindrizitätstoleranz – begrenzt durch zwei koaxiale Zylinder, Differenz der Radien = Toleranzwert."
+        "description": "Zylindrizitätstoleranz – begrenzt durch zwei koaxiale Zylinder, Differenz der Radien = Toleranzwert."
       },
       "profile_line": {
         "name": "Linienprofil",
-        "desc": "Linienprofiltoleranz – begrenzt durch Kreise, deren Differenz der Radien dem Toleranzwert entspricht."
+        "description": "Linienprofiltoleranz – begrenzt durch Kreise, deren Differenz der Radien dem Toleranzwert entspricht."
       },
       "profile_surface": {
         "name": "Flächenprofil",
-        "desc": "Flächenprofiltoleranz – begrenzt durch eine größere und eine kleinere Sphäre, Differenz der Radien = Toleranzwert."
+        "description": "Flächenprofiltoleranz – begrenzt durch eine größere und eine kleinere Sphäre, Differenz der Radien = Toleranzwert."
       },
       "perpendicularity": {
         "name": "Rechtwinkligkeit",
-        "desc": "Rechtwinkligkeitstoleranz – Zone begrenzt durch parallele Ebenen, senkrecht zum Bezug."
+        "description": "Rechtwinkligkeitstoleranz – Zone begrenzt durch parallele Ebenen, senkrecht zum Bezug."
       },
       "angularity": {
         "name": "Neigung",
-        "desc": "Neigungstoleranz – Zone begrenzt durch zwei Ebenen im Nennwinkel zum Bezug."
+        "description": "Neigungstoleranz – Zone begrenzt durch zwei Ebenen im Nennwinkel zum Bezug."
       },
       "parallelism": {
         "name": "Parallelität",
-        "desc": "Parallelitätstoleranz – Zone begrenzt durch parallele Ebenen in Bezug auf die Basis."
+        "description": "Parallelitätstoleranz – Zone begrenzt durch parallele Ebenen in Bezug auf die Basis."
       },
       "position": {
         "name": "Position",
-        "desc": "Positionstoleranz – Zone begrenzt durch einen Zylinder mit dem Durchmesser des Toleranzwertes, Mitte im Nennpunkt."
+        "description": "Positionstoleranz – Zone begrenzt durch einen Zylinder mit dem Durchmesser des Toleranzwertes, Mitte im Nennpunkt."
       },
       "concentricity": {
         "name": "Konzentrizität",
-        "desc": "Konzentrizitätstoleranz – Zone begrenzt durch einen Zylinder, Symmetrieachse entspricht dem Nennwert."
+        "description": "Konzentrizitätstoleranz – Zone begrenzt durch einen Zylinder, Symmetrieachse entspricht dem Nennwert."
       },
       "symmetry": {
         "name": "Symmetrie",
-        "desc": "Symmetrietoleranz – Zone begrenzt durch parallele Ebenen, die symmetrisch zum Bezug liegen."
+        "description": "Symmetrietoleranz – Zone begrenzt durch parallele Ebenen, die symmetrisch zum Bezug liegen."
       },
       "circular_runout": {
         "name": "Rundlauf",
-        "desc": "Rundlauf- oder Planlauftoleranz – Zone begrenzt durch zwei konzentrische Kreise."
+        "description": "Rundlauf- oder Planlauftoleranz – Zone begrenzt durch zwei konzentrische Kreise."
       },
       "total_runout": {
         "name": "Gesamtlauf",
-        "desc": "Gesamtlauftoleranz – Zone begrenzt durch zwei konzentrische Zylinder."
+        "description": "Gesamtlauftoleranz – Zone begrenzt durch zwei konzentrische Zylinder."
       }
     }
   },

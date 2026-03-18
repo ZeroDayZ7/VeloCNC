@@ -19,7 +19,7 @@ final class GCodeSearchProvider extends $NotifierProvider<GCodeSearch, String> {
         argument: null,
         retry: null,
         name: r'gCodeSearchProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -40,7 +40,7 @@ final class GCodeSearchProvider extends $NotifierProvider<GCodeSearch, String> {
   }
 }
 
-String _$gCodeSearchHash() => r'9b689d364ed61b02fc2764e08bed62216a81c8eb';
+String _$gCodeSearchHash() => r'3f8c0facf02a84f0bc1372fbd8872361e05741df';
 
 abstract class _$GCodeSearch extends $Notifier<String> {
   String build();
@@ -72,7 +72,7 @@ final class FilteredGCodesProvider
         argument: null,
         retry: null,
         name: r'filteredGCodesProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -99,4 +99,4 @@ final class FilteredGCodesProvider
   }
 }
 
-String _$filteredGCodesHash() => r'8f8b2128726f30768bae4226a0231ecca3afabb2';
+String _$filteredGCodesHash() => r'b4c7190f526842f57a57fcafe65576481c0ffa3a';

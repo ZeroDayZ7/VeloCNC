@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'g_codes_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class GCodeSearch extends _$GCodeSearch {
   @override
   String build() => "";
@@ -13,7 +13,7 @@ class GCodeSearch extends _$GCodeSearch {
   void update(String query) => state = query;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 List<GCode> filteredGCodes(Ref ref) {
   final query = ref.watch(gCodeSearchProvider).toLowerCase();
 

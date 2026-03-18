@@ -14,17 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FeedRateState {
 
-// Wejścia podstawowe
- double get spindleSpeed; double get feedPerTooth; int get numberOfTeeth;// Obliczanie n z Vc
- double get cuttingSpeed;// Vc
- double get toolDiameter;// D
-// Kompensacja łuku
- double get featureDiameter;// D_work
- bool get isInternal;// Otwór / Czop
-// Wyniki
- double get resultVf;// Liniowy
- double get resultVfArc;// Skompensowany
- double get resultF;
+ double get spindleSpeed; double get feedPerTooth; int get numberOfTeeth; double get toolDiameter; double get featureDiameter; bool get isInternal;
 /// Create a copy of FeedRateState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -35,16 +25,16 @@ $FeedRateStateCopyWith<FeedRateState> get copyWith => _$FeedRateStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FeedRateState&&(identical(other.spindleSpeed, spindleSpeed) || other.spindleSpeed == spindleSpeed)&&(identical(other.feedPerTooth, feedPerTooth) || other.feedPerTooth == feedPerTooth)&&(identical(other.numberOfTeeth, numberOfTeeth) || other.numberOfTeeth == numberOfTeeth)&&(identical(other.cuttingSpeed, cuttingSpeed) || other.cuttingSpeed == cuttingSpeed)&&(identical(other.toolDiameter, toolDiameter) || other.toolDiameter == toolDiameter)&&(identical(other.featureDiameter, featureDiameter) || other.featureDiameter == featureDiameter)&&(identical(other.isInternal, isInternal) || other.isInternal == isInternal)&&(identical(other.resultVf, resultVf) || other.resultVf == resultVf)&&(identical(other.resultVfArc, resultVfArc) || other.resultVfArc == resultVfArc)&&(identical(other.resultF, resultF) || other.resultF == resultF));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FeedRateState&&(identical(other.spindleSpeed, spindleSpeed) || other.spindleSpeed == spindleSpeed)&&(identical(other.feedPerTooth, feedPerTooth) || other.feedPerTooth == feedPerTooth)&&(identical(other.numberOfTeeth, numberOfTeeth) || other.numberOfTeeth == numberOfTeeth)&&(identical(other.toolDiameter, toolDiameter) || other.toolDiameter == toolDiameter)&&(identical(other.featureDiameter, featureDiameter) || other.featureDiameter == featureDiameter)&&(identical(other.isInternal, isInternal) || other.isInternal == isInternal));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,spindleSpeed,feedPerTooth,numberOfTeeth,cuttingSpeed,toolDiameter,featureDiameter,isInternal,resultVf,resultVfArc,resultF);
+int get hashCode => Object.hash(runtimeType,spindleSpeed,feedPerTooth,numberOfTeeth,toolDiameter,featureDiameter,isInternal);
 
 @override
 String toString() {
-  return 'FeedRateState(spindleSpeed: $spindleSpeed, feedPerTooth: $feedPerTooth, numberOfTeeth: $numberOfTeeth, cuttingSpeed: $cuttingSpeed, toolDiameter: $toolDiameter, featureDiameter: $featureDiameter, isInternal: $isInternal, resultVf: $resultVf, resultVfArc: $resultVfArc, resultF: $resultF)';
+  return 'FeedRateState(spindleSpeed: $spindleSpeed, feedPerTooth: $feedPerTooth, numberOfTeeth: $numberOfTeeth, toolDiameter: $toolDiameter, featureDiameter: $featureDiameter, isInternal: $isInternal)';
 }
 
 
@@ -55,7 +45,7 @@ abstract mixin class $FeedRateStateCopyWith<$Res>  {
   factory $FeedRateStateCopyWith(FeedRateState value, $Res Function(FeedRateState) _then) = _$FeedRateStateCopyWithImpl;
 @useResult
 $Res call({
- double spindleSpeed, double feedPerTooth, int numberOfTeeth, double cuttingSpeed, double toolDiameter, double featureDiameter, bool isInternal, double resultVf, double resultVfArc, double resultF
+ double spindleSpeed, double feedPerTooth, int numberOfTeeth, double toolDiameter, double featureDiameter, bool isInternal
 });
 
 
@@ -72,19 +62,15 @@ class _$FeedRateStateCopyWithImpl<$Res>
 
 /// Create a copy of FeedRateState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? spindleSpeed = null,Object? feedPerTooth = null,Object? numberOfTeeth = null,Object? cuttingSpeed = null,Object? toolDiameter = null,Object? featureDiameter = null,Object? isInternal = null,Object? resultVf = null,Object? resultVfArc = null,Object? resultF = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? spindleSpeed = null,Object? feedPerTooth = null,Object? numberOfTeeth = null,Object? toolDiameter = null,Object? featureDiameter = null,Object? isInternal = null,}) {
   return _then(_self.copyWith(
 spindleSpeed: null == spindleSpeed ? _self.spindleSpeed : spindleSpeed // ignore: cast_nullable_to_non_nullable
 as double,feedPerTooth: null == feedPerTooth ? _self.feedPerTooth : feedPerTooth // ignore: cast_nullable_to_non_nullable
 as double,numberOfTeeth: null == numberOfTeeth ? _self.numberOfTeeth : numberOfTeeth // ignore: cast_nullable_to_non_nullable
-as int,cuttingSpeed: null == cuttingSpeed ? _self.cuttingSpeed : cuttingSpeed // ignore: cast_nullable_to_non_nullable
-as double,toolDiameter: null == toolDiameter ? _self.toolDiameter : toolDiameter // ignore: cast_nullable_to_non_nullable
+as int,toolDiameter: null == toolDiameter ? _self.toolDiameter : toolDiameter // ignore: cast_nullable_to_non_nullable
 as double,featureDiameter: null == featureDiameter ? _self.featureDiameter : featureDiameter // ignore: cast_nullable_to_non_nullable
 as double,isInternal: null == isInternal ? _self.isInternal : isInternal // ignore: cast_nullable_to_non_nullable
-as bool,resultVf: null == resultVf ? _self.resultVf : resultVf // ignore: cast_nullable_to_non_nullable
-as double,resultVfArc: null == resultVfArc ? _self.resultVfArc : resultVfArc // ignore: cast_nullable_to_non_nullable
-as double,resultF: null == resultF ? _self.resultF : resultF // ignore: cast_nullable_to_non_nullable
-as double,
+as bool,
   ));
 }
 
@@ -166,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double spindleSpeed,  double feedPerTooth,  int numberOfTeeth,  double cuttingSpeed,  double toolDiameter,  double featureDiameter,  bool isInternal,  double resultVf,  double resultVfArc,  double resultF)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double spindleSpeed,  double feedPerTooth,  int numberOfTeeth,  double toolDiameter,  double featureDiameter,  bool isInternal)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FeedRateState() when $default != null:
-return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.cuttingSpeed,_that.toolDiameter,_that.featureDiameter,_that.isInternal,_that.resultVf,_that.resultVfArc,_that.resultF);case _:
+return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.toolDiameter,_that.featureDiameter,_that.isInternal);case _:
   return orElse();
 
 }
@@ -187,10 +173,10 @@ return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double spindleSpeed,  double feedPerTooth,  int numberOfTeeth,  double cuttingSpeed,  double toolDiameter,  double featureDiameter,  bool isInternal,  double resultVf,  double resultVfArc,  double resultF)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double spindleSpeed,  double feedPerTooth,  int numberOfTeeth,  double toolDiameter,  double featureDiameter,  bool isInternal)  $default,) {final _that = this;
 switch (_that) {
 case _FeedRateState():
-return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.cuttingSpeed,_that.toolDiameter,_that.featureDiameter,_that.isInternal,_that.resultVf,_that.resultVfArc,_that.resultF);}
+return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.toolDiameter,_that.featureDiameter,_that.isInternal);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -204,10 +190,10 @@ return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double spindleSpeed,  double feedPerTooth,  int numberOfTeeth,  double cuttingSpeed,  double toolDiameter,  double featureDiameter,  bool isInternal,  double resultVf,  double resultVfArc,  double resultF)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double spindleSpeed,  double feedPerTooth,  int numberOfTeeth,  double toolDiameter,  double featureDiameter,  bool isInternal)?  $default,) {final _that = this;
 switch (_that) {
 case _FeedRateState() when $default != null:
-return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.cuttingSpeed,_that.toolDiameter,_that.featureDiameter,_that.isInternal,_that.resultVf,_that.resultVfArc,_that.resultF);case _:
+return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.toolDiameter,_that.featureDiameter,_that.isInternal);case _:
   return null;
 
 }
@@ -219,29 +205,15 @@ return $default(_that.spindleSpeed,_that.feedPerTooth,_that.numberOfTeeth,_that.
 
 
 class _FeedRateState implements FeedRateState {
-  const _FeedRateState({this.spindleSpeed = 0.0, this.feedPerTooth = 0.0, this.numberOfTeeth = 1, this.cuttingSpeed = 0.0, this.toolDiameter = 0.0, this.featureDiameter = 0.0, this.isInternal = true, this.resultVf = 0.0, this.resultVfArc = 0.0, this.resultF = 0.0});
+  const _FeedRateState({this.spindleSpeed = 0.0, this.feedPerTooth = 0.0, this.numberOfTeeth = 1, this.toolDiameter = 0.0, this.featureDiameter = 0.0, this.isInternal = true});
   
 
-// Wejścia podstawowe
 @override@JsonKey() final  double spindleSpeed;
 @override@JsonKey() final  double feedPerTooth;
 @override@JsonKey() final  int numberOfTeeth;
-// Obliczanie n z Vc
-@override@JsonKey() final  double cuttingSpeed;
-// Vc
 @override@JsonKey() final  double toolDiameter;
-// D
-// Kompensacja łuku
 @override@JsonKey() final  double featureDiameter;
-// D_work
 @override@JsonKey() final  bool isInternal;
-// Otwór / Czop
-// Wyniki
-@override@JsonKey() final  double resultVf;
-// Liniowy
-@override@JsonKey() final  double resultVfArc;
-// Skompensowany
-@override@JsonKey() final  double resultF;
 
 /// Create a copy of FeedRateState
 /// with the given fields replaced by the non-null parameter values.
@@ -253,16 +225,16 @@ _$FeedRateStateCopyWith<_FeedRateState> get copyWith => __$FeedRateStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FeedRateState&&(identical(other.spindleSpeed, spindleSpeed) || other.spindleSpeed == spindleSpeed)&&(identical(other.feedPerTooth, feedPerTooth) || other.feedPerTooth == feedPerTooth)&&(identical(other.numberOfTeeth, numberOfTeeth) || other.numberOfTeeth == numberOfTeeth)&&(identical(other.cuttingSpeed, cuttingSpeed) || other.cuttingSpeed == cuttingSpeed)&&(identical(other.toolDiameter, toolDiameter) || other.toolDiameter == toolDiameter)&&(identical(other.featureDiameter, featureDiameter) || other.featureDiameter == featureDiameter)&&(identical(other.isInternal, isInternal) || other.isInternal == isInternal)&&(identical(other.resultVf, resultVf) || other.resultVf == resultVf)&&(identical(other.resultVfArc, resultVfArc) || other.resultVfArc == resultVfArc)&&(identical(other.resultF, resultF) || other.resultF == resultF));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FeedRateState&&(identical(other.spindleSpeed, spindleSpeed) || other.spindleSpeed == spindleSpeed)&&(identical(other.feedPerTooth, feedPerTooth) || other.feedPerTooth == feedPerTooth)&&(identical(other.numberOfTeeth, numberOfTeeth) || other.numberOfTeeth == numberOfTeeth)&&(identical(other.toolDiameter, toolDiameter) || other.toolDiameter == toolDiameter)&&(identical(other.featureDiameter, featureDiameter) || other.featureDiameter == featureDiameter)&&(identical(other.isInternal, isInternal) || other.isInternal == isInternal));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,spindleSpeed,feedPerTooth,numberOfTeeth,cuttingSpeed,toolDiameter,featureDiameter,isInternal,resultVf,resultVfArc,resultF);
+int get hashCode => Object.hash(runtimeType,spindleSpeed,feedPerTooth,numberOfTeeth,toolDiameter,featureDiameter,isInternal);
 
 @override
 String toString() {
-  return 'FeedRateState(spindleSpeed: $spindleSpeed, feedPerTooth: $feedPerTooth, numberOfTeeth: $numberOfTeeth, cuttingSpeed: $cuttingSpeed, toolDiameter: $toolDiameter, featureDiameter: $featureDiameter, isInternal: $isInternal, resultVf: $resultVf, resultVfArc: $resultVfArc, resultF: $resultF)';
+  return 'FeedRateState(spindleSpeed: $spindleSpeed, feedPerTooth: $feedPerTooth, numberOfTeeth: $numberOfTeeth, toolDiameter: $toolDiameter, featureDiameter: $featureDiameter, isInternal: $isInternal)';
 }
 
 
@@ -273,7 +245,7 @@ abstract mixin class _$FeedRateStateCopyWith<$Res> implements $FeedRateStateCopy
   factory _$FeedRateStateCopyWith(_FeedRateState value, $Res Function(_FeedRateState) _then) = __$FeedRateStateCopyWithImpl;
 @override @useResult
 $Res call({
- double spindleSpeed, double feedPerTooth, int numberOfTeeth, double cuttingSpeed, double toolDiameter, double featureDiameter, bool isInternal, double resultVf, double resultVfArc, double resultF
+ double spindleSpeed, double feedPerTooth, int numberOfTeeth, double toolDiameter, double featureDiameter, bool isInternal
 });
 
 
@@ -290,19 +262,15 @@ class __$FeedRateStateCopyWithImpl<$Res>
 
 /// Create a copy of FeedRateState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? spindleSpeed = null,Object? feedPerTooth = null,Object? numberOfTeeth = null,Object? cuttingSpeed = null,Object? toolDiameter = null,Object? featureDiameter = null,Object? isInternal = null,Object? resultVf = null,Object? resultVfArc = null,Object? resultF = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? spindleSpeed = null,Object? feedPerTooth = null,Object? numberOfTeeth = null,Object? toolDiameter = null,Object? featureDiameter = null,Object? isInternal = null,}) {
   return _then(_FeedRateState(
 spindleSpeed: null == spindleSpeed ? _self.spindleSpeed : spindleSpeed // ignore: cast_nullable_to_non_nullable
 as double,feedPerTooth: null == feedPerTooth ? _self.feedPerTooth : feedPerTooth // ignore: cast_nullable_to_non_nullable
 as double,numberOfTeeth: null == numberOfTeeth ? _self.numberOfTeeth : numberOfTeeth // ignore: cast_nullable_to_non_nullable
-as int,cuttingSpeed: null == cuttingSpeed ? _self.cuttingSpeed : cuttingSpeed // ignore: cast_nullable_to_non_nullable
-as double,toolDiameter: null == toolDiameter ? _self.toolDiameter : toolDiameter // ignore: cast_nullable_to_non_nullable
+as int,toolDiameter: null == toolDiameter ? _self.toolDiameter : toolDiameter // ignore: cast_nullable_to_non_nullable
 as double,featureDiameter: null == featureDiameter ? _self.featureDiameter : featureDiameter // ignore: cast_nullable_to_non_nullable
 as double,isInternal: null == isInternal ? _self.isInternal : isInternal // ignore: cast_nullable_to_non_nullable
-as bool,resultVf: null == resultVf ? _self.resultVf : resultVf // ignore: cast_nullable_to_non_nullable
-as double,resultVfArc: null == resultVfArc ? _self.resultVfArc : resultVfArc // ignore: cast_nullable_to_non_nullable
-as double,resultF: null == resultF ? _self.resultF : resultF // ignore: cast_nullable_to_non_nullable
-as double,
+as bool,
   ));
 }
 

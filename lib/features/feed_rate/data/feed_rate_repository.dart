@@ -1,12 +1,11 @@
-// lib/features/feed_rate/data/feed_rate_repository.dart
 import 'package:cnc_toolbox/core/database/database.dart';
-import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_state.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_calculation_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'feed_rate_repository.g.dart';
 
 abstract class IFeedRateRepository {
-  Future<void> saveCalculation(FeedRateState state);
+  Future<void> saveCalculationDto(FeedCalculationDto dto);
   Future<List<FeedCalculation>> getHistory({int limit = 10, int offset = 0});
   Future<void> deleteEntry(int id);
 }
@@ -16,14 +15,14 @@ class FeedRateRepository implements IFeedRateRepository {
   FeedRateRepository(this._db);
 
   @override
-  Future<void> saveCalculation(FeedRateState state) async {
+  Future<void> saveCalculationDto(FeedCalculationDto dto) async {
     await _db.saveFeedCalculation(
-      n: state.spindleSpeed,
-      fz: state.feedPerTooth,
-      z: state.numberOfTeeth,
-      vf: state.resultVf,
-      d: state.toolDiameter > 0 ? state.toolDiameter : null,
-      dWork: state.featureDiameter > 0 ? state.featureDiameter : null,
+      n: dto.n,
+      fz: dto.fz,
+      z: dto.z,
+      vf: dto.vf,
+      d: dto.toolDiameter > 0 ? dto.toolDiameter : null,
+      dWork: dto.featureDiameter > 0 ? dto.featureDiameter : null,
     );
   }
 

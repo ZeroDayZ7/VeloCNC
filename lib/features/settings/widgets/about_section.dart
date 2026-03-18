@@ -27,7 +27,7 @@ class AboutSection extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(LocaleKeys.close.tr()),
+            child: Text(LocaleKeys.common_close.tr()),
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'locale_notifier.dart';
+part of 'feed_rate_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,51 +9,52 @@ part of 'locale_notifier.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(LocaleNotifier)
-final localeProvider = LocaleNotifierProvider._();
+@ProviderFor(FeedRateController)
+final feedRateControllerProvider = FeedRateControllerProvider._();
 
-final class LocaleNotifierProvider
-    extends $NotifierProvider<LocaleNotifier, Locale> {
-  LocaleNotifierProvider._()
+final class FeedRateControllerProvider
+    extends $NotifierProvider<FeedRateController, void> {
+  FeedRateControllerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'localeProvider',
+        name: r'feedRateControllerProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$localeNotifierHash();
+  String debugGetCreateSourceHash() => _$feedRateControllerHash();
 
   @$internal
   @override
-  LocaleNotifier create() => LocaleNotifier();
+  FeedRateController create() => FeedRateController();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Locale value) {
+  Override overrideWithValue(void value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Locale>(value),
+      providerOverride: $SyncValueProvider<void>(value),
     );
   }
 }
 
-String _$localeNotifierHash() => r'15fc8d7ba4b3c9ed58213c9eb6f1cc2f86656e05';
+String _$feedRateControllerHash() =>
+    r'71bb3be4232c54afd25eb5be06dbecaa6c036920';
 
-abstract class _$LocaleNotifier extends $Notifier<Locale> {
-  Locale build();
+abstract class _$FeedRateController extends $Notifier<void> {
+  void build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<Locale, Locale>;
+    final ref = this.ref as $Ref<void, void>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Locale, Locale>,
-              Locale,
+              AnyNotifier<void, void>,
+              void,
               Object?,
               Object?
             >;

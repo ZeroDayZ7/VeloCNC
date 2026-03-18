@@ -26,7 +26,7 @@ final class LocalSettingsRepositoryProvider
         argument: null,
         retry: null,
         name: r'localSettingsRepositoryProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -55,4 +55,4 @@ final class LocalSettingsRepositoryProvider
 }
 
 String _$localSettingsRepositoryHash() =>
-    r'b63010f570025b68b68e1da227c2a3fc5efa267c';
+    r'f6b99f2ac5f21b78ea54ce667b9e3d40648c3c64';

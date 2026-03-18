@@ -73,59 +73,59 @@
     "items": {
       "straightness": {
         "name": "Prostoliniowość",
-        "desc": "Tolerancja prostoliniowości - ograniczona równoległymi liniami oddalonymi od siebie o wartość tolerancji."
+        "description": "Tolerancja prostoliniowości - ograniczona równoległymi liniami oddalonymi od siebie o wartość tolerancji."
       },
       "flatness": {
         "name": "Płaskość",
-        "desc": "Tolerancja płaskości - ograniczona dwiema płaszczyznami oddalonymi od siebie o wartość tolerancji."
+        "description": "Tolerancja płaskości - ograniczona dwiema płaszczyznami oddalonymi od siebie o wartość tolerancji."
       },
       "circularity": {
         "name": "Okrągłość",
-        "desc": "Tolerancja okrągłości - ograniczona dwoma okręgami, różnica promieni = wartość tolerancji."
+        "description": "Tolerancja okrągłości - ograniczona dwoma okręgami, różnica promieni = wartość tolerancji."
       },
       "cylindricity": {
         "name": "Walcowość",
-        "desc": "Tolerancja walcowości - ograniczona dwoma współosiowymi walcami, różnica promieni podstaw = wartość tolerancji."
+        "description": "Tolerancja walcowości - ograniczona dwoma współosiowymi walcami, różnica promieni podstaw = wartość tolerancji."
       },
       "profile_line": {
         "name": "Profil linii",
-        "desc": "Tolerancja profilu linii - ograniczona okręgami, różnica promieni = wartość tolerancji."
+        "description": "Tolerancja profilu linii - ograniczona okręgami, różnica promieni = wartość tolerancji."
       },
       "profile_surface": {
         "name": "Profil powierzchni",
-        "desc": "Tolerancja profilu powierzchni - ograniczona sferami większą i mniejszą, różnica promieni = wartość tolerancji."
+        "description": "Tolerancja profilu powierzchni - ograniczona sferami większą i mniejszą, różnica promieni = wartość tolerancji."
       },
       "perpendicularity": {
         "name": "Prostopadłość",
-        "desc": "Tolerancja prostopadłości - strefa ograniczona równoległymi płaszczyznami, proste prostopadłe do bazy."
+        "description": "Tolerancja prostopadłości - strefa ograniczona równoległymi płaszczyznami, proste prostopadłe do bazy."
       },
       "angularity": {
         "name": "Nachylenie",
-        "desc": "Tolerancja nachylenia - strefa ograniczona dwiema płaszczyznami pod kątem wartości nominalnej."
+        "description": "Tolerancja nachylenia - strefa ograniczona dwiema płaszczyznami pod kątem wartości nominalnej."
       },
       "parallelism": {
         "name": "Równoległość",
-        "desc": "Tolerancja równoległości - strefa ograniczona równoległymi płaszczyznami względem bazy."
+        "description": "Tolerancja równoległości - strefa ograniczona równoległymi płaszczyznami względem bazy."
       },
       "position": {
         "name": "Pozycja",
-        "desc": "Tolerancja pozycji - strefa ograniczona walcem o średnicy wartości tolerancji, środek w punkcie nominalnym."
+        "description": "Tolerancja pozycji - strefa ograniczona walcem o średnicy wartości tolerancji, środek w punkcie nominalnym."
       },
       "concentricity": {
         "name": "Współosiowość",
-        "desc": "Tolerancja współosiowości - strefa ograniczona walcem, oś symetrii pokrywa się z nominalną wartością."
+        "description": "Tolerancja współosiowości - strefa ograniczona walcem, oś symetrii pokrywa się z nominalną wartością."
       },
       "symmetry": {
         "name": "Symetria",
-        "desc": "Tolerancja symetrii - strefa ograniczona równoległymi płaszczyznami symetrycznymi do bazy."
+        "description": "Tolerancja symetrii - strefa ograniczona równoległymi płaszczyznami symetrycznymi do bazy."
       },
       "circular_runout": {
         "name": "Bicie promieniowe",
-        "desc": "Tolerancja bicia promieniowego/osiowego - strefa ograniczona dwoma koncentrycznymi okręgami."
+        "description": "Tolerancja bicia promieniowego/osiowego - strefa ograniczona dwoma koncentrycznymi okręgami."
       },
       "total_runout": {
         "name": "Bicie całkowite",
-        "desc": "Tolerancja bicia całkowitego - strefa ograniczona dwoma koncentrycznymi walcami."
+        "description": "Tolerancja bicia całkowitego - strefa ograniczona dwoma koncentrycznymi walcami."
       }
     }
   },

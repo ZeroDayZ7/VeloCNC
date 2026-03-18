@@ -72,59 +72,59 @@
     "items": {
       "straightness": {
         "name": "Straightness",
-        "desc": "Straightness tolerance - limited by parallel lines spaced by the tolerance value."
+        "description": "Straightness tolerance - limited by parallel lines spaced by the tolerance value."
       },
       "flatness": {
         "name": "Flatness",
-        "desc": "Flatness tolerance - limited by two planes spaced by the tolerance value."
+        "description": "Flatness tolerance - limited by two planes spaced by the tolerance value."
       },
       "circularity": {
         "name": "Circularity",
-        "desc": "Circularity tolerance - limited by two concentric circles, difference in radii = tolerance."
+        "description": "Circularity tolerance - limited by two concentric circles, difference in radii = tolerance."
       },
       "cylindricity": {
         "name": "Cylindricity",
-        "desc": "Cylindricity tolerance - limited by two coaxial cylinders, difference in base radii = tolerance."
+        "description": "Cylindricity tolerance - limited by two coaxial cylinders, difference in base radii = tolerance."
       },
       "profile_line": {
         "name": "Line Profile",
-        "desc": "Line profile tolerance - limited by circles, difference in radii = tolerance."
+        "description": "Line profile tolerance - limited by circles, difference in radii = tolerance."
       },
       "profile_surface": {
         "name": "Surface Profile",
-        "desc": "Surface profile tolerance - limited by larger and smaller spheres, difference in radii = tolerance."
+        "description": "Surface profile tolerance - limited by larger and smaller spheres, difference in radii = tolerance."
       },
       "perpendicularity": {
         "name": "Perpendicularity",
-        "desc": "Perpendicularity tolerance - zone limited by parallel planes, lines perpendicular to the datum."
+        "description": "Perpendicularity tolerance - zone limited by parallel planes, lines perpendicular to the datum."
       },
       "angularity": {
         "name": "Angularity",
-        "desc": "Angularity tolerance - zone limited by two planes at the nominal angle."
+        "description": "Angularity tolerance - zone limited by two planes at the nominal angle."
       },
       "parallelism": {
         "name": "Parallelism",
-        "desc": "Parallelism tolerance - zone limited by parallel planes relative to the datum."
+        "description": "Parallelism tolerance - zone limited by parallel planes relative to the datum."
       },
       "position": {
         "name": "Position",
-        "desc": "Position tolerance - zone limited by a cylinder with diameter equal to tolerance value, center at nominal point."
+        "description": "Position tolerance - zone limited by a cylinder with diameter equal to tolerance value, center at nominal point."
       },
       "concentricity": {
         "name": "Concentricity",
-        "desc": "Concentricity tolerance - zone limited by a cylinder, symmetry axis coincides with nominal."
+        "description": "Concentricity tolerance - zone limited by a cylinder, symmetry axis coincides with nominal."
       },
       "symmetry": {
         "name": "Symmetry",
-        "desc": "Symmetry tolerance - zone limited by planes symmetrical to datum."
+        "description": "Symmetry tolerance - zone limited by planes symmetrical to datum."
       },
       "circular_runout": {
         "name": "Circular Runout",
-        "desc": "Circular/axial runout tolerance - zone limited by two concentric circles."
+        "description": "Circular/axial runout tolerance - zone limited by two concentric circles."
       },
       "total_runout": {
         "name": "Total Runout",
-        "desc": "Total runout tolerance - zone limited by two concentric cylinders."
+        "description": "Total runout tolerance - zone limited by two concentric cylinders."
       }
     }
   },
