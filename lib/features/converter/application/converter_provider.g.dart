@@ -16,7 +16,7 @@ final class ConverterNotifierProvider
     extends $NotifierProvider<ConverterNotifier, ConverterState> {
   ConverterNotifierProvider._({
     required ConverterNotifierFamily super.from,
-    required String super.argument,
+    required ConverterGroup super.argument,
   }) : super(
          retry: null,
          name: r'converterProvider',
@@ -58,7 +58,7 @@ final class ConverterNotifierProvider
   }
 }
 
-String _$converterNotifierHash() => r'1da597671307949d4a7e2333238173cc981c8b89';
+String _$converterNotifierHash() => r'912beb39ec66f14da57dc4c7726594010ee34776';
 
 final class ConverterNotifierFamily extends $Family
     with
@@ -67,7 +67,7 @@ final class ConverterNotifierFamily extends $Family
           ConverterState,
           ConverterState,
           ConverterState,
-          String
+          ConverterGroup
         > {
   ConverterNotifierFamily._()
     : super(
@@ -78,7 +78,7 @@ final class ConverterNotifierFamily extends $Family
         isAutoDispose: false,
       );
 
-  ConverterNotifierProvider call(String category) =>
+  ConverterNotifierProvider call(ConverterGroup category) =>
       ConverterNotifierProvider._(argument: category, from: this);
 
   @override
@@ -86,10 +86,10 @@ final class ConverterNotifierFamily extends $Family
 }
 
 abstract class _$ConverterNotifier extends $Notifier<ConverterState> {
-  late final _$args = ref.$arg as String;
-  String get category => _$args;
+  late final _$args = ref.$arg as ConverterGroup;
+  ConverterGroup get category => _$args;
 
-  ConverterState build(String category);
+  ConverterState build(ConverterGroup category);
   @$mustCallSuper
   @override
   void runBuild() {

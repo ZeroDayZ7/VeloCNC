@@ -1,5 +1,5 @@
-
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
+import 'package:cnc_toolbox/widgets/custom_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,29 +34,34 @@ class FeedRateForm extends ConsumerWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            TextField(
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: "Średnica narzędzia (D)",
-                border: OutlineInputBorder(),
+            CustomField(
+              label: "Średnica narzędzia (D)",
+              suffix: "mm",
+              controller: TextEditingController(
+                text: state.toolDiameter > 0
+                    ? state.toolDiameter.toString()
+                    : "",
               ),
               onChanged: notifier.updateToolDia,
             ),
             const SizedBox(height: 10),
-            TextField(
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: "Średnica otworu/czopu",
-                border: OutlineInputBorder(),
+            CustomField(
+              label: "Średnica otworu/czopu",
+              suffix: "mm",
+              controller: TextEditingController(
+                text: state.featureDiameter > 0
+                    ? state.featureDiameter.toString()
+                    : "",
               ),
               onChanged: notifier.updateFeatureDia,
             ),
+            const SizedBox(height: 10),
             SwitchListTile(
               title: Text(
                 state.isInternal ? "Otwór (Wewnętrzny)" : "Czop (Zewnętrzny)",
               ),
               value: state.isInternal,
-              onChanged: notifier.toggleWorkType,
+              onChanged: (val) => notifier.toggleWorkType(val),
             ),
           ],
         ],

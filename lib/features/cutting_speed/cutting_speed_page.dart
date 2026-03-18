@@ -1,5 +1,5 @@
+import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class CuttingSpeedPage extends StatelessWidget {
   const CuttingSpeedPage({super.key});
@@ -11,7 +11,7 @@ class CuttingSpeedPage extends StatelessWidget {
         title: const Text('Tap Drill'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.push("/"),
+          onPressed: () => const HomeRoute().go(context),
         ),
       ),
       body: const Center(child: Text('Tap Drill Page Placeholder')),

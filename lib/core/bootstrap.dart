@@ -2,7 +2,6 @@ import 'package:cnc_toolbox/app.dart';
 import 'package:cnc_toolbox/core/app_observer.dart';
 import 'package:cnc_toolbox/core/localization/app_languages.dart';
 import 'package:cnc_toolbox/core/shared_prefs_provider.dart';
-import 'package:cnc_toolbox/features/tolerances/tolerance_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +13,6 @@ Future<void> bootstrap() async {
   await EasyLocalization.ensureInitialized();
 
   final prefs = await SharedPreferences.getInstance();
-   await ToleranceService.init();
 
   runApp(
     ProviderScope(

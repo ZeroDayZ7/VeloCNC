@@ -30,14 +30,9 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
   @override
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
-
-    // Używamy danych z repozytorium
     final currentCat = converterCategories[_selectedIndex];
-    final categoryId = currentCat.id;
-    final units = currentCat.units;
-
-    final visibleUnits = units
-        .where((u) => settings.isUnitVisible(categoryId, u.id))
+    final visibleUnits = currentCat.units
+        .where((u) => settings.isUnitVisible(currentCat.id.name, u.id))
         .toList();
 
     return Scaffold(
@@ -46,17 +41,11 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.tune),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                ),
-                builder: (context) =>
-                    SettingsSheet(categoryId: categoryId, units: units),
-              );
-            },
+            onPressed: () => SettingsSheet.show(
+              context,
+              currentCat.id.name,
+              currentCat.units,
+            ),
           ),
         ],
       ),
@@ -66,22 +55,18 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
             isExpanded: settings.isSidebarExpanded,
             selectedIndex: _selectedIndex,
             categories: converterCategories,
-            onSelect: (index) {
-              setState(() {
-                _selectedIndex = index;
-                _controllers.clear();
-              });
-            },
-            onToggle: () {
-              ref.read(settingsProvider.notifier).toggleSidebar();
-            },
+            onSelect: (index) => setState(() {
+              _selectedIndex = index;
+              _controllers.clear();
+            }),
+            onToggle: () => ref.read(settingsProvider.notifier).toggleSidebar(),
           ),
-          const VerticalDivider(thickness: 1, width: 1),
+          const VerticalDivider(width: 1),
           Expanded(
             child: ConverterInputs(
               units: visibleUnits,
               controllers: _controllers,
-              categoryId: categoryId,
+              category: currentCat.id,
             ),
           ),
         ],

@@ -1,75 +1,14 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
+import 'package:cnc_toolbox/core/router/app_router.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/widgets/gd_symbols_info_modal.dart';
 import 'package:cnc_toolbox/widgets/app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../data/symbols_data.dart';
 
 class GdSymbolsPage extends StatelessWidget {
   const GdSymbolsPage({super.key});
-
-  // Funkcja wyświetlająca modal z opisem GD&T
-  void _showInfoModal(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.6,
-        maxChildSize: 0.9,
-        expand: false,
-        builder: (context, scrollController) => SingleChildScrollView(
-          controller: scrollController,
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              Text(
-                "Czym jest GD&T?",
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "GD&T (Geometric Dimensioning and Tolerancing) to system symboli służący do precyzyjnego definiowania dopuszczalnych odchyłek kształtu, osiowości, bicia i położenia elementów na rysunku technicznym.",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 12),
-              const Text(
-                "W odróżnieniu od zwykłych tolerancji wymiarowych, GD&T pozwala kontrolować geometrię detalu, co jest kluczowe dla poprawnego montażu i działania maszyn. System ten opiera się na tzw. bazach (Datums), które wyznaczają punkty odniesienia dla pomiarów.",
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 24),
-              // Mały przycisk zamknięcia
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("Rozumiem"),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +19,8 @@ class GdSymbolsPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.info_outline),
             tooltip: "Co to jest GD&T?",
-            onPressed: () => _showInfoModal(context),
+            onPressed: () =>
+                GdSymbolsInfoModal.show(context),
           ),
         ],
       ),
@@ -106,7 +46,7 @@ class GdSymbolsPage extends StatelessWidget {
           final s = gdSymbolsList[index];
           return InkWell(
             borderRadius: BorderRadius.circular(12),
-            onTap: () => context.push('/gd-symbols/details', extra: s.name),
+            onTap: () => GdSymbolDetailsRoute($extra: s.name).push(context),
             child: Card(
               elevation: 0,
               shape: RoundedRectangleBorder(

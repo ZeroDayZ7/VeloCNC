@@ -1,36 +1,18 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
-import 'package:cnc_toolbox/features/g_codes/data/g_codes_data.dart';
+import 'package:cnc_toolbox/features/g_codes/application/g_codes_provider.dart';
 import 'package:cnc_toolbox/features/g_codes/presentation/widgets/g_code_tile.dart';
 import 'package:cnc_toolbox/features/g_codes/presentation/widgets/g_codes_info_modal.dart';
+import 'package:cnc_toolbox/features/g_codes/presentation/widgets/g_codes_search_bar.dart'; // Import nowej klasy
 import 'package:cnc_toolbox/widgets/app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class GCodesPage extends StatefulWidget {
+class GCodesPage extends ConsumerWidget {
   const GCodesPage({super.key});
 
   @override
-  State<GCodesPage> createState() => _GCodesPageState();
-}
-
-class _GCodesPageState extends State<GCodesPage> {
-  String _query = "";
-
-  List filteredCodes() {
-    if (_query.isEmpty) return cncCodes;
-
-    final q = _query.toLowerCase();
-
-    return cncCodes.where((code) {
-      return code.code.toLowerCase().contains(q) ||
-          code.titleKey.tr().toLowerCase().contains(q) ||
-          code.descriptionKey.tr().toLowerCase().contains(q);
-    }).toList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final codes = filteredCodes();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final codes = ref.watch(filteredGCodesProvider);
 
     return Scaffold(
       appBar: CncAppBar(
@@ -44,8 +26,7 @@ class _GCodesPageState extends State<GCodesPage> {
       ),
       body: Column(
         children: [
-          _buildSearchBar(),
-
+          const GCodeSearchBar(), // Używamy jako const class
           Expanded(
             child: ListView.builder(
               itemCount: codes.length,
@@ -55,21 +36,6 @@ class _GCodesPageState extends State<GCodesPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
-      child: SearchBar(
-        hintText: LocaleKeys.search_hint.tr(),
-        leading: const Icon(Icons.search),
-        onChanged: (value) {
-          setState(() {
-            _query = value;
-          });
-        },
       ),
     );
   }

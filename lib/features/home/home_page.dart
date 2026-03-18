@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
+import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:cnc_toolbox/features/home/tool_tile.dart';
 import 'package:cnc_toolbox/features/home/tools_list.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () => context.push(Routes.settings),
+            onPressed: () => const SettingsRoute().push(context),
           ),
         ],
       ),

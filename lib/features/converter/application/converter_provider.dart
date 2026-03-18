@@ -1,4 +1,6 @@
+
 import 'package:cnc_toolbox/features/converter/domain/converter_state.dart';
+import 'package:cnc_toolbox/features/converter/models/converter_category.dart';
 import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -7,9 +9,7 @@ part 'converter_provider.g.dart';
 @Riverpod(keepAlive: true)
 class ConverterNotifier extends _$ConverterNotifier {
   @override
-  ConverterState build(String category) {
-    return const ConverterState();
-  }
+  ConverterState build(ConverterGroup category) => const ConverterState();
 
   void updateValue(String unitId, String value, List<UnitDefinition> allUnits) {
     if (value.isEmpty) {
@@ -17,63 +17,53 @@ class ConverterNotifier extends _$ConverterNotifier {
       return;
     }
 
-    final double? inputValue = double.tryParse(value.replaceAll(',', '.'));
+    final inputValue = double.tryParse(value.replaceAll(',', '.'));
     if (inputValue == null) return;
 
     final Map<String, String> newValues = {};
 
-    if (category == 'temp') {
-      double celsius;
-      switch (unitId) {
-        case 'fahrenheit':
-          celsius = (inputValue - 32) / 1.8;
-          break;
-        case 'kelvin':
-          celsius = inputValue - 273.15;
-          break;
-        default:
-          celsius = inputValue;
-      }
-
-      for (var unit in allUnits) {
-        if (unit.id == unitId) {
-          newValues[unit.id] = value;
-        } else {
-          double converted;
-          switch (unit.id) {
-            case 'fahrenheit':
-              converted = (celsius * 1.8) + 32;
-              break;
-            case 'kelvin':
-              converted = celsius + 273.15;
-              break;
-            default:
-              converted = celsius;
-          }
-          newValues[unit.id] = _formatValue(converted);
-        }
-      }
+    if (category == ConverterGroup.temperature) {
+      _handleTemperature(inputValue, unitId, value, allUnits, newValues);
     } else {
-      final currentUnit = allUnits.firstWhere((u) => u.id == unitId);
-      final double baseValue = inputValue * currentUnit.ratio;
-
-      for (var unit in allUnits) {
-        if (unit.id == unitId) {
-          newValues[unit.id] = value;
-        } else {
-          final double converted = baseValue / unit.ratio;
-          newValues[unit.id] = _formatValue(converted);
-        }
-      }
+      _handleLinear(inputValue, unitId, value, allUnits, newValues);
     }
 
     state = state.copyWith(values: newValues);
   }
 
-  String _formatValue(double v) {
-    return v
-        .toStringAsFixed(6)
-        .replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), "")
-        .replaceAll(RegExp(r"\.$"), "");
+  void _handleTemperature(double val, String uid, String orig, List<UnitDefinition> units, Map<String, String> out) {
+    double celsius;
+    switch (uid) {
+      case 'fahrenheit': celsius = (val - 32) / 1.8; break;
+      case 'kelvin': celsius = val - 273.15; break;
+      default: celsius = val;
+    }
+
+    for (final u in units) {
+      if (u.id == uid) {
+        out[u.id] = orig;
+      } else {
+        double conv;
+        switch (u.id) {
+          case 'fahrenheit': conv = (celsius * 1.8) + 32; break;
+          case 'kelvin': conv = celsius + 273.15; break;
+          default: conv = celsius;
+        }
+        out[u.id] = _format(conv);
+      }
+    }
+  }
+
+  void _handleLinear(double val, String uid, String orig, List<UnitDefinition> units, Map<String, String> out) {
+    final current = units.firstWhere((u) => u.id == uid);
+    final base = val * current.ratio;
+
+    for (final u in units) {
+      out[u.id] = u.id == uid ? orig : _format(base / u.ratio);
+    }
+  }
+
+  String _format(double v) {
+    return v.toStringAsFixed(6).replaceAll(RegExp(r'([.]*0+)(?!.*\d)'), '').replaceAll(RegExp(r'\.$'), '');
   }
 }

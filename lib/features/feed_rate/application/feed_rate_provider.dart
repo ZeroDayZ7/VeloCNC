@@ -1,6 +1,9 @@
+// lib/features/feed_rate/application/feed_rate_provider.dart
 import 'package:cnc_toolbox/core/database/database.dart';
 import 'package:cnc_toolbox/core/utils/logger/app_logger.dart';
 import 'package:cnc_toolbox/core/utils/logger/logger_provider.dart';
+import 'package:cnc_toolbox/features/feed_rate/data/feed_rate_repository.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_math.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,28 +14,19 @@ class FeedRateNotifier extends _$FeedRateNotifier {
   @override
   FeedRateState build(String type) => const FeedRateState();
 
-  AppLogger get _log => ref.read(appLoggerProvider);
+  IAppLogger get _log => ref.read(appLoggerProvider);
+  IFeedRateRepository get _repo => ref.read(feedRateRepositoryProvider);
 
-  // --- ZAPIS I ODCZYT Z BAZY ---
+  // --- AKCJE ---
 
   Future<void> saveCurrentToDb() async {
-    // Sprawdź czy stan w ogóle istnieje
     if (state.resultVf <= 0) {
       _log.w("Anulowano zapis: wynik Vf jest zerowy", module: "FEED_RATE");
       return;
     }
 
-    final db = ref.read(databaseProvider);
-
     try {
-      await db.saveFeedCalculation(
-        n: state.spindleSpeed,
-        fz: state.feedPerTooth,
-        z: state.numberOfTeeth,
-        vf: state.resultVf,
-        d: state.toolDiameter > 0 ? state.toolDiameter : null,
-        dWork: state.featureDiameter > 0 ? state.featureDiameter : null,
-      );
+      await _repo.saveCalculation(state);
       _log.i("Pomyślnie zapisano obliczenia do bazy", module: "FEED_RATE");
     } catch (e, st) {
       _log.e(
@@ -44,7 +38,6 @@ class FeedRateNotifier extends _$FeedRateNotifier {
     }
   }
 
-  // Metoda do wczytywania danych z historii z powrotem do UI
   void loadFromHistory(FeedCalculation entry) {
     _log.d("Wczytywanie historii ID: ${entry.id}", module: "FEED_RATE");
     state = state.copyWith(
@@ -57,56 +50,53 @@ class FeedRateNotifier extends _$FeedRateNotifier {
     _calculate();
   }
 
-  // Aktualizacja danych
+  // --- UPDATES ---
+
   void updateSpindleSpeed(String v) => _update(
     () => state = state.copyWith(spindleSpeed: double.tryParse(v) ?? 0),
   );
+
   void updateFeedPerTooth(String v) => _update(
     () => state = state.copyWith(feedPerTooth: double.tryParse(v) ?? 0),
   );
+
   void updateTeeth(int v) =>
       _update(() => state = state.copyWith(numberOfTeeth: v));
+
   void updateToolDia(String v) => _update(
     () => state = state.copyWith(toolDiameter: double.tryParse(v) ?? 0),
   );
+
   void updateFeatureDia(String v) => _update(
     () => state = state.copyWith(featureDiameter: double.tryParse(v) ?? 0),
   );
+
   void toggleWorkType(bool isInternal) =>
       _update(() => state = state.copyWith(isInternal: isInternal));
 
-  void _update(Function action) {
+  // --- LOGIKA ---
+
+  void _update(void Function() action) {
     action();
     _calculate();
   }
 
   void _calculate() {
-    // 1. Podstawowy Vf
-    final vf = state.spindleSpeed * state.feedPerTooth * state.numberOfTeeth;
-    final f = state.feedPerTooth * state.numberOfTeeth;
-
-    // 2. Kompensacja łuku
-    double vfArc = vf;
-    if (state.toolDiameter > 0 && state.featureDiameter > 0) {
-      if (state.isInternal) {
-        // Otwór: wolniej
-        vfArc =
-            vf *
-            (state.featureDiameter - state.toolDiameter) /
-            state.featureDiameter;
-      } else {
-        // Czop: szybciej
-        vfArc =
-            vf *
-            (state.featureDiameter + state.toolDiameter) /
-            state.featureDiameter;
-      }
-    }
-
-    state = state.copyWith(
-      resultVf: vf,
-      resultVfArc: vfArc < 0 ? 0 : vfArc,
-      resultF: f,
+    final vf = FeedRateMath.calculateVf(
+      state.spindleSpeed,
+      state.feedPerTooth,
+      state.numberOfTeeth,
     );
+
+    final f = FeedRateMath.calculateF(state.feedPerTooth, state.numberOfTeeth);
+
+    final vfArc = FeedRateMath.calculateArcCompensation(
+      vf: vf,
+      toolDia: state.toolDiameter,
+      featureDia: state.featureDiameter,
+      isInternal: state.isInternal,
+    );
+
+    state = state.copyWith(resultVf: vf, resultVfArc: vfArc, resultF: f);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
-import 'package:cnc_toolbox/features/tolerances/tolerance_service.dart';
+import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +12,8 @@ class ToleranceInputForm extends StatelessWidget {
   final VoidCallback onChanged;
   final Function(String?) onLetterChanged;
   final Function(String?) onNumberChanged;
+  final List<String> letters;
+  final List<String> numbers;
 
   const ToleranceInputForm({
     super.key,
@@ -22,14 +24,12 @@ class ToleranceInputForm extends StatelessWidget {
     required this.onChanged,
     required this.onLetterChanged,
     required this.onNumberChanged,
+    required this.letters,
+    required this.numbers,
   });
 
   @override
   Widget build(BuildContext context) {
-    final letters = ToleranceService.getLetters(selectedType);
-    final numbers = selectedLetter != null
-        ? ToleranceService.getNumbersForLetter(selectedType, selectedLetter!)
-        : <String>[];
 
     return Card(
       elevation: 0,
@@ -49,7 +49,6 @@ class ToleranceInputForm extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: LocaleKeys.tolerance_nominal_diameter.tr(),
                 suffixText: LocaleKeys.tolerance_unit_mm.tr(),
-                border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.straighten),
               ),
               onChanged: (_) => onChanged(),
@@ -63,7 +62,6 @@ class ToleranceInputForm extends StatelessWidget {
                     initialValue: selectedLetter,
                     decoration: InputDecoration(
                       labelText: LocaleKeys.tolerance_letter.tr(),
-                      border: OutlineInputBorder(),
                     ),
                     items: letters
                         .map((l) => DropdownMenuItem(value: l, child: Text(l)))
@@ -78,7 +76,6 @@ class ToleranceInputForm extends StatelessWidget {
                     initialValue: selectedNumber,
                     decoration: InputDecoration(
                       labelText: LocaleKeys.tolerance_grade_number.tr(),
-                      border: OutlineInputBorder(),
                     ),
                     items: numbers
                         .map((n) => DropdownMenuItem(value: n, child: Text(n)))

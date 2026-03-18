@@ -1,83 +1,131 @@
-import 'package:cnc_toolbox/core/constants/constants.dart';
-import 'package:cnc_toolbox/features/converter/converter_page.dart';
-import 'package:cnc_toolbox/features/cutting_speed/cutting_speed_page.dart';
-import 'package:cnc_toolbox/features/feed_rate/feed_rate_page.dart';
-import 'package:cnc_toolbox/features/g_codes/presentation/g_codes_page.dart';
-import 'package:cnc_toolbox/features/gd&t_symbols/data/symbols_data.dart';
-import 'package:cnc_toolbox/features/gd&t_symbols/presentation/symbol_details_page.dart';
-import 'package:cnc_toolbox/features/gd&t_symbols/presentation/symbols_page.dart';
-import 'package:cnc_toolbox/features/home/home_page.dart';
-import 'package:cnc_toolbox/features/settings/settings_page.dart';
-import 'package:cnc_toolbox/features/spindle_speed/spindle_speed_page.dart';
-import 'package:cnc_toolbox/features/tap_drill/tap_drill_page.dart';
-import 'package:cnc_toolbox/features/tolerances/tolerance_page.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cnc_toolbox/features/home/presentation/not_found_page.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final routerProvider = Provider<GoRouter>((ref) {
+// Importy podstron
+import '../../features/converter/converter_page.dart';
+import '../../features/cutting_speed/cutting_speed_page.dart';
+import '../../features/feed_rate/feed_rate_page.dart';
+import '../../features/g_codes/presentation/g_codes_page.dart';
+import '../../features/gd&t_symbols/data/symbols_data.dart';
+import '../../features/gd&t_symbols/presentation/symbol_details_page.dart';
+import '../../features/gd&t_symbols/presentation/symbols_page.dart';
+import '../../features/home/home_page.dart';
+import '../../features/settings/settings_page.dart';
+import '../../features/spindle_speed/spindle_speed_page.dart';
+import '../../features/tap_drill/tap_drill_page.dart';
+import '../../features/tolerances/tolerance_page.dart';
+
+part 'app_router.g.dart';
+
+// --- DEFINICJA GŁÓWNA ---
+@TypedGoRoute<HomeRoute>(
+  path: '/',
+  routes: [
+    TypedGoRoute<SettingsRoute>(path: 'settings'),
+    TypedGoRoute<CuttingSpeedRoute>(path: 'cutting-speed'),
+    TypedGoRoute<FeedRateRoute>(path: 'feed-rate'),
+    TypedGoRoute<SpindleSpeedRoute>(path: 'spindle-speed'),
+    TypedGoRoute<TapDrillRoute>(path: 'tap-drill'),
+    TypedGoRoute<ConverterRoute>(path: 'converter'),
+    TypedGoRoute<TolerancesRoute>(path: 'tolerances'),
+    TypedGoRoute<GCodesRoute>(path: 'g-codes'),
+    TypedGoRoute<GdSymbolsRoute>(
+      path: 'gd-symbols',
+      routes: [TypedGoRoute<GdSymbolDetailsRoute>(path: 'details')],
+    ),
+  ],
+)
+class HomeRoute extends GoRouteData with $HomeRoute {
+  const HomeRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const HomePage();
+}
+
+class SettingsRoute extends GoRouteData with $SettingsRoute {
+  const SettingsRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SettingsPage();
+}
+
+class CuttingSpeedRoute extends GoRouteData with $CuttingSpeedRoute {
+  const CuttingSpeedRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const CuttingSpeedPage();
+}
+
+class FeedRateRoute extends GoRouteData with $FeedRateRoute {
+  const FeedRateRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const FeedRatePage();
+}
+
+class SpindleSpeedRoute extends GoRouteData with $SpindleSpeedRoute {
+  const SpindleSpeedRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SpindleSpeedPage();
+}
+
+class TapDrillRoute extends GoRouteData with $TapDrillRoute {
+  const TapDrillRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const TapDrillPage();
+}
+
+class ConverterRoute extends GoRouteData with $ConverterRoute {
+  const ConverterRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ConverterPage();
+}
+
+class TolerancesRoute extends GoRouteData with $TolerancesRoute {
+  const TolerancesRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const TolerancePage();
+}
+
+class GCodesRoute extends GoRouteData with $GCodesRoute {
+  const GCodesRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const GCodesPage();
+}
+
+class GdSymbolsRoute extends GoRouteData with $GdSymbolsRoute {
+  const GdSymbolsRoute();
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const GdSymbolsPage();
+}
+
+class GdSymbolDetailsRoute extends GoRouteData with $GdSymbolDetailsRoute {
+  final String? $extra;
+  const GdSymbolDetailsRoute({this.$extra});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final symbol = gdSymbolsList.firstWhere(
+      (s) => s.name == ($extra ?? ''),
+      orElse: () => gdSymbolsList.first,
+    );
+    return GdSymbolDetailsPage(symbol: symbol);
+  }
+}
+
+// --- PROVIDER ---
+@Riverpod(keepAlive: true)
+GoRouter router(Ref ref) {
   return GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: true,
-    routes: [
-      GoRoute(
-        path: Routes.home,
-        name: 'home',
-        builder: (context, state) => const HomePage(),
-      ),
-      GoRoute(
-        path: Routes.settings,
-        name: 'settings',
-        builder: (context, state) => const SettingsPage(),
-      ),
-      GoRoute(
-        path: Routes.cuttingSpeed,
-        name: 'cutting_speed',
-        builder: (context, state) => const CuttingSpeedPage(),
-      ),
-      GoRoute(
-        path: Routes.feedRate,
-        name: 'feed_rate',
-        builder: (context, state) => const FeedRatePage(),
-      ),
-      GoRoute(
-        path: Routes.spindleSpeed,
-        name: 'spindle_speed',
-        builder: (context, state) => const SpindleSpeedPage(),
-      ),
-      GoRoute(
-        path: Routes.tapDrill,
-        name: 'tap_drill',
-        builder: (context, state) => const TapDrillPage(),
-      ),
-      GoRoute(
-        path: Routes.converter,
-        name: 'converter',
-        builder: (context, state) => const ConverterPage(),
-      ),
-      GoRoute(
-        path: Routes.tolerances,
-        name: 'tolerances',
-        builder: (context, state) => const TolerancePage(),
-      ),
-      GoRoute(
-        path: Routes.gCodes,
-        name: 'g_codes',
-        builder: (context, state) => const GCodesPage(),
-      ),
-      GoRoute(
-        path: Routes.gdSymbols,
-        builder: (context, state) => const GdSymbolsPage(),
-        routes: [
-          GoRoute(
-            path: 'details',
-            builder: (context, state) {
-              final name = state.extra as String;
-              final symbol = gdSymbolsList.firstWhere((s) => s.name == name);
-              return GdSymbolDetailsPage(symbol: symbol);
-            },
-          ),
-        ],
-      ),
-    ],
+    routes: $appRoutes,
+    errorBuilder: (context, state) => const NotFoundPage(),
   );
-});
+}

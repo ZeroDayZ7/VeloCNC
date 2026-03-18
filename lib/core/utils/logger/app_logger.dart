@@ -1,7 +1,40 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
-class AppLogger {
+abstract class IAppLogger {
+  void d(
+    String message, {
+    String? module,
+    dynamic error,
+    StackTrace? stackTrace,
+  });
+  void i(
+    String message, {
+    String? module,
+    dynamic error,
+    StackTrace? stackTrace,
+  });
+  void w(
+    String message, {
+    String? module,
+    dynamic error,
+    StackTrace? stackTrace,
+  });
+  void e(
+    String message, {
+    String? module,
+    dynamic error,
+    StackTrace? stackTrace,
+  });
+  void t(
+    String message, {
+    String? module,
+    dynamic error,
+    StackTrace? stackTrace,
+  });
+}
+
+class AppLogger implements IAppLogger {
   final Logger _logger;
 
   AppLogger()
@@ -17,6 +50,7 @@ class AppLogger {
         ),
       );
 
+  @override
   void d(
     String message, {
     String? module,
@@ -25,6 +59,7 @@ class AppLogger {
   }) =>
       _logger.d(_format(message, module), error: error, stackTrace: stackTrace);
 
+  @override
   void i(
     String message, {
     String? module,
@@ -33,6 +68,7 @@ class AppLogger {
   }) =>
       _logger.i(_format(message, module), error: error, stackTrace: stackTrace);
 
+  @override
   void w(
     String message, {
     String? module,
@@ -41,6 +77,7 @@ class AppLogger {
   }) =>
       _logger.w(_format(message, module), error: error, stackTrace: stackTrace);
 
+  @override
   void e(
     String message, {
     String? module,
@@ -49,6 +86,7 @@ class AppLogger {
   }) =>
       _logger.e(_format(message, module), error: error, stackTrace: stackTrace);
 
+  @override
   void t(
     String message, {
     String? module,

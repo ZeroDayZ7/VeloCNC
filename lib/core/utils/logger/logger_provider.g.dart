@@ -13,8 +13,8 @@ part of 'logger_provider.dart';
 final appLoggerProvider = AppLoggerProvider._();
 
 final class AppLoggerProvider
-    extends $FunctionalProvider<AppLogger, AppLogger, AppLogger>
-    with $Provider<AppLogger> {
+    extends $FunctionalProvider<IAppLogger, IAppLogger, IAppLogger>
+    with $Provider<IAppLogger> {
   AppLoggerProvider._()
     : super(
         from: null,
@@ -31,21 +31,21 @@ final class AppLoggerProvider
 
   @$internal
   @override
-  $ProviderElement<AppLogger> $createElement($ProviderPointer pointer) =>
+  $ProviderElement<IAppLogger> $createElement($ProviderPointer pointer) =>
       $ProviderElement(pointer);
 
   @override
-  AppLogger create(Ref ref) {
+  IAppLogger create(Ref ref) {
     return appLogger(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AppLogger value) {
+  Override overrideWithValue(IAppLogger value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<AppLogger>(value),
+      providerOverride: $SyncValueProvider<IAppLogger>(value),
     );
   }
 }
 
-String _$appLoggerHash() => r'3699c15aceb1e23139f386ef70915703ccabf195';
+String _$appLoggerHash() => r'd71bf30563e769949c3a94d942b934ff76260b39';

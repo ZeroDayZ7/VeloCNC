@@ -17,6 +17,21 @@ class SettingsSheet extends ConsumerWidget {
     required this.units,
   });
 
+  static void show(
+    BuildContext context,
+    String categoryId,
+    List<UnitDefinition> units,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => SettingsSheet(categoryId: categoryId, units: units),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);

@@ -1,11 +1,10 @@
-import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
+import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:cnc_toolbox/features/settings/widgets/language_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'widgets/about_section.dart';
 import 'widgets/dark_mode_switch.dart';
@@ -22,7 +21,7 @@ class SettingsPage extends ConsumerWidget {
         title: Text(LocaleKeys.settings.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.push(Routes.home),
+          onPressed: () => const HomeRoute().go(context),
         ),
       ),
       body: ListView(

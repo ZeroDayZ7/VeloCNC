@@ -2,8 +2,10 @@
 import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
 import 'package:flutter/material.dart';
 
+enum ConverterGroup { length, weight, temperature, pressure, speed, volume }
+
 class ConverterCategory {
-  final String id;
+  final ConverterGroup id;
   final IconData icon;
   final String label;
   final List<UnitDefinition> units;

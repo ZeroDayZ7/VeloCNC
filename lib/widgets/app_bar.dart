@@ -1,4 +1,4 @@
-import 'package:cnc_toolbox/core/constants/constants.dart';
+import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +8,7 @@ class CncAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
   final List<Widget>? actions;
   final VoidCallback? onBackPress;
-  final PreferredSizeWidget? bottom; // 1. DODAJ TO POLE
+  final PreferredSizeWidget? bottom;
 
   const CncAppBar({
     super.key,
@@ -16,7 +16,7 @@ class CncAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackButton = true,
     this.actions,
     this.onBackPress,
-    this.bottom, // 2. DODAJ DO KONSTRUKTORA
+    this.bottom,
   });
 
   @override
@@ -32,18 +32,17 @@ class CncAppBar extends StatelessWidget implements PreferredSizeWidget {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.go(Routes.home);
+                      const HomeRoute().go(context);
                     }
                   },
             )
           : null,
       actions: actions,
-      bottom: bottom, // 3. PRZEKAŻ DO WEWNĘTRZNEGO APPBARA
+      bottom: bottom,
     );
   }
 
   @override
-  // 4. POPRAW WYSOKOŚĆ (jeśli jest bottom, musi być wyższy)
   Size get preferredSize =>
       Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0.0));
 }

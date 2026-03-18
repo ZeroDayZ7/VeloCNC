@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cnc_toolbox/core/shared_prefs_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,15 +39,14 @@ class SettingsNotifier extends _$SettingsNotifier {
 
   @override
   SettingsState build() {
-    _load();
-    return const SettingsState();
+    final prefs = ref.watch(sharedPrefsProvider);
+    return _loadInitialState(prefs);
   }
 
-  Future<void> _load() async {
-    final prefs = await SharedPreferences.getInstance();
+  SettingsState _loadInitialState(SharedPreferences prefs) {
     final isExpanded = prefs.getBool(_sidebarKey) ?? true;
-
     final Map<String, List<String>> unitsMap = {};
+
     for (final key in prefs.getKeys()) {
       if (key.startsWith(_unitsKeyPrefix)) {
         final category = key.replaceFirst(_unitsKeyPrefix, '');
@@ -58,21 +58,18 @@ class SettingsNotifier extends _$SettingsNotifier {
       }
     }
 
-    state = state.copyWith(
-      isSidebarExpanded: isExpanded,
-      visibleUnits: unitsMap,
-    );
+    return SettingsState(isSidebarExpanded: isExpanded, visibleUnits: unitsMap);
   }
 
   Future<void> toggleSidebar() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider);
     final newValue = !state.isSidebarExpanded;
     await prefs.setBool(_sidebarKey, newValue);
     state = state.copyWith(isSidebarExpanded: newValue);
   }
 
   Future<void> toggleUnit(String category, String unitId) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = ref.read(sharedPrefsProvider);
     final current = state.visibleUnits[category] ?? [];
     final updated = current.contains(unitId)
         ? current.where((e) => e != unitId).toList()

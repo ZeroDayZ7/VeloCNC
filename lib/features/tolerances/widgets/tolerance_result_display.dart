@@ -1,8 +1,8 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
+import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
+import 'package:cnc_toolbox/widgets/info_components.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
-import '../tolerance_service.dart';
 
 class ToleranceResultDisplay extends StatelessWidget {
   final ToleranceResult res;
@@ -20,108 +20,73 @@ class ToleranceResultDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     final hasCalculations =
         res.upperDeviation != null && res.lowerDeviation != null;
+
     return Column(
       children: [
         if (res.infoKey != null)
-          _buildBanner(
-            context,
-            res.infoKey!.tr(),
-            Icons.info_outline,
-            Colors.blue,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: InfoTipCard(text: res.infoKey!.tr()),
           ),
-
         if (res.restrictionKey != null)
-          _buildBanner(
-            context,
-            res.restrictionKey!.tr(),
-            Icons.warning_amber_rounded,
-            Colors.orange,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: InfoTipCard(text: res.restrictionKey!.tr()),
           ),
-
         if (hasCalculations) ...[
-          _buildDeviationTile(
-            LocaleKeys.tolerance_upper_dev.tr(),
-            "${_formatValue(res.upperDeviation, showPlus: true)} mm",
-            Colors.green,
+          DeviationTile(
+            label: LocaleKeys.tolerance_upper_dev.tr(),
+            value: "${_formatValue(res.upperDeviation, showPlus: true)} mm",
+            color: Colors.green,
           ),
-          _buildDeviationTile(
-            LocaleKeys.tolerance_lower_dev.tr(),
-            "${_formatValue(res.lowerDeviation)} mm",
-            Colors.red,
+          DeviationTile(
+            label: LocaleKeys.tolerance_lower_dev.tr(),
+            value: "${_formatValue(res.lowerDeviation)} mm",
+            color: Colors.red,
           ),
           const SizedBox(height: 16),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              children: [
-                Text(
-                  LocaleKeys.tolerance_real_size.tr(),
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Ø${_formatValue(res.minSize)} - Ø${_formatValue(res.maxSize)}",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  ),
-                ),
-              ],
-            ),
+          RealSizeCard(
+            minSize: _formatValue(res.minSize),
+            maxSize: _formatValue(res.maxSize),
           ),
         ],
       ],
     );
   }
+}
 
-  Widget _buildBanner(
-    BuildContext context,
-    String text,
-    IconData icon,
-    Color color,
-  ) {
+class RealSizeCard extends StatelessWidget {
+  final String minSize;
+  final String maxSize;
+
+  const RealSizeCard({super.key, required this.minSize, required this.maxSize});
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withValues(alpha: 0.5)),
+        color: colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(16),
       ),
-      child: Row(
+      child: Column(
         children: [
-          Icon(icon, color: color, size: 20),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-              ),
+          Text(
+            LocaleKeys.tolerance_real_size.tr(),
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            "Ø$minSize - Ø$maxSize",
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: colorScheme.onPrimaryContainer,
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildDeviationTile(String label, String value, Color color) {
-    return ListTile(
-      title: Text(label),
-      trailing: Text(
-        value,
-        style: TextStyle(
-          color: color,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-        ),
       ),
     );
   }
