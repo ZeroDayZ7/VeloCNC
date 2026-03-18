@@ -14,7 +14,7 @@ class GdSymbolsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CncAppBar(
-        titleKey: LocaleKeys.gd_symbols_title.tr(),
+        titleKey: LocaleKeys.gd_symbols_title,
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),

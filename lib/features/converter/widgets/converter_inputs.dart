@@ -18,47 +18,60 @@ class ConverterInputs extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(converterProvider(category));
-
-    // 1. Inicjalizacja kontrolerów tylko raz
-    final controllers = useMemoized(
-      () => {for (var u in units) u.id: TextEditingController()},
-      [units], // Re-inicjalizuj tylko jeśli lista jednostek się zmieni
-    );
-
-    // 2. Automatyczny dispose
-    useEffect(() {
-      return () {
-        for (final controller in controllers.values) {
-          controller.dispose();
-        }
-      };
-    }, [controllers]);
-
     return ListView.separated(
       padding: const EdgeInsets.all(16),
       itemCount: units.length,
       separatorBuilder: (_, _) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
-        final unit = units[index];
-        final value = state.values[unit.id] ?? "";
-        final controller = controllers[unit.id]!;
-
-        if (controller.text != value && !FocusScope.of(context).hasFocus) {
-          controller.text = value;
-        }
-
-        return TextField(
-          controller: controller,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(
-            labelText: unit.label.tr(),
-            suffixText: unit.symbol,
-          ),
-          onChanged: (val) => ref
-              .read(converterProvider(category).notifier)
-              .updateValue(unit.id, val, units),
+        return _UnitRow(
+          key: ValueKey(units[index].id),
+          unit: units[index],
+          category: category,
+          allUnits: units,
         );
+      },
+    );
+  }
+}
+
+class _UnitRow extends HookConsumerWidget {
+  final UnitDefinition unit;
+  final ConverterCategory category;
+  final List<UnitDefinition> allUnits;
+
+  const _UnitRow({
+    super.key,
+    required this.unit,
+    required this.category,
+    required this.allUnits,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(converterProvider(category));
+    final controller = useTextEditingController();
+    final focusNode = useFocusNode();
+    final value = state.values[unit.id] ?? "";
+
+    useEffect(() {
+      if (!focusNode.hasFocus && controller.text != value) {
+        controller.text = value;
+      }
+      return null;
+    }, [value, focusNode.hasFocus]);
+
+    return TextField(
+      controller: controller,
+      focusNode: focusNode,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      decoration: InputDecoration(
+        labelText: unit.label.tr(),
+        suffixText: unit.symbol,
+      ),
+      onChanged: (val) {
+        ref
+            .read(converterProvider(category).notifier)
+            .updateValue(unit.id, val, allUnits);
       },
     );
   }
