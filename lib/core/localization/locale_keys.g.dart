@@ -13,6 +13,16 @@ abstract class  LocaleKeys {
   static const tools_gd_symbols = 'tools.gd_symbols';
   static const tools_g_codes = 'tools.g_codes';
   static const tools = 'tools';
+  static const common_understand = 'common.understand';
+  static const common_close = 'common.close';
+  static const common_back = 'common.back';
+  static const common_no_data = 'common.no_data';
+  static const common = 'common';
+  static const feed_results_compensated_feed = 'feed_results.compensated_feed';
+  static const feed_results_linear_feed = 'feed_results.linear_feed';
+  static const feed_results_per_rev = 'feed_results.per_rev';
+  static const feed_results_unit_min = 'feed_results.unit_min';
+  static const feed_results = 'feed_results';
   static const descriptions_cutting_speed = 'descriptions.cutting_speed';
   static const descriptions_spindle_rpm = 'descriptions.spindle_rpm';
   static const descriptions_feed_rate = 'descriptions.feed_rate';
@@ -26,7 +36,6 @@ abstract class  LocaleKeys {
   static const gd_symbols_modal_title = 'gd_symbols.modal_title';
   static const gd_symbols_modal_p1 = 'gd_symbols.modal_p1';
   static const gd_symbols_modal_p2 = 'gd_symbols.modal_p2';
-  static const gd_symbols_understand_btn = 'gd_symbols.understand_btn';
   static const gd_symbols_categories_form = 'gd_symbols.categories.form';
   static const gd_symbols_categories_orientation = 'gd_symbols.categories.orientation';
   static const gd_symbols_categories_location = 'gd_symbols.categories.location';
@@ -231,6 +240,8 @@ abstract class  LocaleKeys {
   static const converter = 'converter';
   static const search_hint = 'search_hint';
   static const error_out_of_range = 'error.out_of_range';
+  static const error_page_not_found = 'error.page_not_found';
+  static const error_go_home = 'error.go_home';
   static const error = 'error';
 
 }

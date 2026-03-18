@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/features/home/presentation/not_found_page.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -111,10 +112,18 @@ class GdSymbolDetailsRoute extends GoRouteData with $GdSymbolDetailsRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final symbol = gdSymbolsList.firstWhere(
+    final symbol = gdSymbolsList.firstWhereOrNull(
       (s) => s.name == ($extra ?? ''),
-      orElse: () => gdSymbolsList.first,
     );
+
+    if (symbol == null) {
+      return const NotFoundPage(
+        message:
+            'Nie znaleziono symbolu GD&T',
+      );
+    }
+
+    // 3. Wszystko OK - renderujemy stronę
     return GdSymbolDetailsPage(symbol: symbol);
   }
 }

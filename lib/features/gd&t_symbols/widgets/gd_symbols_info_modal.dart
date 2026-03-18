@@ -1,3 +1,5 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class GdSymbolsInfoModal extends StatelessWidget {
@@ -66,7 +68,7 @@ class _Content extends StatelessWidget {
               width: double.infinity,
               child: FilledButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text("Rozumiem"),
+                child: Text(LocaleKeys.common_understand.tr()),
               ),
             ),
           ],

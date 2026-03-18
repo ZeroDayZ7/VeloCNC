@@ -2,32 +2,61 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
 
-final List<UnitDefinition> lengthUnits = const [
-  UnitDefinition(id: 'm', label: LocaleKeys.converter_units_m, symbol: 'm', ratio: 1.0),
-  UnitDefinition(id: 'mm', label: LocaleKeys.converter_units_mm, symbol: 'mm', ratio: 0.001),
-  UnitDefinition(id: 'um', label: LocaleKeys.converter_units_um, symbol: 'µm', ratio: 0.000001),
-  UnitDefinition(id: 'km', label: LocaleKeys.converter_units_km, symbol: 'km', ratio: 1000.0),
-  UnitDefinition(id: 'inch', label: LocaleKeys.converter_units_inch, symbol: 'in', ratio: 0.0254),
+// POMOCNIK
+UnitDefinition _linear(String id, String label, String symbol, double ratio) {
+  return UnitDefinition(
+    id: id,
+    label: label,
+    symbol: symbol,
+    toBase: (val) => val * ratio,
+    fromBase: (val) => val / ratio,
+  );
+}
+
+final List<UnitDefinition> lengthUnits = [
+  _linear('m', LocaleKeys.converter_units_m, 'm', 1.0),
+  _linear('mm', LocaleKeys.converter_units_mm, 'mm', 0.001),
+  _linear('um', LocaleKeys.converter_units_um, 'µm', 0.000001),
+  _linear('km', LocaleKeys.converter_units_km, 'km', 1000.0),
+  _linear('inch', LocaleKeys.converter_units_inch, 'in', 0.0254),
 ];
 
-final List<UnitDefinition> tempUnits = const [
-  UnitDefinition(id: 'celsius', label: LocaleKeys.converter_units_celsius, symbol: '°C', ratio: 1.0),
-  UnitDefinition(id: 'fahrenheit', label: LocaleKeys.converter_units_fahrenheit, symbol: '°F', ratio: 1.0),
-  UnitDefinition(id: 'kelvin', label: LocaleKeys.converter_units_kelvin, symbol: 'K', ratio: 1.0),
+final List<UnitDefinition> tempUnits = [
+  UnitDefinition(
+    id: 'celsius',
+    label: LocaleKeys.converter_units_celsius,
+    symbol: '°C',
+    toBase: (val) => val,
+    fromBase: (val) => val,
+  ),
+  UnitDefinition(
+    id: 'fahrenheit',
+    label: LocaleKeys.converter_units_fahrenheit,
+    symbol: '°F',
+    toBase: (val) => (val - 32) / 1.8,
+    fromBase: (val) => (val * 1.8) + 32,
+  ),
+  UnitDefinition(
+    id: 'kelvin',
+    label: LocaleKeys.converter_units_kelvin,
+    symbol: 'K',
+    toBase: (val) => val - 273.15,
+    fromBase: (val) => val + 273.15,
+  ),
 ];
 
-final List<UnitDefinition> speedUnits = const [
-  UnitDefinition(id: 'm_s', label: LocaleKeys.converter_units_m_s, symbol: 'm/s', ratio: 1.0),
-  UnitDefinition(id: 'km_h', label: LocaleKeys.converter_units_km_h, symbol: 'km/h', ratio: 1 / 3.6),
-  UnitDefinition(id: 'mm_min', label: LocaleKeys.converter_units_mm_min, symbol: 'mm/min', ratio: 0.001 / 60),
-  UnitDefinition(id: 'mm_s', label: LocaleKeys.converter_units_mm_s, symbol: 'mm/s', ratio: 0.001),
-  UnitDefinition(id: 'in_min', label: LocaleKeys.converter_units_in_min, symbol: 'in/min', ratio: 0.0254 / 60),
+final List<UnitDefinition> speedUnits = [
+  _linear('m_s', LocaleKeys.converter_units_m_s, 'm/s', 1.0),
+  _linear('km_h', LocaleKeys.converter_units_km_h, 'km/h', 1 / 3.6),
+  _linear('mm_min', LocaleKeys.converter_units_mm_min, 'mm/min', 0.001 / 60),
+  _linear('mm_s', LocaleKeys.converter_units_mm_s, 'mm/s', 0.001),
+  _linear('in_min', LocaleKeys.converter_units_in_min, 'in/min', 0.0254 / 60),
 ];
 
-final List<UnitDefinition> pressureUnits = const [
-  UnitDefinition(id: 'bar', label: LocaleKeys.converter_units_bar, symbol: 'bar', ratio: 1.0),
-  UnitDefinition(id: 'psi', label: LocaleKeys.converter_units_psi, symbol: 'psi', ratio: 0.0689476),
-  UnitDefinition(id: 'pa', label: LocaleKeys.converter_units_pa, symbol: 'Pa', ratio: 0.00001),
-  UnitDefinition(id: 'mpa', label: LocaleKeys.converter_units_mpa, symbol: 'MPa', ratio: 10.0),
-  UnitDefinition(id: 'atm', label: LocaleKeys.converter_units_atm, symbol: 'atm', ratio: 1.01325),
+final List<UnitDefinition> pressureUnits = [
+  _linear('bar', LocaleKeys.converter_units_bar, 'bar', 1.0),
+  _linear('psi', LocaleKeys.converter_units_psi, 'psi', 0.0689476),
+  _linear('pa', LocaleKeys.converter_units_pa, 'Pa', 0.00001),
+  _linear('mpa', LocaleKeys.converter_units_mpa, 'MPa', 10.0),
+  _linear('atm', LocaleKeys.converter_units_atm, 'atm', 1.01325),
 ];

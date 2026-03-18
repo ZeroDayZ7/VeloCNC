@@ -31,9 +31,7 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
     final currentCat = converterCategories[_selectedIndex];
-    final visibleUnits = currentCat.units
-        .where((u) => settings.isUnitVisible(currentCat.id.name, u.id))
-        .toList();
+    final visibleUnits = settings.getVisibleUnitsForCategory(currentCat);
 
     return Scaffold(
       appBar: CncAppBar(
@@ -66,7 +64,7 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
             child: ConverterInputs(
               units: visibleUnits,
               controllers: _controllers,
-              category: currentCat.id,
+              category: currentCat,
             ),
           ),
         ],

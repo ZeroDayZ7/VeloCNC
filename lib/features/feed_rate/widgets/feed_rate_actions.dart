@@ -1,5 +1,5 @@
-
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,7 +17,7 @@ class FeedRateActions extends ConsumerWidget {
           tooltip: 'Historia obliczeń',
           onPressed: () {
             final tabIndex = DefaultTabController.of(context).index;
-            final type = tabIndex == 0 ? "basic" : "arc";
+            final type = tabIndex == 0 ? FeedType.basic : FeedType.arc;
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,
@@ -30,7 +30,7 @@ class FeedRateActions extends ConsumerWidget {
           tooltip: 'Zapisz parametry',
           onPressed: () async {
             final tabIndex = DefaultTabController.of(context).index;
-            final type = tabIndex == 0 ? "basic" : "arc";
+            final type = tabIndex == 0 ? FeedType.basic : FeedType.arc;
             await ref.read(feedRateProvider(type).notifier).saveCurrentToDb();
             if (context.mounted) {
               ScaffoldMessenger.of(

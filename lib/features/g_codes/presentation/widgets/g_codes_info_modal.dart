@@ -1,6 +1,7 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/widgets/info_components.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 
 class GCodesInfoModal {
   static void show(BuildContext context) {
@@ -80,7 +81,7 @@ class GCodesInfoModal {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text("Rozumiem"),
+                  child: Text(LocaleKeys.common_understand.tr()),
                 ),
               ),
               const SizedBox(height: 16),

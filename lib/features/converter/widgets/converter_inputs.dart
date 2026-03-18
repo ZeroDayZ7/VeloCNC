@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ConverterInputs extends ConsumerWidget {
   final List<UnitDefinition> units;
   final Map<String, TextEditingController> controllers;
-  final ConverterGroup category;
+  final ConverterCategory category;
 
   const ConverterInputs({
     super.key,
@@ -28,16 +28,14 @@ class ConverterInputs extends ConsumerWidget {
       itemBuilder: (context, index) {
         final unit = units[index];
         final value = state.values[unit.id] ?? "";
+
         final controller = controllers.putIfAbsent(
           unit.id,
           () => TextEditingController(),
         );
 
-        if (controller.text != value) {
-          controller.value = controller.value.copyWith(
-            text: value,
-            selection: TextSelection.collapsed(offset: value.length),
-          );
+        if (controller.text != value && !FocusScope.of(context).hasFocus) {
+          controller.text = value;
         }
 
         return TextField(

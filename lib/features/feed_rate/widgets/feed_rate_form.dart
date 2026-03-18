@@ -1,4 +1,6 @@
+import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart'; // Dodaj import enuma
 import 'package:cnc_toolbox/widgets/custom_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,28 +8,77 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'feed_input_fields.dart';
 import 'result_card.dart';
 
-class FeedRateForm extends ConsumerWidget {
-  final String type;
-
+class FeedRateForm extends ConsumerStatefulWidget {
+  final FeedType type; // Zmieniono z String na FeedType
   const FeedRateForm({super.key, required this.type});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(feedRateProvider(type));
-    final notifier = ref.read(feedRateProvider(type).notifier);
+  ConsumerState<FeedRateForm> createState() => _FeedRateFormState();
+}
+
+class _FeedRateFormState extends ConsumerState<FeedRateForm> {
+  late final TextEditingController _nController;
+  late final TextEditingController _zController;
+  late final TextEditingController _fzController;
+  late final TextEditingController _toolDiaController;
+  late final TextEditingController _featDiaController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Riverpod automatycznie rozpozna typ dzięki zmianie w parametrze build
+    final s = ref.read(feedRateProvider(widget.type));
+    _nController = TextEditingController(text: _fmt(s.spindleSpeed));
+    _zController = TextEditingController(text: s.numberOfTeeth.toString());
+    _fzController = TextEditingController(text: _fmt(s.feedPerTooth));
+    _toolDiaController = TextEditingController(text: _fmt(s.toolDiameter));
+    _featDiaController = TextEditingController(text: _fmt(s.featureDiameter));
+  }
+
+  String _fmt(double val) => val > 0 ? AppNumberFormatter.format(val) : "";
+
+  @override
+  void dispose() {
+    _nController.dispose();
+    _zController.dispose();
+    _fzController.dispose();
+    _toolDiaController.dispose();
+    _featDiaController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(feedRateProvider(widget.type));
+    final notifier = ref.read(feedRateProvider(widget.type).notifier);
+
+    _updateIfChanged(_nController, state.spindleSpeed);
+    _updateIfChanged(_zController, state.numberOfTeeth.toDouble());
+    _updateIfChanged(_fzController, state.feedPerTooth);
+    _updateIfChanged(_toolDiaController, state.toolDiameter);
+    _updateIfChanged(_featDiaController, state.featureDiameter);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           ResultCard(
-            vf: type == "basic" ? state.resultVf : state.resultVfArc,
+            // Używamy enuma do warunku
+            vf: widget.type == FeedType.basic
+                ? state.resultVf
+                : state.resultVfArc,
             f: state.resultF,
-            isArc: type == "arc",
+            isArc: widget.type == FeedType.arc,
           ),
           const SizedBox(height: 20),
-          FeedInputFields(notifier: notifier),
-          if (type == "arc") ...[
+          FeedInputFields(
+            notifier: notifier,
+            nController: _nController,
+            zController: _zController,
+            fzController: _fzController,
+          ),
+          // Warunek oparty na enumie
+          if (widget.type == FeedType.arc) ...[
             const Divider(height: 40),
             const Text(
               "Parametry łuku",
@@ -37,22 +88,14 @@ class FeedRateForm extends ConsumerWidget {
             CustomField(
               label: "Średnica narzędzia (D)",
               suffix: "mm",
-              controller: TextEditingController(
-                text: state.toolDiameter > 0
-                    ? state.toolDiameter.toString()
-                    : "",
-              ),
+              controller: _toolDiaController,
               onChanged: notifier.updateToolDia,
             ),
             const SizedBox(height: 10),
             CustomField(
               label: "Średnica otworu/czopu",
               suffix: "mm",
-              controller: TextEditingController(
-                text: state.featureDiameter > 0
-                    ? state.featureDiameter.toString()
-                    : "",
-              ),
+              controller: _featDiaController,
               onChanged: notifier.updateFeatureDia,
             ),
             const SizedBox(height: 10),
@@ -67,5 +110,12 @@ class FeedRateForm extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  void _updateIfChanged(TextEditingController controller, double value) {
+    final text = value > 0 ? AppNumberFormatter.format(value) : "";
+    if (controller.text != text && !FocusScope.of(context).hasFocus) {
+      controller.text = text;
+    }
   }
 }

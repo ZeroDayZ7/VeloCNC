@@ -16,7 +16,7 @@ final class FeedRateNotifierProvider
     extends $NotifierProvider<FeedRateNotifier, FeedRateState> {
   FeedRateNotifierProvider._({
     required FeedRateNotifierFamily super.from,
-    required String super.argument,
+    required FeedType super.argument,
   }) : super(
          retry: null,
          name: r'feedRateProvider',
@@ -58,7 +58,7 @@ final class FeedRateNotifierProvider
   }
 }
 
-String _$feedRateNotifierHash() => r'4692b6b025a642b27366f3b23b450392319b241f';
+String _$feedRateNotifierHash() => r'60df50d9947c36482c362cd433830d8da70efc34';
 
 final class FeedRateNotifierFamily extends $Family
     with
@@ -67,7 +67,7 @@ final class FeedRateNotifierFamily extends $Family
           FeedRateState,
           FeedRateState,
           FeedRateState,
-          String
+          FeedType
         > {
   FeedRateNotifierFamily._()
     : super(
@@ -78,7 +78,7 @@ final class FeedRateNotifierFamily extends $Family
         isAutoDispose: false,
       );
 
-  FeedRateNotifierProvider call(String type) =>
+  FeedRateNotifierProvider call(FeedType type) =>
       FeedRateNotifierProvider._(argument: type, from: this);
 
   @override
@@ -86,10 +86,10 @@ final class FeedRateNotifierFamily extends $Family
 }
 
 abstract class _$FeedRateNotifier extends $Notifier<FeedRateState> {
-  late final _$args = ref.$arg as String;
-  String get type => _$args;
+  late final _$args = ref.$arg as FeedType;
+  FeedType get type => _$args;
 
-  FeedRateState build(String type);
+  FeedRateState build(FeedType type);
   @$mustCallSuper
   @override
   void runBuild() {

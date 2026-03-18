@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:cnc_toolbox/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +26,8 @@ class FeedRatePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            FeedRateForm(type: "basic"),
-            FeedRateForm(type: "arc"),
+            FeedRateForm(type: FeedType.basic),
+            FeedRateForm(type: FeedType.arc),
           ],
         ),
       ),

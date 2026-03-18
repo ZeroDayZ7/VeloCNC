@@ -11,6 +11,18 @@
     "gd_symbols": "Symbole GD&T",
     "g_codes": "G Codes"
   },
+  "common": {
+    "understand": "Rozumiem",
+    "close": "Zamknij",
+    "back": "Powrót",
+    "no_data": "Brak danych"
+  },
+  "feed_results": {
+    "compensated_feed": "Skompensowany posuw (Vf)",
+    "linear_feed": "Posuw liniowy (Vf)",
+    "per_rev": "Na obrót: {} mm/obr",
+    "unit_min": "mm/min"
+  },
   "descriptions": {
     "cutting_speed": "Oblicz prędkość skrawania na podstawie średnicy i RPM",
     "spindle_rpm": "Oblicz RPM dla materiału i narzędzia",
@@ -26,7 +38,6 @@
     "modal_title": "Czym jest GD&T?",
     "modal_p1": "GD&T (Geometric Dimensioning and Tolerancing) to system symboli służący do precyzyjnego definiowania dopuszczalnych odchyłek kształtu, osiowości, bicia i położenia elementów na rysunku technicznym.",
     "modal_p2": "W odróżnieniu od zwykłych tolerancji wymiarowych, GD&T pozwala kontrolować geometrię detalu, co jest kluczowe dla poprawnego montażu i działania maszyn. System ten opiera się na tzw. bazach (Datums), które wyznaczają punkty odniesienia dla pomiarów.",
-    "understand_btn": "Rozumiem",
     "categories": {
       "form": "Kształt",
       "orientation": "Kierunek",
@@ -260,6 +271,8 @@
 
   "search_hint": "Szukaj kodu G...",
   "error": {
-    "out_of_range": "Średnica poza zakresem bazy danych"
+    "out_of_range": "Średnica poza zakresem bazy danych",
+    "page_not_found": "Strona nie została znaleziona",
+    "go_home": "Powrót do strony głównej"
   }
 }

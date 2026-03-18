@@ -1,10 +1,13 @@
 import 'package:cnc_toolbox/core/database/database.dart';
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FeedHistorySheet extends ConsumerWidget {
-  final String targetType;
+  final FeedType targetType;
 
   const FeedHistorySheet({super.key, required this.targetType});
 
@@ -36,7 +39,7 @@ class FeedHistorySheet extends ConsumerWidget {
                 ),
                 Expanded(
                   child: history.isEmpty
-                      ? const Center(child: Text("Brak danych"))
+                      ? Center(child: Text(LocaleKeys.common_no_data.tr()))
                       : ListView.builder(
                           controller: scrollController,
                           itemCount: history.length,

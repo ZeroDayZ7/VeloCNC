@@ -1,8 +1,15 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class NotFoundPage extends StatelessWidget {
-  const NotFoundPage({super.key});
+  final String? message; // Dodajemy pole
+
+  const NotFoundPage({
+    super.key,
+    this.message, // Dodajemy do konstruktora
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +22,14 @@ class NotFoundPage extends StatelessWidget {
             children: [
               Text(
                 '404',
-                style: Theme.of(
-                  context,
-                ).textTheme.displayLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
               const SizedBox(height: 16),
               Text(
-                'Strona nie została znaleziona',
+                message ?? LocaleKeys.error_page_not_found.tr(),
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -31,7 +39,7 @@ class NotFoundPage extends StatelessWidget {
                   const HomeRoute().go(context);
                 },
                 icon: const Icon(Icons.home),
-                label: const Text('Powrót do strony głównej'),
+                label: Text(LocaleKeys.error_go_home.tr()),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,

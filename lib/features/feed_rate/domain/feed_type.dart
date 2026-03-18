@@ -1,0 +1,1 @@
+enum FeedType { basic, arc }

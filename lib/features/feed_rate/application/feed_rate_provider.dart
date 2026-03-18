@@ -1,10 +1,11 @@
-// lib/features/feed_rate/application/feed_rate_provider.dart
 import 'package:cnc_toolbox/core/database/database.dart';
+import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
 import 'package:cnc_toolbox/core/utils/logger/app_logger.dart';
 import 'package:cnc_toolbox/core/utils/logger/logger_provider.dart';
 import 'package:cnc_toolbox/features/feed_rate/data/feed_rate_repository.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_math.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_state.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'feed_rate_provider.g.dart';
@@ -12,12 +13,10 @@ part 'feed_rate_provider.g.dart';
 @Riverpod(keepAlive: true)
 class FeedRateNotifier extends _$FeedRateNotifier {
   @override
-  FeedRateState build(String type) => const FeedRateState();
+  FeedRateState build(FeedType type) => const FeedRateState();
 
   IAppLogger get _log => ref.read(appLoggerProvider);
   IFeedRateRepository get _repo => ref.read(feedRateRepositoryProvider);
-
-  // --- AKCJE ---
 
   Future<void> saveCurrentToDb() async {
     if (state.resultVf <= 0) {
@@ -50,34 +49,31 @@ class FeedRateNotifier extends _$FeedRateNotifier {
     _calculate();
   }
 
-  // --- UPDATES ---
+  void _updateDouble(String v, FeedRateState Function(double val) copyWith) {
+    final val = AppNumberFormatter.tryParse(v) ?? 0;
+    state = copyWith(val);
+    _calculate();
+  }
 
-  void updateSpindleSpeed(String v) => _update(
-    () => state = state.copyWith(spindleSpeed: double.tryParse(v) ?? 0),
-  );
+  void updateSpindleSpeed(String v) =>
+      _updateDouble(v, (val) => state.copyWith(spindleSpeed: val));
 
-  void updateFeedPerTooth(String v) => _update(
-    () => state = state.copyWith(feedPerTooth: double.tryParse(v) ?? 0),
-  );
+  void updateFeedPerTooth(String v) =>
+      _updateDouble(v, (val) => state.copyWith(feedPerTooth: val));
 
-  void updateTeeth(int v) =>
-      _update(() => state = state.copyWith(numberOfTeeth: v));
+  void updateToolDia(String v) =>
+      _updateDouble(v, (val) => state.copyWith(toolDiameter: val));
 
-  void updateToolDia(String v) => _update(
-    () => state = state.copyWith(toolDiameter: double.tryParse(v) ?? 0),
-  );
+  void updateFeatureDia(String v) =>
+      _updateDouble(v, (val) => state.copyWith(featureDiameter: val));
 
-  void updateFeatureDia(String v) => _update(
-    () => state = state.copyWith(featureDiameter: double.tryParse(v) ?? 0),
-  );
+  void updateTeeth(int v) {
+    state = state.copyWith(numberOfTeeth: v);
+    _calculate();
+  }
 
-  void toggleWorkType(bool isInternal) =>
-      _update(() => state = state.copyWith(isInternal: isInternal));
-
-  // --- LOGIKA ---
-
-  void _update(void Function() action) {
-    action();
+  void toggleWorkType(bool isInternal) {
+    state = state.copyWith(isInternal: isInternal);
     _calculate();
   }
 
@@ -90,12 +86,15 @@ class FeedRateNotifier extends _$FeedRateNotifier {
 
     final f = FeedRateMath.calculateF(state.feedPerTooth, state.numberOfTeeth);
 
-    final vfArc = FeedRateMath.calculateArcCompensation(
-      vf: vf,
-      toolDia: state.toolDiameter,
-      featureDia: state.featureDiameter,
-      isInternal: state.isInternal,
-    );
+    double vfArc = 0;
+    if (type == FeedType.arc) {
+      vfArc = FeedRateMath.calculateArcCompensation(
+        vf: vf,
+        toolDia: state.toolDiameter,
+        featureDia: state.featureDiameter,
+        isInternal: state.isInternal,
+      );
+    }
 
     state = state.copyWith(resultVf: vf, resultVfArc: vfArc, resultF: f);
   }
