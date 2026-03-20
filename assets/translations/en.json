@@ -2,6 +2,13 @@
   "app": {
     "title": "CNC Toolbox"
   },
+  "splash": {
+    "initializing": "INICJALIZACJA...",
+    "database_init": "ŁADOWANIE BAZY DANYCH...",
+    "settings_load": "WCZYTYWANIE USTAWIEŃ...",
+    "loading": "PROSZĘ CZEKAĆ...",
+    "starting": "URUCHAMIANIE..."
+  },
   "tools": {
     "cutting_speed": "Cutting Speed",
     "spindle_rpm": "Spindle RPM",

@@ -5,6 +5,12 @@
 abstract class  LocaleKeys {
   static const app_title = 'app.title';
   static const app = 'app';
+  static const splash_initializing = 'splash.initializing';
+  static const splash_database_init = 'splash.database_init';
+  static const splash_settings_load = 'splash.settings_load';
+  static const splash_loading = 'splash.loading';
+  static const splash_starting = 'splash.starting';
+  static const splash = 'splash';
   static const tools_cutting_speed = 'tools.cutting_speed';
   static const tools_spindle_rpm = 'tools.spindle_rpm';
   static const tools_feed_rate = 'tools.feed_rate';

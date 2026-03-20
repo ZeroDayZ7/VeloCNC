@@ -122,10 +122,10 @@ return blocked(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function()?  ready,TResult Function( String? reason)?  blocked,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String? messageKey)?  loading,TResult Function()?  ready,TResult Function( String? reason)?  blocked,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
-return loading();case _Ready() when ready != null:
+return loading(_that.messageKey);case _Ready() when ready != null:
 return ready();case _Blocked() when blocked != null:
 return blocked(_that.reason);case _:
   return orElse();
@@ -145,10 +145,10 @@ return blocked(_that.reason);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function()  ready,required TResult Function( String? reason)  blocked,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String? messageKey)  loading,required TResult Function()  ready,required TResult Function( String? reason)  blocked,}) {final _that = this;
 switch (_that) {
 case _Loading():
-return loading();case _Ready():
+return loading(_that.messageKey);case _Ready():
 return ready();case _Blocked():
 return blocked(_that.reason);}
 }
@@ -164,10 +164,10 @@ return blocked(_that.reason);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function()?  ready,TResult? Function( String? reason)?  blocked,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String? messageKey)?  loading,TResult? Function()?  ready,TResult? Function( String? reason)?  blocked,}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
-return loading();case _Ready() when ready != null:
+return loading(_that.messageKey);case _Ready() when ready != null:
 return ready();case _Blocked() when blocked != null:
 return blocked(_that.reason);case _:
   return null;
@@ -181,33 +181,67 @@ return blocked(_that.reason);case _:
 
 
 class _Loading implements AppInitStatus {
-  const _Loading();
+  const _Loading({this.messageKey});
   
 
+ final  String? messageKey;
 
-
+/// Create a copy of AppInitStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoadingCopyWith<_Loading> get copyWith => __$LoadingCopyWithImpl<_Loading>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading&&(identical(other.messageKey, messageKey) || other.messageKey == messageKey));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,messageKey);
 
 @override
 String toString() {
-  return 'AppInitStatus.loading()';
+  return 'AppInitStatus.loading(messageKey: $messageKey)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$LoadingCopyWith<$Res> implements $AppInitStatusCopyWith<$Res> {
+  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) _then) = __$LoadingCopyWithImpl;
+@useResult
+$Res call({
+ String? messageKey
+});
 
 
+
+
+}
+/// @nodoc
+class __$LoadingCopyWithImpl<$Res>
+    implements _$LoadingCopyWith<$Res> {
+  __$LoadingCopyWithImpl(this._self, this._then);
+
+  final _Loading _self;
+  final $Res Function(_Loading) _then;
+
+/// Create a copy of AppInitStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? messageKey = freezed,}) {
+  return _then(_Loading(
+messageKey: freezed == messageKey ? _self.messageKey : messageKey // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

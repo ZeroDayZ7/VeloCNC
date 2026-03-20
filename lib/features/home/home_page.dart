@@ -1,5 +1,6 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
+import 'package:cnc_toolbox/features/home/cnc_drawer.dart';
 import 'package:cnc_toolbox/features/home/tool_tile.dart';
 import 'package:cnc_toolbox/features/home/tools_list.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppInfo.appName),
-        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -21,6 +21,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      drawer: const CncDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: LayoutBuilder(

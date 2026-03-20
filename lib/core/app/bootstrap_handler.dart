@@ -27,7 +27,7 @@ class _AppBootstrapHandlerState extends ConsumerState<AppBootstrapHandler> {
     final status = ref.watch(appInitProvider);
 
     return status.when(
-      loading: () => const SplashScreen(),
+      loading: (key) => const SplashScreen(),
       blocked: (reason) =>
           Scaffold(body: Center(child: Text('Błąd krytyczny: $reason'))),
       ready: () => widget.child,

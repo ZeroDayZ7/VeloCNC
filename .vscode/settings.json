@@ -76,5 +76,11 @@
     "**/*.g.dart": true,
     "**/*.txt": true,
     "cnc_toolbox.iml": true
+  },
+  "search.useIgnoreFiles": true,
+  "search.useGlobalIgnoreFiles": true,
+  "files.watcherExclude": {
+    "**/*.g.dart": true,
+    "**/*.freezed.dart": true
   }
 }
