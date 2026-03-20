@@ -26,7 +26,7 @@ final class DatabaseRepositoryProvider
         argument: null,
         retry: null,
         name: r'databaseRepositoryProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -55,4 +55,4 @@ final class DatabaseRepositoryProvider
 }
 
 String _$databaseRepositoryHash() =>
-    r'c3f44a66898966859575b9d0710eb61e96e8ac9e';
+    r'062527391836a9f015e2db3e5b7c7b866440f982';

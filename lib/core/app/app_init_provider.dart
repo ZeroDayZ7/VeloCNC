@@ -5,6 +5,10 @@ import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
 import 'package:cnc_toolbox/core/models/result.dart';
 import 'package:cnc_toolbox/core/theme/theme_provider.dart';
 import 'package:cnc_toolbox/core/utils/logger/logger_provider.dart';
+import 'package:cnc_toolbox/features/converter/application/converter_settings_provider.dart';
+import 'package:cnc_toolbox/features/g_codes/application/g_codes_provider.dart';
+import 'package:cnc_toolbox/features/history/domain/history_notifier.dart';
+import 'package:cnc_toolbox/features/tolerances/application/tolerance_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_init_provider.g.dart';
@@ -54,6 +58,11 @@ class AppInitNotifier extends _$AppInitNotifier {
       );
       ref.read(themeProvider);
       ref.read(localeProvider);
+
+      await ref.read(toleranceServiceProvider.future);
+      ref.read(gCodeSearchProvider);
+      ref.read(settingsProvider);
+      await ref.read(historyProvider.future);
 
       // 3. Minimum Splash Time
       final elapsed = DateTime.now().difference(startTime);

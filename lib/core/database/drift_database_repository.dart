@@ -24,7 +24,7 @@ class DriftDatabaseRepository implements IDatabaseRepository {
   Future<void> close() => _db.close();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 IDatabaseRepository databaseRepository(Ref ref) {
   final db = ref.watch(databaseProvider);
   return DriftDatabaseRepository(db);

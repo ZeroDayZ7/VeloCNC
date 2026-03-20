@@ -41,7 +41,7 @@ final class AppInitNotifierProvider
   }
 }
 
-String _$appInitNotifierHash() => r'4c16bc336d07d39ffb5193ed01d5faf4a6c37339';
+String _$appInitNotifierHash() => r'bee7cf42d14b651e89290d222c7514af7a03b62e';
 
 abstract class _$AppInitNotifier extends $Notifier<AppInitStatus> {
   AppInitStatus build();
