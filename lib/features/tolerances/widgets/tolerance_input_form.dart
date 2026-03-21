@@ -3,25 +3,24 @@ import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-
 class ToleranceInputForm extends StatelessWidget {
-  final TextEditingController diameterController;
+  final String diameterInitialValue;
   final ToleranceType selectedType;
   final String? selectedLetter;
   final String? selectedNumber;
-  final VoidCallback onChanged;
-  final Function(String?) onLetterChanged;
-  final Function(String?) onNumberChanged;
+  final ValueChanged<String> onDiameterChanged;
+  final ValueChanged<String?> onLetterChanged;
+  final ValueChanged<String?> onNumberChanged;
   final List<String> letters;
   final List<String> numbers;
 
   const ToleranceInputForm({
     super.key,
-    required this.diameterController,
+    required this.diameterInitialValue,
     required this.selectedType,
     required this.selectedLetter,
     required this.selectedNumber,
-    required this.onChanged,
+    required this.onDiameterChanged,
     required this.onLetterChanged,
     required this.onNumberChanged,
     required this.letters,
@@ -30,7 +29,6 @@ class ToleranceInputForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -41,8 +39,8 @@ class ToleranceInputForm extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
-              controller: diameterController,
+            TextFormField(
+              initialValue: diameterInitialValue,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
@@ -51,14 +49,14 @@ class ToleranceInputForm extends StatelessWidget {
                 suffixText: LocaleKeys.tolerance_unit_mm.tr(),
                 prefixIcon: const Icon(Icons.straighten),
               ),
-              onChanged: (_) => onChanged(),
+              onChanged: onDiameterChanged,
             ),
             const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    key: ValueKey('letter_$selectedLetter'),
+                    key: ValueKey('letter_${selectedType}_$selectedLetter'),
                     initialValue: selectedLetter,
                     decoration: InputDecoration(
                       labelText: LocaleKeys.tolerance_letter.tr(),
@@ -72,7 +70,7 @@ class ToleranceInputForm extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    key: ValueKey('number_$selectedNumber'),
+                    key: ValueKey('number_${selectedLetter}_$selectedNumber'),
                     initialValue: selectedNumber,
                     decoration: InputDecoration(
                       labelText: LocaleKeys.tolerance_grade_number.tr(),

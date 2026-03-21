@@ -1,5 +1,3 @@
-// lib/features/converter/widgets/settings_sheet.dart
-
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/converter/application/converter_settings_provider.dart';
 import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
@@ -7,7 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsSheet extends ConsumerWidget {
+class SettingsSheet extends StatelessWidget {
   final String categoryId;
   final List<UnitDefinition> units;
 
@@ -33,12 +31,9 @@ class SettingsSheet extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final settings = ref.watch(settingsProvider);
-
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
-      // Ustawiamy wysokość na np. 60% ekranu
       height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
         children: [
@@ -65,24 +60,9 @@ class SettingsSheet extends ConsumerWidget {
             child: ListView.builder(
               itemCount: units.length,
               itemBuilder: (context, index) {
-                final unit = units[index];
-                final isVisible = settings.isUnitVisible(categoryId, unit.id);
-
-                return CheckboxListTile(
-                  title: Text(unit.label.tr()),
-                  secondary: Text(
-                    unit.symbol,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  value: isVisible,
-                  onChanged: (bool? value) {
-                    ref
-                        .read(settingsProvider.notifier)
-                        .toggleUnit(categoryId, unit.id);
-                  },
+                return _UnitCheckboxTile(
+                  categoryId: categoryId,
+                  unit: units[index],
                 );
               },
             ),
@@ -96,6 +76,36 @@ class SettingsSheet extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _UnitCheckboxTile extends ConsumerWidget {
+  final String categoryId;
+  final UnitDefinition unit;
+
+  const _UnitCheckboxTile({required this.categoryId, required this.unit});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isVisible = ref.watch(
+      settingsProvider.select(
+        (s) => s.isUnitVisible(categoryId, unit.id),
+      ),
+    );
+
+    return CheckboxListTile(
+      title: Text(unit.label.tr()),
+      secondary: Text(
+        unit.symbol,
+        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+      ),
+      value: isVisible,
+      onChanged: (_) {
+        ref
+            .read(settingsProvider.notifier)
+            .toggleUnit(categoryId, unit.id);
+      },
     );
   }
 }

@@ -1,10 +1,18 @@
-import 'package:cnc_toolbox/core/database/database.dart';
-import 'package:cnc_toolbox/core/models/result.dart';
+// i_history_repository.dart
+import 'package:cnc_toolbox/features/history/models/feed_history_entry.dart';
 
 abstract class IHistoryRepository {
-  /// Pobiera historię. Zwraca Success z listą lub Failure z opisem błędu.
-  Future<Result<List<FeedCalculation>>> getFeedHistory();
+  Future<List<FeedHistoryEntry>> getFeedHistory({int limit = 10, int offset = 0});
+  
+  // Zamiast FeedCalculationsCompanion, przyjmujemy parametry lub DTO
+  Future<void> saveCalculation({
+    required double n,
+    required double fz,
+    required int z,
+    required double vf,
+    double? d,
+    double? dWork,
+  });
 
-  /// Dodaje wpis. Zwraca Success(true) lub Failure.
-  Future<Result<bool>> addToHistory(FeedCalculationsCompanion entry);
+  Future<void> deleteEntry(int id);
 }

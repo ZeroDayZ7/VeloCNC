@@ -6,8 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ErrorApp extends ConsumerWidget {
   final String error;
+  final VoidCallback? onRetry;
 
-  const ErrorApp({super.key, required this.error});
+  const ErrorApp({super.key, required this.error, this.onRetry});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -61,9 +62,7 @@ class ErrorApp extends ConsumerWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    ref.read(appInitProvider.notifier).recheck();
-                  },
+                  onPressed: onRetry ?? () => ref.invalidate(appInitProvider),
                   icon: const Icon(Icons.refresh_rounded),
                   label: Text(
                     LocaleKeys.splash_retry.tr(),

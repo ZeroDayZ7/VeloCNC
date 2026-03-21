@@ -9,12 +9,13 @@ part of 'app_init_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(AppInitNotifier)
-final appInitProvider = AppInitNotifierProvider._();
+@ProviderFor(appInit)
+final appInitProvider = AppInitProvider._();
 
-final class AppInitNotifierProvider
-    extends $NotifierProvider<AppInitNotifier, AppInitStatus> {
-  AppInitNotifierProvider._()
+final class AppInitProvider
+    extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
+    with $FutureModifier<void>, $FutureProvider<void> {
+  AppInitProvider._()
     : super(
         from: null,
         argument: null,
@@ -26,37 +27,17 @@ final class AppInitNotifierProvider
       );
 
   @override
-  String debugGetCreateSourceHash() => _$appInitNotifierHash();
+  String debugGetCreateSourceHash() => _$appInitHash();
 
   @$internal
   @override
-  AppInitNotifier create() => AppInitNotifier();
+  $FutureProviderElement<void> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AppInitStatus value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<AppInitStatus>(value),
-    );
-  }
-}
-
-String _$appInitNotifierHash() => r'bee7cf42d14b651e89290d222c7514af7a03b62e';
-
-abstract class _$AppInitNotifier extends $Notifier<AppInitStatus> {
-  AppInitStatus build();
-  @$mustCallSuper
   @override
-  void runBuild() {
-    final ref = this.ref as $Ref<AppInitStatus, AppInitStatus>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<AppInitStatus, AppInitStatus>,
-              AppInitStatus,
-              Object?,
-              Object?
-            >;
-    element.handleCreate(ref, build);
+  FutureOr<void> create(Ref ref) {
+    return appInit(ref);
   }
 }
+
+String _$appInitHash() => r'85bc6aea7b11d55cca09984e95d9f712f417b329';

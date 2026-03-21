@@ -6,6 +6,19 @@ part 'tolerance_models.g.dart';
 enum ToleranceType { hole, shaft }
 
 @freezed
+sealed class TolerancePageState with _$TolerancePageState {
+  const factory TolerancePageState({
+    @Default(ToleranceType.hole) ToleranceType type,
+    @Default('') String diameterInput,
+    String? selectedLetter,
+    String? selectedNumber,
+    ToleranceResult? result,
+    @Default([]) List<String> availableLetters,
+    @Default([]) List<String> availableNumbers,
+  }) = _TolerancePageState;
+}
+
+@freezed
 sealed class ToleranceRange with _$ToleranceRange {
   const factory ToleranceRange({
     @Default(0.0) double min,

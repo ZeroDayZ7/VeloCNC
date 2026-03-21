@@ -11,6 +11,311 @@ part of 'tolerance_models.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+/// @nodoc
+mixin _$TolerancePageState {
+
+ ToleranceType get type; String get diameterInput; String? get selectedLetter; String? get selectedNumber; ToleranceResult? get result; List<String> get availableLetters; List<String> get availableNumbers;
+/// Create a copy of TolerancePageState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TolerancePageStateCopyWith<TolerancePageState> get copyWith => _$TolerancePageStateCopyWithImpl<TolerancePageState>(this as TolerancePageState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TolerancePageState&&(identical(other.type, type) || other.type == type)&&(identical(other.diameterInput, diameterInput) || other.diameterInput == diameterInput)&&(identical(other.selectedLetter, selectedLetter) || other.selectedLetter == selectedLetter)&&(identical(other.selectedNumber, selectedNumber) || other.selectedNumber == selectedNumber)&&(identical(other.result, result) || other.result == result)&&const DeepCollectionEquality().equals(other.availableLetters, availableLetters)&&const DeepCollectionEquality().equals(other.availableNumbers, availableNumbers));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,type,diameterInput,selectedLetter,selectedNumber,result,const DeepCollectionEquality().hash(availableLetters),const DeepCollectionEquality().hash(availableNumbers));
+
+@override
+String toString() {
+  return 'TolerancePageState(type: $type, diameterInput: $diameterInput, selectedLetter: $selectedLetter, selectedNumber: $selectedNumber, result: $result, availableLetters: $availableLetters, availableNumbers: $availableNumbers)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $TolerancePageStateCopyWith<$Res>  {
+  factory $TolerancePageStateCopyWith(TolerancePageState value, $Res Function(TolerancePageState) _then) = _$TolerancePageStateCopyWithImpl;
+@useResult
+$Res call({
+ ToleranceType type, String diameterInput, String? selectedLetter, String? selectedNumber, ToleranceResult? result, List<String> availableLetters, List<String> availableNumbers
+});
+
+
+$ToleranceResultCopyWith<$Res>? get result;
+
+}
+/// @nodoc
+class _$TolerancePageStateCopyWithImpl<$Res>
+    implements $TolerancePageStateCopyWith<$Res> {
+  _$TolerancePageStateCopyWithImpl(this._self, this._then);
+
+  final TolerancePageState _self;
+  final $Res Function(TolerancePageState) _then;
+
+/// Create a copy of TolerancePageState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? diameterInput = null,Object? selectedLetter = freezed,Object? selectedNumber = freezed,Object? result = freezed,Object? availableLetters = null,Object? availableNumbers = null,}) {
+  return _then(_self.copyWith(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as ToleranceType,diameterInput: null == diameterInput ? _self.diameterInput : diameterInput // ignore: cast_nullable_to_non_nullable
+as String,selectedLetter: freezed == selectedLetter ? _self.selectedLetter : selectedLetter // ignore: cast_nullable_to_non_nullable
+as String?,selectedNumber: freezed == selectedNumber ? _self.selectedNumber : selectedNumber // ignore: cast_nullable_to_non_nullable
+as String?,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
+as ToleranceResult?,availableLetters: null == availableLetters ? _self.availableLetters : availableLetters // ignore: cast_nullable_to_non_nullable
+as List<String>,availableNumbers: null == availableNumbers ? _self.availableNumbers : availableNumbers // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+/// Create a copy of TolerancePageState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ToleranceResultCopyWith<$Res>? get result {
+    if (_self.result == null) {
+    return null;
+  }
+
+  return $ToleranceResultCopyWith<$Res>(_self.result!, (value) {
+    return _then(_self.copyWith(result: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [TolerancePageState].
+extension TolerancePageStatePatterns on TolerancePageState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TolerancePageState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TolerancePageState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TolerancePageState value)  $default,){
+final _that = this;
+switch (_that) {
+case _TolerancePageState():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TolerancePageState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TolerancePageState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ToleranceType type,  String diameterInput,  String? selectedLetter,  String? selectedNumber,  ToleranceResult? result,  List<String> availableLetters,  List<String> availableNumbers)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TolerancePageState() when $default != null:
+return $default(_that.type,_that.diameterInput,_that.selectedLetter,_that.selectedNumber,_that.result,_that.availableLetters,_that.availableNumbers);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ToleranceType type,  String diameterInput,  String? selectedLetter,  String? selectedNumber,  ToleranceResult? result,  List<String> availableLetters,  List<String> availableNumbers)  $default,) {final _that = this;
+switch (_that) {
+case _TolerancePageState():
+return $default(_that.type,_that.diameterInput,_that.selectedLetter,_that.selectedNumber,_that.result,_that.availableLetters,_that.availableNumbers);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ToleranceType type,  String diameterInput,  String? selectedLetter,  String? selectedNumber,  ToleranceResult? result,  List<String> availableLetters,  List<String> availableNumbers)?  $default,) {final _that = this;
+switch (_that) {
+case _TolerancePageState() when $default != null:
+return $default(_that.type,_that.diameterInput,_that.selectedLetter,_that.selectedNumber,_that.result,_that.availableLetters,_that.availableNumbers);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _TolerancePageState implements TolerancePageState {
+  const _TolerancePageState({this.type = ToleranceType.hole, this.diameterInput = '', this.selectedLetter, this.selectedNumber, this.result, final  List<String> availableLetters = const [], final  List<String> availableNumbers = const []}): _availableLetters = availableLetters,_availableNumbers = availableNumbers;
+  
+
+@override@JsonKey() final  ToleranceType type;
+@override@JsonKey() final  String diameterInput;
+@override final  String? selectedLetter;
+@override final  String? selectedNumber;
+@override final  ToleranceResult? result;
+ final  List<String> _availableLetters;
+@override@JsonKey() List<String> get availableLetters {
+  if (_availableLetters is EqualUnmodifiableListView) return _availableLetters;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_availableLetters);
+}
+
+ final  List<String> _availableNumbers;
+@override@JsonKey() List<String> get availableNumbers {
+  if (_availableNumbers is EqualUnmodifiableListView) return _availableNumbers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_availableNumbers);
+}
+
+
+/// Create a copy of TolerancePageState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TolerancePageStateCopyWith<_TolerancePageState> get copyWith => __$TolerancePageStateCopyWithImpl<_TolerancePageState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TolerancePageState&&(identical(other.type, type) || other.type == type)&&(identical(other.diameterInput, diameterInput) || other.diameterInput == diameterInput)&&(identical(other.selectedLetter, selectedLetter) || other.selectedLetter == selectedLetter)&&(identical(other.selectedNumber, selectedNumber) || other.selectedNumber == selectedNumber)&&(identical(other.result, result) || other.result == result)&&const DeepCollectionEquality().equals(other._availableLetters, _availableLetters)&&const DeepCollectionEquality().equals(other._availableNumbers, _availableNumbers));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,type,diameterInput,selectedLetter,selectedNumber,result,const DeepCollectionEquality().hash(_availableLetters),const DeepCollectionEquality().hash(_availableNumbers));
+
+@override
+String toString() {
+  return 'TolerancePageState(type: $type, diameterInput: $diameterInput, selectedLetter: $selectedLetter, selectedNumber: $selectedNumber, result: $result, availableLetters: $availableLetters, availableNumbers: $availableNumbers)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TolerancePageStateCopyWith<$Res> implements $TolerancePageStateCopyWith<$Res> {
+  factory _$TolerancePageStateCopyWith(_TolerancePageState value, $Res Function(_TolerancePageState) _then) = __$TolerancePageStateCopyWithImpl;
+@override @useResult
+$Res call({
+ ToleranceType type, String diameterInput, String? selectedLetter, String? selectedNumber, ToleranceResult? result, List<String> availableLetters, List<String> availableNumbers
+});
+
+
+@override $ToleranceResultCopyWith<$Res>? get result;
+
+}
+/// @nodoc
+class __$TolerancePageStateCopyWithImpl<$Res>
+    implements _$TolerancePageStateCopyWith<$Res> {
+  __$TolerancePageStateCopyWithImpl(this._self, this._then);
+
+  final _TolerancePageState _self;
+  final $Res Function(_TolerancePageState) _then;
+
+/// Create a copy of TolerancePageState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? diameterInput = null,Object? selectedLetter = freezed,Object? selectedNumber = freezed,Object? result = freezed,Object? availableLetters = null,Object? availableNumbers = null,}) {
+  return _then(_TolerancePageState(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as ToleranceType,diameterInput: null == diameterInput ? _self.diameterInput : diameterInput // ignore: cast_nullable_to_non_nullable
+as String,selectedLetter: freezed == selectedLetter ? _self.selectedLetter : selectedLetter // ignore: cast_nullable_to_non_nullable
+as String?,selectedNumber: freezed == selectedNumber ? _self.selectedNumber : selectedNumber // ignore: cast_nullable_to_non_nullable
+as String?,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
+as ToleranceResult?,availableLetters: null == availableLetters ? _self._availableLetters : availableLetters // ignore: cast_nullable_to_non_nullable
+as List<String>,availableNumbers: null == availableNumbers ? _self._availableNumbers : availableNumbers // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+/// Create a copy of TolerancePageState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ToleranceResultCopyWith<$Res>? get result {
+    if (_self.result == null) {
+    return null;
+  }
+
+  return $ToleranceResultCopyWith<$Res>(_self.result!, (value) {
+    return _then(_self.copyWith(result: value));
+  });
+}
+}
+
 
 /// @nodoc
 mixin _$ToleranceRange {

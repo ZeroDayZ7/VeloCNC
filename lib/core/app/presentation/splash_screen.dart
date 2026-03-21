@@ -1,5 +1,3 @@
-import 'package:cnc_toolbox/core/app/app_init_provider.dart';
-import 'package:cnc_toolbox/core/app/app_init_status.dart';
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/widgets/app_scaffold.dart';
@@ -13,13 +11,7 @@ class SplashScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final status = ref.watch(appInitProvider);
-
-    // Wyciągamy klucz i tłumaczymy go w locie
-    final message = status.maybeWhen(
-      loading: (key) => (key ?? LocaleKeys.splash_loading).tr(),
-      orElse: () => LocaleKeys.splash_starting.tr(),
-    );
+    final message = LocaleKeys.splash_loading.tr();
 
     return AppScaffold(
       scrollable: false,
