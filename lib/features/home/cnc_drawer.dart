@@ -25,20 +25,20 @@ class CncDrawer extends StatelessWidget {
                 bottom: BorderSide(color: Colors.blueAccent, width: 2),
               ),
             ),
-            child: const Center(
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.precision_manufacturing,
                     size: 40,
                     color: Colors.blueAccent,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     AppInfo.appName,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,
@@ -61,12 +61,16 @@ class CncDrawer extends StatelessWidget {
                 return ListTile(
                   leading: Icon(
                     tool.icon,
-                    color: isSelected ? Colors.blueAccent : Colors.white70,
+                    color: isSelected
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                   title: Text(
                     tool.labelKey.tr(),
                     style: TextStyle(
-                      color: isSelected ? Colors.white : Colors.white70,
+                      color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: isSelected
                           ? FontWeight.bold
                           : FontWeight.normal,
@@ -86,8 +90,14 @@ class CncDrawer extends StatelessWidget {
           // Stopka z ustawieniami
           const Divider(height: 1),
           ListTile(
-            leading: const Icon(Icons.settings, color: Colors.white70),
-            title: Text(LocaleKeys.settings.tr()),
+            leading: Icon(
+              Icons.settings,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+            title: Text(
+              LocaleKeys.settings.tr(),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+            ),
             onTap: () {
               context.pop();
               const SettingsRoute().push(context);

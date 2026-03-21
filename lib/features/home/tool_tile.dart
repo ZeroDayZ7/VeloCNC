@@ -27,8 +27,7 @@ class ToolTile extends StatelessWidget {
         child: Padding(
           padding: AppSpacings.edgeInsetsM,
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
@@ -51,9 +50,9 @@ class ToolTile extends StatelessWidget {
               Flexible(
                 child: Text(
                   description.tr(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 11,
-                    color: Color.fromARGB(255, 180, 180, 180),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
