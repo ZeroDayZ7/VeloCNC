@@ -26,23 +26,17 @@ class HomePage extends StatelessWidget {
         padding: AppSpacings.edgeInsetsM,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final crossAxisCount = constraints.maxWidth > 900
-                ? 4
-                : constraints.maxWidth > 600
-                ? 3
-                : 2;
-
             return GridView.builder(
               itemCount: tools.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 220,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.90,
+                mainAxisExtent:
+                    200,
               ),
               itemBuilder: (context, index) {
                 final tool = tools[index];
-
                 return ToolTile(
                   icon: tool.icon,
                   label: tool.labelKey,

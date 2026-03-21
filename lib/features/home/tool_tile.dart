@@ -27,30 +27,38 @@ class ToolTile extends StatelessWidget {
         child: Padding(
           padding: AppSpacings.edgeInsetsM,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment:
+                MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 icon,
-                size: 50,
+                size: 48,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(height: 12),
-
+              const SizedBox(height: 8),
               Text(
                 label.tr(),
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-
-              const SizedBox(height: 8),
-
-              Text(
-                description.tr(),
-                style: const TextStyle(fontSize: 12, color: Color.fromARGB(255, 180, 180, 180)),
-                textAlign: TextAlign.center,
+              const SizedBox(height: 4),
+              Flexible(
+                child: Text(
+                  description.tr(),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color.fromARGB(255, 180, 180, 180),
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),

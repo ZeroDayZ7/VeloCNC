@@ -89,23 +89,34 @@ class _UnitCheckboxTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isVisible = ref.watch(
-      settingsProvider.select(
-        (s) => s.isUnitVisible(categoryId, unit.id),
-      ),
+      settingsProvider.select((s) => s.isUnitVisible(categoryId, unit.id)),
     );
 
     return CheckboxListTile(
-      title: Text(unit.label.tr()),
-      secondary: Text(
-        unit.symbol,
-        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
-      ),
       value: isVisible,
       onChanged: (_) {
-        ref
-            .read(settingsProvider.notifier)
-            .toggleUnit(categoryId, unit.id);
+        ref.read(settingsProvider.notifier).toggleUnit(categoryId, unit.id);
       },
+      title: Row(
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(
+              unit.symbol,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              unit.label.tr(),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
