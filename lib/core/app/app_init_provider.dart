@@ -13,6 +13,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_init_provider.g.dart';
 
+/// Orchestrates the application bootstrap process.
+///
+/// This provider performs critical startup tasks in sequence:
+/// 1. Verifies [IDatabaseRepository] health.
+/// 2. Warms up core providers ([themeProvider], [localeProvider], etc.).
+/// 3. Pre-loads heavy resources like tolerances and history.
+/// 4. Ensures the splash screen remains visible for [AppConfig.minSplashDuration].
+///
+/// Returns a [Result] indicating success or the specific [AppException] encountered.
 @riverpod
 Future<Result<void>> appInit(Ref ref) async {
   final logger = ref.read(appLoggerProvider);

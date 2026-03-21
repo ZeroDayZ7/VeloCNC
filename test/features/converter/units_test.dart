@@ -15,6 +15,8 @@ void main() {
       expect(mm.toBase(result), 1.0);
     });
 
+    /// Verifies that temperature conversion handles absolute zero and
+    /// critical points correctly across Celsius and Fahrenheit.
     test('Temperature: Celsius to Fahrenheit and back', () {
       final c = tempUnits.firstWhere((u) => u.id == 'celsius');
       final f = tempUnits.firstWhere((u) => u.id == 'fahrenheit');
@@ -27,6 +29,8 @@ void main() {
       expect(f.fromBase(c.toBase(-40)), closeTo(-40.0, 0.01));
     });
 
+    /// Ensures high precision when converting Bar to PSI,
+    /// vital for high-pressure CNC coolant systems.
     test('Pressure: Bar to PSI', () {
       final bar = pressureUnits.firstWhere((u) => u.id == 'bar');
       final psi = pressureUnits.firstWhere((u) => u.id == 'psi');

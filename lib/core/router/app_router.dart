@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-// Importy podstron
-import '../../features/converter/converter_page.dart';
-import '../../features/cutting_speed/cutting_speed_page.dart';
+// Page imports
+import '../../features/converter/presentation/pages/converter_page.dart';
+import '../../features/cutting_speed/presentation/pages/cutting_speed_page.dart';
 import '../../features/feed_rate/feed_rate_page.dart';
 import '../../features/g_codes/presentation/g_codes_page.dart';
 import '../../features/gd&t_symbols/data/symbols_data.dart';
@@ -15,12 +15,15 @@ import '../../features/gd&t_symbols/presentation/symbols_page.dart';
 import '../../features/home/home_page.dart';
 import '../../features/settings/settings_page.dart';
 import '../../features/spindle_speed/spindle_speed_page.dart';
-import '../../features/tap_drill/tap_drill_page.dart';
+import '../../features/tap_drill/presentation/pages/tap_drill_page.dart';
 import '../../features/tolerances/tolerance_page.dart';
 
 part 'app_router.g.dart';
 
-// --- DEFINICJA GŁÓWNA ---
+/// Central navigation configuration using type-safe routes.
+///
+/// This structure defines the entire application tree, ensuring that
+/// parameters and route names are checked at compile-time.
 @TypedGoRoute<HomeRoute>(
   path: '/',
   routes: [
@@ -106,29 +109,33 @@ class GdSymbolsRoute extends GoRouteData with $GdSymbolsRoute {
       const GdSymbolsPage();
 }
 
+/// Detailed view for a specific GD&T symbol.
+///
+/// Uses the `$extra` parameter to pass the symbol name and performs
+/// a lookup to ensure the data exists before rendering.
 class GdSymbolDetailsRoute extends GoRouteData with $GdSymbolDetailsRoute {
   final String? $extra;
   const GdSymbolDetailsRoute({this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    // Lookup symbol in the static data list
     final symbol = gdSymbolsList.firstWhereOrNull(
       (s) => s.name == ($extra ?? ''),
     );
-
+    // Fallback to error page if symbol is missing from data source
     if (symbol == null) {
-      return const NotFoundPage(
-        message:
-            'Nie znaleziono symbolu GD&T',
-      );
+      return const NotFoundPage(message: 'Nie znaleziono symbolu GD&T');
     }
 
-    // 3. Wszystko OK - renderujemy stronę
     return GdSymbolDetailsPage(symbol: symbol);
   }
 }
 
-// --- PROVIDER ---
+/// Provides the global [GoRouter] instance.
+///
+/// Includes custom [errorBuilder] for 404 handling and
+/// enables [debugLogDiagnostics] in development mode.
 @Riverpod(keepAlive: true)
 GoRouter router(Ref ref) {
   return GoRouter(

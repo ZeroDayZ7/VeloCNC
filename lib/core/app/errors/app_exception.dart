@@ -1,7 +1,10 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-/// Bazowa klasa dla wszystkich błędów aplikacji
+/// Base class for all domain-specific exceptions.
+///
+/// Provides a [toLocalizedString] method to ensure technical errors
+/// are translated before being displayed to the end-user.
 abstract class AppException implements Exception {
   final String message;
   final String? code;
@@ -11,11 +14,11 @@ abstract class AppException implements Exception {
   @override
   String toString() => message;
 
-  /// Metoda do pobierania zlokalizowanego komunikatu dla UI
+  /// Returns a localized error message suitable for display in the UI.
   String toLocalizedString();
 }
 
-/// Błąd inicjalizacji bazy danych
+/// Thrown when the local database fails to initialize or perform health checks.
 class DatabaseException extends AppException {
   DatabaseException(super.message, [super.code]);
 
@@ -23,7 +26,8 @@ class DatabaseException extends AppException {
   String toLocalizedString() => LocaleKeys.error_database_init.tr();
 }
 
-/// Błąd ładowania zasobów (np. brak pliku JSON z G-kodami)
+/// Thrown when external assets (e.g., JSON data for G-codes or tolerances)
+/// cannot be found or loaded correctly.
 class AssetLoadException extends AppException {
   AssetLoadException(super.message);
 

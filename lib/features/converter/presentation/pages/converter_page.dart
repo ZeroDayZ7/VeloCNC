@@ -2,9 +2,9 @@ import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart'; // Dodaj ten import
 import 'package:cnc_toolbox/features/converter/application/converter_settings_provider.dart';
 import 'package:cnc_toolbox/features/converter/data/units_data.dart';
-import 'package:cnc_toolbox/features/converter/widgets/converter_inputs.dart';
-import 'package:cnc_toolbox/features/converter/widgets/converter_sidebar.dart';
-import 'package:cnc_toolbox/features/converter/widgets/settings_sheet.dart';
+import 'package:cnc_toolbox/features/converter/presentation/widgets/converter_inputs.dart';
+import 'package:cnc_toolbox/features/converter/presentation/widgets/converter_sidebar.dart';
+import 'package:cnc_toolbox/features/converter/presentation/widgets/settings_sheet.dart';
 import 'package:cnc_toolbox/widgets/app_scaffold.dart';
 import 'package:easy_localization/easy_localization.dart'; // Do tłumaczenia klucza
 import 'package:flutter/material.dart';

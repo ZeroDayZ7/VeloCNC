@@ -1,17 +1,21 @@
 import 'package:flutter/foundation.dart';
 
-/// Generyczna klasa do obsługi wyników operacji.
-/// Zapobiega rzucaniu wyjątkami (Exceptions) i wymusza obsługę błędów w UI.
+/// A generic container for operation results.
+///
+/// Used to enforce explicit error handling in the UI layer and
+/// avoid unexpected runtime exceptions.
 @immutable
 sealed class Result<T> {
   const Result();
 }
 
+/// Represents a successful operation containing [data].
 class Success<T> extends Result<T> {
   final T data;
   const Success(this.data);
 }
 
+/// Represents a failed operation with an [error] and optional [stackTrace].
 class Failure<T> extends Result<T> {
   final Object error;
   final StackTrace? stackTrace;

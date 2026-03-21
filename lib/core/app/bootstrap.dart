@@ -10,36 +10,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Global logger instance for pre-bootstrap events.
 final _logger = AppLogger();
 
+/// Entry point for the application bootstrap process.
+///
+/// Responsibilities:
+/// - Error handling (Flutter errors, asynchronous errors via [runZonedGuarded]).
+/// - Global services initialization (SharedPreferences, Localization).
+/// - Manual [ProviderContainer] creation for precise dependency overrides.
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+  // Catch Flutter-specific framework errors
   FlutterError.onError = _handleFlutterError;
+
+  // Catch errors that happen in the platform's underlying code
   PlatformDispatcher.instance.onError = (error, stack) {
     _handleGlobalError(error, stack);
     return true;
   };
 
+  // Custom UI for unexpected Red Screen of Death in production
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Scaffold(
       body: Center(
         child: Text(
           kDebugMode
               ? details.exception.toString()
-              : 'Wystąpił nieoczekiwany błąd ⚙️',
+              : 'An unexpected error occurred ⚙️',
           textAlign: TextAlign.center,
         ),
       ),
     );
   };
 
+  // Guard the application startup using a custom error zone
   await runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await EasyLocalization.ensureInitialized();
 
-    // 1. Inicjalizacja usług przed startem Riverpoda
+    // 1. Core services initialization before Riverpod starts
     final prefs = await SharedPreferences.getInstance();
 
-    // 2. Ręczne tworzenie ProviderContainer
+    // 2. Create ProviderContainer with manual overrides
+    // Using UncontrolledProviderScope allows us to manage the lifecycle
+    // of the container manually, which is safer for advanced bootstrap flows.
     final container = ProviderContainer(
       observers: [const AppObserver()],
       overrides: [
@@ -64,9 +78,11 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   }, (error, stack) => _handleGlobalError(error, stack));
 }
 
+/// Logs errors that occur outside of the Flutter framework context.
 void _handleGlobalError(Object error, StackTrace stack) =>
     _logger.e('🔥 Global Error', error: error, stackTrace: stack);
 
+/// Logs errors captured by the Flutter framework.
 void _handleFlutterError(FlutterErrorDetails details) => _logger.e(
   '💥 Flutter Error',
   error: details.exception,

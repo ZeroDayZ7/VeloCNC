@@ -2,7 +2,11 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
 
-// POMOCNIK
+/// Helper factory for creating linear unit transformations.
+///
+/// Uses a [ratio] to convert values to and from a common base unit.
+/// This simplifies the addition of new units by only requiring their
+/// relationship to the base (e.g., Meters for length, Bars for pressure).
 UnitDefinition _linear(String id, String label, String symbol, double ratio) {
   return UnitDefinition(
     id: id,
@@ -13,6 +17,7 @@ UnitDefinition _linear(String id, String label, String symbol, double ratio) {
   );
 }
 
+/// Unit definitions for length, where **Meters (m)** is the base unit.
 final List<UnitDefinition> lengthUnits = [
   _linear('m', LocaleKeys.converter_units_m, 'm', 1.0),
   _linear('mm', LocaleKeys.converter_units_mm, 'mm', 0.001),
@@ -21,6 +26,11 @@ final List<UnitDefinition> lengthUnits = [
   _linear('inch', LocaleKeys.converter_units_inch, 'in', 0.0254),
 ];
 
+/// Unit definitions for temperature.
+///
+/// Unlike linear units, temperature requires custom [toBase] and [fromBase]
+/// logic due to varying zero-point offsets (e.g., Celsius to Kelvin).
+/// **Celsius (°C)** is used as the internal base unit for calculations.
 final List<UnitDefinition> tempUnits = [
   UnitDefinition(
     id: 'celsius',
@@ -45,6 +55,8 @@ final List<UnitDefinition> tempUnits = [
   ),
 ];
 
+/// Unit definitions for velocity, where **Meters per second (m/s)** is the base unit.
+/// Crucial for CNC spindle and feed rate conversions.
 final List<UnitDefinition> speedUnits = [
   _linear('m_s', LocaleKeys.converter_units_m_s, 'm/s', 1.0),
   _linear('km_h', LocaleKeys.converter_units_km_h, 'km/h', 1 / 3.6),
@@ -53,6 +65,8 @@ final List<UnitDefinition> speedUnits = [
   _linear('in_min', LocaleKeys.converter_units_in_min, 'in/min', 0.0254 / 60),
 ];
 
+/// Unit definitions for pressure, where **Bar** is the base unit.
+/// Useful for coolant and hydraulic system monitoring.
 final List<UnitDefinition> pressureUnits = [
   _linear('bar', LocaleKeys.converter_units_bar, 'bar', 1.0),
   _linear('psi', LocaleKeys.converter_units_psi, 'psi', 0.0689476),
