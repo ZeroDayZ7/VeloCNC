@@ -53,6 +53,17 @@ class AppBreakpoints {
   static const double sidebarWidth = 280.0;
 }
 
+abstract class AppDurations {
+  static const fast = Duration(milliseconds: 150);
+  static const normal = Duration(milliseconds: 250);
+  static const slow = Duration(milliseconds: 400);
+}
+
+abstract class AppOpacity {
+  static const subtle = 0.08;
+  static const disabled = 0.38;
+}
+
 /// --- SYMBOLS ASSETS PATHS ---
 class GdAssets {
   static const String basePath = 'assets/images/gd_t_symbols';
@@ -73,5 +84,5 @@ class GdAssets {
   static const String circularRunout = 'circular_runout'; // bicie promieniowe
   static const String totalRunout = 'total_runout'; // bicie całkowite
 
-  static const String datumFeature = 'datum_feature'; // bicie całkowite
+  static const String datumFeature = 'datum_feature';
 }

@@ -10,16 +10,14 @@ class DarkModeSwitch extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
-    final themeNotifier = ref.read(themeProvider.notifier);
     final isDarkMode = themeMode == ThemeMode.dark;
 
     return SwitchListTile(
+      secondary: const Icon(Icons.dark_mode_outlined),
       title: Text(LocaleKeys.dark_mode.tr()),
       subtitle: Text(LocaleKeys.dark_mode_desc.tr()),
       value: isDarkMode,
-      onChanged: (val) => themeNotifier.toggleTheme(val),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      tileColor: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.1),
+      onChanged: (val) => ref.read(themeProvider.notifier).toggleTheme(val),
     );
   }
 }

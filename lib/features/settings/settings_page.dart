@@ -1,14 +1,14 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/localization/locale_notifier.dart';
-import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
-import 'package:cnc_toolbox/features/settings/widgets/language_tile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'widgets/about_section.dart';
 import 'widgets/dark_mode_switch.dart';
+import 'widgets/language_tile.dart';
+import 'widgets/settings_group.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -18,81 +18,65 @@ class SettingsPage extends ConsumerWidget {
     ref.watch(localeProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(LocaleKeys.settings.tr()),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => const HomeRoute().go(context),
-        ),
-      ),
+      appBar: AppBar(title: Text(LocaleKeys.settings.tr())),
       body: ListView(
         padding: AppSpacings.edgeInsetsM,
         children: [
-          _SettingsContainer(
+          SettingsGroup(
             title: LocaleKeys.appearance.tr(),
-            child: const DarkModeSwitch(),
+            children: const [DarkModeSwitch()],
           ),
-          AppSpacings.gapM,
 
-          _SettingsContainer(
+          SettingsGroup(
             title: LocaleKeys.language.tr(),
-            child: const LanguageTile(),
+            children: const [LanguageTile()],
           ),
-          AppSpacings.gapM,
 
-          _SettingsContainer(
+          SettingsGroup(
             title: LocaleKeys.preferences.tr(),
-            child: Column(
-              children: [
-                ListTile(
-                  title: Text(LocaleKeys.unit_system.tr()),
-                  subtitle: Text(LocaleKeys.unit_system_desc.tr()),
-                  leading: const Icon(Icons.straighten),
-                ),
-                ListTile(
-                  title: Text(LocaleKeys.notifications.tr()),
-                  subtitle: Text(LocaleKeys.notifications_desc.tr()),
-                  leading: const Icon(Icons.notifications),
-                ),
-              ],
-            ),
+            children: [
+              _buildSimpleTile(
+                context,
+                icon: Icons.straighten,
+                title: LocaleKeys.unit_system.tr(),
+                subtitle: LocaleKeys.unit_system_desc.tr(),
+              ),
+              const Divider(indent: 56, height: 1),
+              _buildSimpleTile(
+                context,
+                icon: Icons.notifications_none,
+                title: LocaleKeys.notifications.tr(),
+                subtitle: LocaleKeys.notifications_desc.tr(),
+              ),
+            ],
           ),
-          AppSpacings.gapM,
 
-          _SettingsContainer(
+          SettingsGroup(
             title: LocaleKeys.about.tr(),
-            child: const AboutSection(),
+            children: const [AboutSection()],
           ),
+
+          AppSpacings.gapL,
         ],
       ),
     );
   }
-}
 
-class _SettingsContainer extends StatelessWidget {
-  final String title;
-  final Widget child;
-
-  const _SettingsContainer({required this.title, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Theme.of(
-          context,
-        ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.2),
-        borderRadius: BorderRadius.circular(12),
+  Widget _buildSimpleTile(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: 8),
-          child,
-        ],
-      ),
+      title: Text(title),
+      subtitle: Text(subtitle),
+      trailing: const Icon(Icons.chevron_right, size: 20),
+      onTap: () {}, // Tu dodasz nawigację w przyszłości
     );
   }
 }

@@ -8,33 +8,32 @@ import 'language_picker.dart';
 class LanguageTile extends StatelessWidget {
   const LanguageTile({super.key});
 
-  void _showLanguagePicker(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (_) => const LanguagePicker(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final currentLocale = context.locale;
+
     final currentLanguage = AppLanguage.values.firstWhere(
       (l) => l.locale.languageCode == currentLocale.languageCode,
       orElse: () => AppLanguage.polish,
     );
 
     return ListTile(
+      leading: Text(currentLanguage.flag, style: const TextStyle(fontSize: 22)),
       title: Text(currentLanguage.name),
-      leading: Text(currentLanguage.flag, style: const TextStyle(fontSize: 20)),
       subtitle: Text(LocaleKeys.change_language_desc.tr()),
-      onTap: () => _showLanguagePicker(context),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      tileColor: Theme.of(
-        context,
-      ).colorScheme.primaryContainer.withValues(alpha: 0.1),
+      trailing: null,
+
+      onTap: () => showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        useSafeArea: true,
+        backgroundColor: theme.colorScheme.surface,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        builder: (_) => const LanguagePicker(),
+      ),
     );
   }
 }
