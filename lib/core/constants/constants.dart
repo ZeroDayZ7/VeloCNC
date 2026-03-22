@@ -72,4 +72,6 @@ class GdAssets {
   static const String symmetry = 'symmetry'; // symetria
   static const String circularRunout = 'circular_runout'; // bicie promieniowe
   static const String totalRunout = 'total_runout'; // bicie całkowite
+
+  static const String datumFeature = 'datum_feature'; // bicie całkowite
 }

@@ -109,4 +109,12 @@ final List<GdSymbol> gdSymbolsList = [
     requiresDatum: true,
     assetImage: '${GdAssets.basePath}/${GdAssets.totalRunout}.png',
   ),
+  const GdSymbol(
+    name: LocaleKeys.gd_symbols_items_datum_features_name,
+    symbol: '${GdAssets.svgPath}/${GdAssets.datumFeature}.svg',
+    description: LocaleKeys.gd_symbols_items_datum_features_description,
+    category: SymbolCategory.runout,
+    requiresDatum: true,
+    assetImage: '${GdAssets.basePath}/${GdAssets.datumFeature}.png',
+  ),
 ];

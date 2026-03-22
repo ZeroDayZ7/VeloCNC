@@ -134,6 +134,10 @@
       "total_runout": {
         "name": "Gesamtlauf",
         "description": "Gesamtlauftoleranz – Zone begrenzt durch zwei konzentrische Zylinder."
+      },
+      "datum_features": {
+        "name": "Baza pomiarowa",
+        "description": "Fizyczny element części (powierzchnia, otwór, wałek) używany do ustanowienia teoretycznie idealnej bazy odniesienia dla pomiarów."
       }
     }
   },

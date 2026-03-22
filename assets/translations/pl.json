@@ -135,6 +135,10 @@
       "total_runout": {
         "name": "Bicie całkowite",
         "description": "Tolerancja bicia całkowitego - strefa ograniczona dwoma koncentrycznymi walcami."
+      },
+      "datum_features": {
+        "name": "Baza pomiarowa",
+        "description": "Fizyczny element części (powierzchnia, otwór, wałek) używany do ustanowienia teoretycznie idealnej bazy odniesienia dla pomiarów."
       }
     }
   },
