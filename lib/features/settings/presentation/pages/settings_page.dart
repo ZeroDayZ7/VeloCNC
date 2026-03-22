@@ -5,10 +5,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'widgets/about_section.dart';
-import 'widgets/dark_mode_switch.dart';
-import 'widgets/language_tile.dart';
-import 'widgets/settings_group.dart';
+import '../widgets/about_section.dart';
+import '../widgets/dark_mode_switch.dart';
+import '../widgets/language_tile.dart';
+import '../widgets/settings_group.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});

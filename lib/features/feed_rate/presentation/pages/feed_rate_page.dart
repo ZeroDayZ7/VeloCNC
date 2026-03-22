@@ -3,8 +3,8 @@ import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:cnc_toolbox/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/feed_rate_actions.dart';
-import 'widgets/feed_rate_form.dart';
+import '../widgets/feed_rate_actions.dart';
+import '../widgets/feed_rate_form.dart';
 
 class FeedRatePage extends StatelessWidget {
   const FeedRatePage({super.key});

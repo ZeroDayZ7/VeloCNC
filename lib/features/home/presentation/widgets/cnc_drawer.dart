@@ -1,7 +1,7 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
-import 'package:cnc_toolbox/features/home/tools_list.dart';
+import 'package:cnc_toolbox/features/home/domain/constants/tools_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

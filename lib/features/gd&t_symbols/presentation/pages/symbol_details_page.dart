@@ -2,8 +2,8 @@ import 'package:cnc_toolbox/features/gd&t_symbols/domain/gd_symbol_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/symbol_datum_badge.dart';
-import 'widgets/symbol_image_card.dart';
+import '../widgets/symbol_datum_badge.dart';
+import '../widgets/symbol_image_card.dart';
 
 class GdSymbolDetailsPage extends StatelessWidget {
   final GdSymbol symbol;
