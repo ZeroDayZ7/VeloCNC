@@ -1,9 +1,10 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_controller.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
+import 'package:cnc_toolbox/features/feed_rate/presentation/widgets/feed_history_sheet.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:cnc_toolbox/features/feed_rate/presentation/widgets/feed_history_sheet.dart';
 
 class FeedRateActions extends ConsumerWidget {
   const FeedRateActions({super.key});
@@ -14,7 +15,7 @@ class FeedRateActions extends ConsumerWidget {
       children: [
         IconButton(
           icon: const Icon(Icons.history),
-          tooltip: 'Historia obliczeń',
+          tooltip: LocaleKeys.feed_rate_history_tooltip.tr(),
           onPressed: () {
             final tabIndex = DefaultTabController.of(context).index;
             final type = tabIndex == 0 ? FeedType.basic : FeedType.arc;
@@ -27,15 +28,21 @@ class FeedRateActions extends ConsumerWidget {
         ),
         IconButton(
           icon: const Icon(Icons.save),
-          tooltip: 'Zapisz parametry',
+          tooltip: LocaleKeys.feed_rate_save_params_tooltip.tr(),
           onPressed: () async {
             final tabIndex = DefaultTabController.of(context).index;
             final type = tabIndex == 0 ? FeedType.basic : FeedType.arc;
             await ref.read(feedRateControllerProvider.notifier).save(type);
             if (context.mounted) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('Zapisano ($type)')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    LocaleKeys.feed_rate_save_success.tr(
+                      args: [type.toString()],
+                    ),
+                  ),
+                ),
+              );
             }
           },
         ),

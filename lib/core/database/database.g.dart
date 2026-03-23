@@ -833,6 +833,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final DriftFeedRateDao driftFeedRateDao = DriftFeedRateDao(
     this as AppDatabase,
   );
+  late final DriftSearchDao driftSearchDao = DriftSearchDao(
+    this as AppDatabase,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1294,64 +1297,3 @@ class $AppDatabaseManager {
   $$FeedCalculationsTableTableManager get feedCalculations =>
       $$FeedCalculationsTableTableManager(_db, _db.feedCalculations);
 }
-
-// **************************************************************************
-// RiverpodGenerator
-// **************************************************************************
-
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, type=warning
-/// Provider for the [AppDatabase] instance.
-///
-/// Uses [keepAlive] to ensure the database connection remains open
-/// throughout the application lifecycle.
-
-@ProviderFor(database)
-final databaseProvider = DatabaseProvider._();
-
-/// Provider for the [AppDatabase] instance.
-///
-/// Uses [keepAlive] to ensure the database connection remains open
-/// throughout the application lifecycle.
-
-final class DatabaseProvider
-    extends $FunctionalProvider<AppDatabase, AppDatabase, AppDatabase>
-    with $Provider<AppDatabase> {
-  /// Provider for the [AppDatabase] instance.
-  ///
-  /// Uses [keepAlive] to ensure the database connection remains open
-  /// throughout the application lifecycle.
-  DatabaseProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'databaseProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$databaseHash();
-
-  @$internal
-  @override
-  $ProviderElement<AppDatabase> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  AppDatabase create(Ref ref) {
-    return database(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AppDatabase value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<AppDatabase>(value),
-    );
-  }
-}
-
-String _$databaseHash() => r'fd8e187bc7bddf0460b17f2a5f254600b81fcc54';

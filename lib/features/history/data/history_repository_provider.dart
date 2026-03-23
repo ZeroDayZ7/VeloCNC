@@ -1,4 +1,4 @@
-import 'package:cnc_toolbox/core/database/database.dart';
+import 'package:cnc_toolbox/core/database/database_provider.dart';
 import 'package:cnc_toolbox/features/history/domain/drift_history_repository.dart';
 import 'package:cnc_toolbox/features/history/domain/i_history_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

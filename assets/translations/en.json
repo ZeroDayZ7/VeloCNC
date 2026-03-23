@@ -29,6 +29,9 @@
     "no_data": "Brak danych"
   },
   "feed_rate": {
+    "history_tooltip": "Historia obliczeń",
+    "save_params_tooltip": "Zapisz parametry",
+    "save_success": "Zapisano ({})",
     "arc_parameters": "Parametry łuku",
     "tool_diameter_label": "Średnica narzędzia (D)",
     "feature_diameter_label": "Średnica otworu/czopu",

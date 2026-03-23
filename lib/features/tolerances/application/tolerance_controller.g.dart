@@ -42,7 +42,7 @@ final class ToleranceControllerProvider
 }
 
 String _$toleranceControllerHash() =>
-    r'e29ef5c5d7af983d3ad9baf7316aed0bbfcb17bf';
+    r'6b77240b20355fa4853c64a7dcb1f47d7fc96dad';
 
 abstract class _$ToleranceController extends $Notifier<TolerancePageState> {
   TolerancePageState build();

@@ -1,5 +1,6 @@
 import 'package:cnc_toolbox/core/database/daos/feed_rate_dao.dart';
 import 'package:cnc_toolbox/core/database/database.dart';
+import 'package:cnc_toolbox/core/database/tables/feed_calculations.dart';
 import 'package:drift/drift.dart';
 
 part 'drift_feed_rate_dao.g.dart';

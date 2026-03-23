@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/converter/application/converter_settings_provider.dart';
 import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -33,12 +34,12 @@ class SettingsSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: AppSpacings.edgeInsetsMs,
       height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: AppSpacings.edgeInsetsM,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

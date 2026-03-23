@@ -21,7 +21,7 @@ class GCodeTile extends StatelessWidget {
         subtitle: Text(code.titleKey.tr()),
         children: [
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: AppSpacings.edgeInsetsMs,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

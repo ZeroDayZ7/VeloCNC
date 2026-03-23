@@ -16,7 +16,7 @@ class ErrorApp extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: AppSpacings.edgeInsetsL,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

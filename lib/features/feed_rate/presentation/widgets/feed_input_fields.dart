@@ -1,5 +1,4 @@
 import 'package:cnc_toolbox/core/theme/app_design.dart';
-import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +31,7 @@ class FeedInputFields extends ConsumerWidget {
             labelText: "Obroty (n)",
             suffixText: "obr/min",
           ),
-          onChanged: (v) {
-            final val = AppNumberFormatter.tryParse(v);
-            if (val != null) notifier.updateSpindleSpeed(val);
-          },
+          onChanged: notifier.updateSpindleSpeed,
         ),
         AppSpacings.gapMs,
         TextField(
@@ -45,7 +41,7 @@ class FeedInputFields extends ConsumerWidget {
             labelText: "Liczba ostrzy (z)",
             suffixText: "szt.",
           ),
-          onChanged: (v) => notifier.updateTeeth(int.tryParse(v) ?? 1),
+          onChanged: notifier.updateTeeth,
         ),
         AppSpacings.gapMs,
         TextField(
@@ -55,10 +51,7 @@ class FeedInputFields extends ConsumerWidget {
             labelText: "Posuw na ostrze (fz)",
             suffixText: "mm",
           ),
-          onChanged: (v) {
-            final val = AppNumberFormatter.tryParse(v);
-            if (val != null) notifier.updateFeedPerTooth(val);
-          },
+          onChanged: notifier.updateFeedPerTooth,
         ),
       ],
     );

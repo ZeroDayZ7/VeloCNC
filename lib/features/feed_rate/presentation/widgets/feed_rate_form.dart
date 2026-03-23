@@ -113,20 +113,14 @@ class FeedRateForm extends HookConsumerWidget {
           label: LocaleKeys.feed_rate_tool_diameter_label.tr(),
           suffix: "mm",
           controller: dCtrl,
-          onChanged: (v) {
-            final val = AppNumberFormatter.tryParse(v);
-            if (val != null) notifier.updateToolDia(val);
-          },
+          onChanged: notifier.updateToolDia,
         ),
         AppSpacings.gapMs,
         CustomField(
           label: LocaleKeys.feed_rate_feature_diameter_label.tr(),
           suffix: "mm",
           controller: dfCtrl,
-          onChanged: (v) {
-            final val = AppNumberFormatter.tryParse(v);
-            if (val != null) notifier.updateFeatureDia(val);
-          },
+          onChanged: notifier.updateFeatureDia,
         ),
         AppSpacings.gapMs,
         SwitchListTile(

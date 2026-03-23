@@ -28,6 +28,9 @@ abstract class  LocaleKeys {
   static const common_back = 'common.back';
   static const common_no_data = 'common.no_data';
   static const common = 'common';
+  static const feed_rate_history_tooltip = 'feed_rate.history_tooltip';
+  static const feed_rate_save_params_tooltip = 'feed_rate.save_params_tooltip';
+  static const feed_rate_save_success = 'feed_rate.save_success';
   static const feed_rate_arc_parameters = 'feed_rate.arc_parameters';
   static const feed_rate_tool_diameter_label = 'feed_rate.tool_diameter_label';
   static const feed_rate_feature_diameter_label = 'feed_rate.feature_diameter_label';

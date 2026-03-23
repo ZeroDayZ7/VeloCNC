@@ -1,12 +1,21 @@
-// lib/features/tolerances/data/tolerance_repository.dart
-
 import 'dart:convert';
 
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:flutter/services.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class ToleranceRepository {
+part 'tolerance_repository.g.dart';
+
+/// Interfejs dla repozytorium tolerancji
+abstract class IToleranceRepository {
+  Future<Map<ToleranceType, Map<String, List<ToleranceRange>>>>
+  loadTolerances();
+}
+
+/// Implementacja oparta na pliku JSON z Assetów
+class ToleranceRepository implements IToleranceRepository {
+  @override
   Future<Map<ToleranceType, Map<String, List<ToleranceRange>>>>
   loadTolerances() async {
     final jsonString = await rootBundle.loadString(AppAssets.tolerancesJson);
@@ -38,4 +47,9 @@ class ToleranceRepository {
       );
     });
   }
+}
+
+@Riverpod(keepAlive: true)
+IToleranceRepository toleranceRepository(Ref ref) {
+  return ToleranceRepository();
 }

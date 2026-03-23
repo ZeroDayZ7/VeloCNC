@@ -46,4 +46,4 @@ final class ToleranceServiceProvider
   }
 }
 
-String _$toleranceServiceHash() => r'd36ec1943eb6bc14a0452a49cadbb2ccd708c55e';
+String _$toleranceServiceHash() => r'af7896756145acde9904c04b8a549a7cadd5700a';

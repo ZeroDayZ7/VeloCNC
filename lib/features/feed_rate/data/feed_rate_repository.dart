@@ -1,5 +1,6 @@
 import 'package:cnc_toolbox/core/database/daos/feed_rate_dao.dart'; // Import interfejsu DAO
 import 'package:cnc_toolbox/core/database/database.dart';
+import 'package:cnc_toolbox/core/database/database_provider.dart';
 import 'package:cnc_toolbox/core/models/result.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_calculation_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

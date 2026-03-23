@@ -41,7 +41,7 @@ final class GCodeControllerProvider
   }
 }
 
-String _$gCodeControllerHash() => r'c38b0911885db59d684661740989f466cab36ab3';
+String _$gCodeControllerHash() => r'46438697da4bf95af8e65eeda3e04de808b9d5ec';
 
 abstract class _$GCodeController extends $Notifier<GCodeState> {
   GCodeState build();

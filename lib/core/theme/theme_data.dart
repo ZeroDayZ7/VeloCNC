@@ -1,8 +1,7 @@
-import 'package:cnc_toolbox/core/theme/theme_extensions.dart';
-import 'package:flutter/material.dart';
-
 import 'package:cnc_toolbox/core/theme/app_colors.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
+import 'package:cnc_toolbox/core/theme/theme_extensions.dart';
+import 'package:flutter/material.dart';
 
 /// Centralized theme configuration for the application.
 ///
@@ -35,6 +34,8 @@ class AppTheme {
     brightness: Brightness.light,
     colorSchemeSeed: AppColors.primary,
     inputDecorationTheme: _inputTheme(Brightness.light),
+    filledButtonTheme: _filledButtonTheme(),
+    elevatedButtonTheme: _elevatedButtonTheme(),
     extensions: [
       CncColors(
         toolStatus: AppColors.statusReady,
@@ -52,6 +53,8 @@ class AppTheme {
     colorSchemeSeed: AppColors.primary,
     scaffoldBackgroundColor: AppColors.bgDark,
     inputDecorationTheme: _inputTheme(Brightness.dark),
+    filledButtonTheme: _filledButtonTheme(),
+    elevatedButtonTheme: _elevatedButtonTheme(),
     extensions: [
       CncColors(
         toolStatus: AppColors.statusReady.withValues(alpha: 0.8),
@@ -59,4 +62,30 @@ class AppTheme {
       ),
     ],
   );
+
+  /// Global style for FilledButtons (including .tonal)
+  static FilledButtonThemeData _filledButtonTheme() => FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      padding: const EdgeInsets.symmetric(
+        vertical: AppSpacings.m,
+        horizontal: AppSpacings.l,
+      ),
+      shape: RoundedRectangleBorder(borderRadius: AppRadii.radiusM),
+      minimumSize: const Size(64, 48),
+    ),
+  );
+
+  /// Global style for ElevatedButtons
+  static ElevatedButtonThemeData _elevatedButtonTheme() =>
+      ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppSpacings.m,
+            horizontal: AppSpacings.l,
+          ),
+          shape: RoundedRectangleBorder(borderRadius: AppRadii.radiusM),
+          elevation: 2,
+          minimumSize: const Size(64, 48),
+        ),
+      );
 }

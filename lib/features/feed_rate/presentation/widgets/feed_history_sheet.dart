@@ -3,6 +3,7 @@ import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:cnc_toolbox/features/history/domain/history_notifier.dart';
+import 'package:cnc_toolbox/widgets/empty_state_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,6 @@ class FeedHistorySheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Słuchamy stanu z Notifiera (używając DTO)
     final historyState = ref.watch(historyProvider);
 
     return DraggableScrollableSheet(
@@ -24,7 +24,11 @@ class FeedHistorySheet extends ConsumerWidget {
       builder: (context, scrollController) {
         return historyState.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, stack) => Center(child: Text("Błąd: $err")),
+          error: (err, stack) => EmptyStateWidget(
+            icon: Icons.error_outline_rounded,
+            message: LocaleKeys.splash_error_title.tr(),
+            subtitle: err.toString(),
+          ),
           data: (history) => Column(
             children: [
               Padding(
@@ -55,9 +59,7 @@ class FeedHistorySheet extends ConsumerWidget {
                               // Tutaj ładujemy dane z powrotem do kalkulatora
                               ref
                                   .read(feedRateProvider(targetType).notifier)
-                                  .loadFromHistory(
-                                    item,
-                                  );
+                                  .loadFromHistory(item);
                               Navigator.pop(context);
                             },
                           );

@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/database/database.dart';
+import 'package:cnc_toolbox/core/database/database_provider.dart';
 import 'package:cnc_toolbox/core/database/i_database_repository.dart';
 import 'package:cnc_toolbox/core/models/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

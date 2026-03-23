@@ -1,7 +1,7 @@
-import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
+import 'package:cnc_toolbox/features/home/presentation/widgets/cnc_drawer_header.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,37 +17,7 @@ class CncDrawer extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
-          // Nagłówek Drawera
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
-              border: const Border(
-                bottom: BorderSide(color: Colors.blueAccent, width: 2),
-              ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.precision_manufacturing,
-                    size: 40,
-                    color: Colors.blueAccent,
-                  ),
-                  AppSpacings.gapMs,
-                  Text(
-                    AppInfo.appName,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const CncDrawerHeader(),
 
           // Lista narzędzi
           Expanded(

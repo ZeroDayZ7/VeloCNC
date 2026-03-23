@@ -1,9 +1,9 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
+import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
+import 'package:cnc_toolbox/features/tolerances/application/tolerance_provider.dart';
 import 'package:cnc_toolbox/features/tolerances/application/tolerance_service.dart';
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:cnc_toolbox/features/tolerances/application/tolerance_provider.dart';
 
 part 'tolerance_controller.g.dart';
 
@@ -99,7 +99,7 @@ class ToleranceController extends _$ToleranceController {
   }
 
   void _calculate() {
-    final diameter = double.tryParse(state.diameterInput);
+   final diameter = AppNumberFormatter.tryParse(state.diameterInput);
     if (diameter == null ||
         state.selectedLetter == null ||
         state.selectedNumber == null) {
