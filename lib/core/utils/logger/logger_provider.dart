@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'app_logger.dart';
+import 'package:cnc_toolbox/core/utils/logger/app_logger.dart';
 
 part 'logger_provider.g.dart';
 

@@ -1,3 +1,5 @@
+import 'package:cnc_toolbox/core/utils/logger/app_logger.dart';
+import 'package:cnc_toolbox/features/g_codes/domain/g_code_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,7 +8,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// This class logs provider initialization, updates, and disposals to the console
 /// to assist in debugging and tracking application state flow.
 final class AppObserver extends ProviderObserver {
-  const AppObserver();
+  final IAppLogger logger;
+
+  const AppObserver(this.logger);
 
   @override
   void didAddProvider(ProviderObserverContext context, Object? value) {
@@ -26,19 +30,25 @@ final class AppObserver extends ProviderObserver {
     debugPrint('🔄 Provider updated: $name');
 
     // Filter out large state objects to keep the console readable
-    if (newValue.toString().contains('GCodeState')) {
-      debugPrint('   [Content hidden: GCodeState is too large]');
+    if (newValue is GCodeState) {
+      logger.d(
+        '🔄 Provider updated: $name | [Content hidden: GCodeState is too large]',
+        module: 'Riverpod',
+      );
       return;
     }
 
-    debugPrint('   previous: $previousValue');
-    debugPrint('   new: $newValue');
+    logger.d(
+      '🔄 Provider updated: $name\n   previous: $previousValue\n   new: $newValue',
+      module: 'Riverpod',
+    );
   }
 
   @override
   void didDisposeProvider(ProviderObserverContext context) {
-    debugPrint(
+    logger.d(
       '❌ Provider disposed: ${context.provider.name ?? context.provider.runtimeType}',
+      module: 'Riverpod',
     );
   }
 }

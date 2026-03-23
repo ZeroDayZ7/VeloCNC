@@ -12,7 +12,7 @@ class GCodesRepository {
   Future<Result<List<GCode>>> loadGCodes() async {
     try {
       final String response = await rootBundle.loadString(AppAssets.gCodesJson);
-      final List<dynamic> data = json.decode(response);
+      final List<dynamic> data = json.decode(response) as List<dynamic>;
 
       final codes = data
           .map((json) => GCode.fromJson(json as Map<String, dynamic>))

@@ -1,17 +1,3 @@
-/// --- ROUTES ---
-abstract class Routes {
-  static const home = '/';
-  static const cuttingSpeed = '/cutting-speed';
-  static const spindleSpeed = '/spindle-speed';
-  static const feedRate = '/feed-rate';
-  static const converter = '/converter';
-  static const tolerances = '/tolerances';
-  static const settings = '/settings';
-  static const tapDrill = '/tap-drill';
-  static const gdSymbols = '/gd-symbols';
-  static const gCodes = '/g-codes';
-}
-
 /// --- APP INFO ---
 abstract class AppInfo {
   static const appName = 'VeloCNC';

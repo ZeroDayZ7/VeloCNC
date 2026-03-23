@@ -56,7 +56,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   // Using UncontrolledProviderScope allows us to manage the lifecycle
   // of the container manually, which is safer for advanced bootstrap flows.
   final container = ProviderContainer(
-    observers: [const AppObserver()],
+    observers: [AppObserver(_logger)],
     overrides: [
       sharedPrefsProvider.overrideWithValue(prefs),
       appLoggerProvider.overrideWithValue(_logger),

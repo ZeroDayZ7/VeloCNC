@@ -9,30 +9,37 @@ abstract class AppSpacings {
   // --- Base Values ---
   static const double xs = 4.0;
   static const double s = 8.0;
+  static const double ms = 12.0;
   static const double m = 16.0;
   static const double l = 24.0;
   static const double xl = 32.0;
+  static const double xxl = 40.0;
+  static const double huge = 60.0;
 
   // --- Predefined EdgeInsets ---
   static const EdgeInsets edgeInsetsXs = EdgeInsets.all(xs);
   static const EdgeInsets edgeInsetsS = EdgeInsets.all(s);
+  static const EdgeInsets edgeInsetsMs = EdgeInsets.all(ms);
   static const EdgeInsets edgeInsetsM = EdgeInsets.all(m);
   static const EdgeInsets edgeInsetsL = EdgeInsets.all(l);
+  static const EdgeInsets edgeInsetsXl = EdgeInsets.all(xl);
 
   /// Symmetrical padding commonly used in lists and forms.
-  static const EdgeInsets hvM = EdgeInsets.symmetric(
-    horizontal: m,
-    vertical: m,
-  );
+  static const EdgeInsets hvM = EdgeInsets.symmetric(horizontal: m, vertical: m);
   static const EdgeInsets hM = EdgeInsets.symmetric(horizontal: m);
   static const EdgeInsets vM = EdgeInsets.symmetric(vertical: m);
+  static const EdgeInsets hL = EdgeInsets.symmetric(horizontal: l);
 
   // --- Predefined Gaps (SizedBox) ---
   // Using constant Gaps improves performance and code readability.
   static const gapXs = SizedBox(width: xs, height: xs);
   static const gapS = SizedBox(width: s, height: s);
+  static const gapMs = SizedBox(width: ms, height: ms);
   static const gapM = SizedBox(width: m, height: m);
   static const gapL = SizedBox(width: l, height: l);
+  static const gapXl = SizedBox(width: xl, height: xl);
+  static const gapXxl = SizedBox(width: xxl, height: xxl);
+  static const gapHuge = SizedBox(width: huge, height: huge);
 }
 
 /// Centralized border radius configuration.

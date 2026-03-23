@@ -1,4 +1,4 @@
-import '../domain/tolerance_models.dart';
+import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 
 class ToleranceService {
   final Map<ToleranceType, Map<String, List<ToleranceRange>>> data;

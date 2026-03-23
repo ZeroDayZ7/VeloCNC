@@ -38,7 +38,7 @@ class NotFoundPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 32),
+              AppSpacings.gapXl,
               ElevatedButton.icon(
                 onPressed: () => const HomeRoute().go(context),
                 icon: const Icon(Icons.home),

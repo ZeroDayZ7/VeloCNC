@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/g_codes/domain/g_code_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class GCodeTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(code.descriptionKey.tr()),
-                const SizedBox(height: 8),
+                AppSpacings.gapS,
                 Text(
                   "${LocaleKeys.gcodes_example.tr()}:",
                   style: const TextStyle(fontWeight: FontWeight.bold),

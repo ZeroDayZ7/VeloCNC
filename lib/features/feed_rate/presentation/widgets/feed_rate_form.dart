@@ -5,14 +5,13 @@ import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_computed.da
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_state.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
+import 'package:cnc_toolbox/features/feed_rate/presentation/widgets/feed_input_fields.dart';
+import 'package:cnc_toolbox/features/feed_rate/presentation/widgets/result_card.dart';
 import 'package:cnc_toolbox/widgets/custom_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'feed_input_fields.dart';
-import 'result_card.dart';
 
 class FeedRateForm extends HookConsumerWidget {
   final FeedType type;
@@ -63,7 +62,7 @@ class FeedRateForm extends HookConsumerWidget {
             f: f,
             isArc: type == FeedType.arc,
           ),
-          const SizedBox(height: 20),
+          AppSpacings.gapL,
           FeedInputFields(
             type: type,
             nController: nController,
@@ -109,7 +108,7 @@ class FeedRateForm extends HookConsumerWidget {
           LocaleKeys.feed_rate_arc_parameters.tr(),
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 10),
+        AppSpacings.gapMs,
         CustomField(
           label: LocaleKeys.feed_rate_tool_diameter_label.tr(),
           suffix: "mm",
@@ -119,7 +118,7 @@ class FeedRateForm extends HookConsumerWidget {
             if (val != null) notifier.updateToolDia(val);
           },
         ),
-        const SizedBox(height: 10),
+        AppSpacings.gapMs,
         CustomField(
           label: LocaleKeys.feed_rate_feature_diameter_label.tr(),
           suffix: "mm",
@@ -129,7 +128,7 @@ class FeedRateForm extends HookConsumerWidget {
             if (val != null) notifier.updateFeatureDia(val);
           },
         ),
-        const SizedBox(height: 10),
+        AppSpacings.gapMs,
         SwitchListTile(
           title: Text(
             state.isInternal

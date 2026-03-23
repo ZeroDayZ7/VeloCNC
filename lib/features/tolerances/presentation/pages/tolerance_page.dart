@@ -58,7 +58,7 @@ class TolerancePage extends ConsumerWidget {
                 onLetterChanged: notifier.updateLetter,
                 onNumberChanged: notifier.updateNumber,
               ),
-              const SizedBox(height: 24),
+              AppSpacings.gapL,
               if (ctrl.result != null)
                 ToleranceResultDisplay(res: ctrl.result!),
             ],

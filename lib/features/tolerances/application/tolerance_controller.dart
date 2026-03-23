@@ -3,7 +3,7 @@ import 'package:cnc_toolbox/features/tolerances/application/tolerance_service.da
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'tolerance_provider.dart';
+import 'package:cnc_toolbox/features/tolerances/application/tolerance_provider.dart';
 
 part 'tolerance_controller.g.dart';
 

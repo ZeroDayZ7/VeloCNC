@@ -20,6 +20,7 @@ abstract class  LocaleKeys {
   static const tools_tolerances = 'tools.tolerances';
   static const tools_gd_symbols = 'tools.gd_symbols';
   static const tools_g_codes = 'tools.g_codes';
+  static const tools_tap_drill = 'tools.tap_drill';
   static const tools = 'tools';
   static const common_history = 'common.history';
   static const common_understand = 'common.understand';
@@ -56,6 +57,7 @@ abstract class  LocaleKeys {
   static const descriptions_tolerances = 'descriptions.tolerances';
   static const descriptions_gd_symbols = 'descriptions.gd_symbols';
   static const descriptions_g_codes = 'descriptions.g_codes';
+  static const descriptions_tap_drill = 'descriptions.tap_drill';
   static const descriptions = 'descriptions';
   static const gd_symbols_title = 'gd_symbols.title';
   static const gd_symbols_info_tooltip = 'gd_symbols.info_tooltip';
@@ -124,9 +126,10 @@ abstract class  LocaleKeys {
   static const settings = 'settings';
   static const dark_mode = 'dark_mode';
   static const language = 'language';
+  static const cutting_speed = 'cutting_speed';
   static const cutting_speed_calculator = 'cutting_speed_calculator';
   static const tool_diameter = 'tool_diameter';
-  static const spindle_rpm_label = 'spindle_rpm_label';
+  static const spindle_rpm = 'spindle_rpm';
   static const calculate_cutting_speed = 'calculate_cutting_speed';
   static const calculation_not_implemented = 'calculation_not_implemented';
   static const material = 'material';
@@ -153,6 +156,7 @@ abstract class  LocaleKeys {
   static const about = 'about';
   static const version = 'version';
   static const about_desc = 'about_desc';
+  static const close = 'close';
   static const tolerance_hole = 'tolerance.hole';
   static const tolerance_shaft = 'tolerance.shaft';
   static const tolerance_letter = 'tolerance.letter';

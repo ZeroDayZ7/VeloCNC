@@ -35,7 +35,7 @@ class ToolTile extends StatelessWidget {
                 size: 48,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(height: 8),
+              AppSpacings.gapS,
               Text(
                 label.tr(),
                 style: const TextStyle(
@@ -46,7 +46,7 @@ class ToolTile extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 4),
+              AppSpacings.gapXs,
               Flexible(
                 child: Text(
                   description.tr(),

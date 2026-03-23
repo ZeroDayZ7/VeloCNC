@@ -3,15 +3,15 @@
 import 'dart:convert';
 
 import 'package:cnc_toolbox/core/constants/constants.dart';
+import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:flutter/services.dart';
-
-import '../domain/tolerance_models.dart';
 
 class ToleranceRepository {
   Future<Map<ToleranceType, Map<String, List<ToleranceRange>>>>
   loadTolerances() async {
     final jsonString = await rootBundle.loadString(AppAssets.tolerancesJson);
-    final Map<String, dynamic> decoded = json.decode(jsonString);
+    final Map<String, dynamic> decoded =
+        json.decode(jsonString) as Map<String, dynamic>;
 
     return {
       ToleranceType.hole: _parseSection(

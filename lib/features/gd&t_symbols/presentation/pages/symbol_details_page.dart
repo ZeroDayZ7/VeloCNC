@@ -1,9 +1,9 @@
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/gd&t_symbols/domain/gd_symbol_model.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/presentation/widgets/symbol_datum_badge.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/presentation/widgets/symbol_image_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/symbol_datum_badge.dart';
-import '../widgets/symbol_image_card.dart';
 
 class GdSymbolDetailsPage extends StatelessWidget {
   final GdSymbol symbol;
@@ -20,9 +20,9 @@ class GdSymbolDetailsPage extends StatelessWidget {
         child: Column(
           children: [
             SymbolImageCard(symbol: symbol, height: screenHeight * 0.45),
-            const SizedBox(height: 24),
+            AppSpacings.gapL,
             SymbolDatumBadge(symbol: symbol),
-            const SizedBox(height: 24),
+            AppSpacings.gapL,
             Text(
               symbol.description.tr(),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(

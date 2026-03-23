@@ -1,8 +1,8 @@
 import 'package:cnc_toolbox/core/theme/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
-import 'app_design.dart';
+import 'package:cnc_toolbox/core/theme/app_colors.dart';
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 
 /// Centralized theme configuration for the application.
 ///

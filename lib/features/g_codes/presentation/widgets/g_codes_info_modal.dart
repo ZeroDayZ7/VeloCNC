@@ -45,24 +45,24 @@ class GCodesInfoModal {
                 LocaleKeys.g_codes_info_description.tr(),
                 style: const TextStyle(fontSize: 16, height: 1.5),
               ),
-              const SizedBox(height: 24),
+              AppSpacings.gapL,
               InfoSection(
                 title: LocaleKeys.g_codes_info_how_it_works_title.tr(),
                 content: LocaleKeys.g_codes_info_how_it_works_content.tr(),
               ),
-              const SizedBox(height: 20),
+              AppSpacings.gapL,
               InfoSection(
                 title: LocaleKeys.g_codes_info_structure_title.tr(),
                 content: LocaleKeys.g_codes_info_structure_content.tr(),
               ),
-              const SizedBox(height: 20),
+              AppSpacings.gapL,
               InfoSection(
                 title: LocaleKeys.g_codes_info_modal_codes_title.tr(),
                 content: LocaleKeys.g_codes_info_modal_codes_content.tr(),
               ),
-              const SizedBox(height: 20),
+              AppSpacings.gapL,
               InfoTipCard(text: LocaleKeys.g_codes_info_safety_tip.tr()),
-              const SizedBox(height: 32),
+              AppSpacings.gapXl,
               SizedBox(
                 width: double.infinity,
                 child: FilledButton.tonal(

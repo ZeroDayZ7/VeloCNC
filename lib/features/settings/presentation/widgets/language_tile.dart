@@ -3,7 +3,7 @@ import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import 'language_picker.dart';
+import 'package:cnc_toolbox/features/settings/presentation/widgets/language_picker.dart';
 
 class LanguageTile extends StatelessWidget {
   const LanguageTile({super.key});

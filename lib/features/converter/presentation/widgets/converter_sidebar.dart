@@ -35,7 +35,7 @@ class ConverterSidebar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const SizedBox(height: 8),
+          AppSpacings.gapS,
           IconButton(
             icon: AnimatedRotation(
               duration: const Duration(milliseconds: 250),
@@ -44,7 +44,7 @@ class ConverterSidebar extends StatelessWidget {
             ),
             onPressed: onToggle,
           ),
-          const SizedBox(height: 8),
+          AppSpacings.gapS,
           Expanded(
             child: ListView.builder(
               itemCount: categories.length,

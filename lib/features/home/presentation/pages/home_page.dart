@@ -1,7 +1,6 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
-import 'package:cnc_toolbox/features/home/domain/constants/tools_list.dart';
 import 'package:cnc_toolbox/features/home/presentation/widgets/cnc_drawer.dart';
 import 'package:cnc_toolbox/features/home/presentation/widgets/tool_tile.dart';
 import 'package:flutter/material.dart';
@@ -27,21 +26,20 @@ class HomePage extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return GridView.builder(
-              itemCount: tools.length,
+              itemCount: appNavigation.length,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 220,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                mainAxisExtent:
-                    200,
+                mainAxisExtent: 200,
               ),
               itemBuilder: (context, index) {
-                final tool = tools[index];
+                final tool = appNavigation[index];
                 return ToolTile(
                   icon: tool.icon,
                   label: tool.labelKey,
                   description: tool.descriptionKey,
-                  onTap: () => tool.route.go(context),
+                  onTap: () => tool.go(context),
                 );
               },
             );

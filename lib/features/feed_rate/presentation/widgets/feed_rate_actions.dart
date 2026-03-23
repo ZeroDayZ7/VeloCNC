@@ -3,7 +3,7 @@ import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'feed_history_sheet.dart';
+import 'package:cnc_toolbox/features/feed_rate/presentation/widgets/feed_history_sheet.dart';
 
 class FeedRateActions extends ConsumerWidget {
   const FeedRateActions({super.key});

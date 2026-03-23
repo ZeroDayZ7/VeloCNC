@@ -18,7 +18,8 @@
     "unit_converter": "Konwerter jednostek",
     "tolerances": "Tolerancje pasowania",
     "gd_symbols": "Symbole GD&T",
-    "g_codes": "G Codes"
+    "g_codes": "G Codes",
+    "tap_drill": "Wiertła pod gwint"
   },
   "common": {
     "history": "Ostatnie obliczenia",
@@ -60,7 +61,8 @@
     "unit_converter": "Konwersja mm/inch, m/min - ft/min",
     "tolerances": "Oblicz tolerancje i pasowania otworów oraz wałków",
     "gd_symbols": "Tolerancje geometryczne kształtu i położenia",
-    "g_codes": "Podręcznik referencyjny kodów G CNC"
+    "g_codes": "Podręcznik referencyjny kodów G CNC",
+    "tap_drill": "Dobierz odpowiednie wiertło pod gwint"
   },
   "gd_symbols": {
     "title": "Symbole GD&T",

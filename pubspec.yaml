@@ -51,8 +51,8 @@ flutter:
     - assets/images/
     - assets/translations/
     - assets/data/
-    - assets/images/gd_t_symbols/
-    - assets/images/gd_t_symbols/svg/
+    - assets/images/gd_t_symbols/illustrations/
+    - assets/images/gd_t_symbols/vectors/
 
 flutter_launcher_icons:
   android: true

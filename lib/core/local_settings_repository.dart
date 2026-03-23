@@ -62,7 +62,7 @@ class LocalSettingsRepository {
           final category = key.replaceFirst(PreferencesKeys.unitsKeyPrefix, '');
           final jsonString = _prefs.getString(key);
           if (jsonString != null) {
-            final List decoded = jsonDecode(jsonString);
+            final List<dynamic> decoded = jsonDecode(jsonString) as List<dynamic>;
             unitsMap[category] = decoded.cast<String>();
           }
         }

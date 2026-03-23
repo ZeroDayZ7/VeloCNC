@@ -2,7 +2,7 @@ import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/gd&t_symbols/data/symbols_data.dart';
 import 'package:flutter/material.dart';
 
-import 'gd_symbol_card.dart';
+import 'package:cnc_toolbox/features/gd&t_symbols/presentation/widgets/gd_symbol_card.dart';
 
 class GdSymbolsGrid extends StatelessWidget {
   const GdSymbolsGrid({super.key});

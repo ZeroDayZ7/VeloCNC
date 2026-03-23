@@ -13,51 +13,42 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_init_provider.g.dart';
 
-/// Orchestrates the application bootstrap process.
-///
-/// This provider performs critical startup tasks in sequence:
-/// 1. Verifies [IDatabaseRepository] health.
-/// 2. Warms up core providers ([themeProvider], [localeProvider], etc.).
-/// 3. Pre-loads heavy resources like tolerances and history.
-/// 4. Ensures the splash screen remains visible for [AppConfig.minSplashDuration].
-///
-/// Returns a [Result] indicating success or the specific [AppException] encountered.
 @riverpod
 Future<Result<void>> appInit(Ref ref) async {
   final logger = ref.read(appLoggerProvider);
   final startTime = DateTime.now();
 
-  // 1. Database Health Check
-  final dbRepo = ref.read(databaseRepositoryProvider);
-  final dbResult = await dbRepo.healthCheck();
-
-  // Obsługa Failure jako danej - bez rzucania wyjątków
-  if (dbResult is Failure<bool>) {
-    logger.e('💥 Database Check Failed', error: dbResult.error);
-    return Failure(DatabaseException(dbResult.error.toString()));
-  }
-
-  if (dbResult is Success<bool> && !dbResult.data) {
-    return Failure(DatabaseException('Database unhealthy'));
-  }
-
-  // 2. Warm-up & Parallel Loading
   try {
+    // 1. Parallel Bootstrap
+    final results = await Future.wait([
+      ref.read(databaseRepositoryProvider).healthCheck(),
+      ref.read(toleranceServiceProvider.future),
+      ref.read(historyProvider.future),
+    ]);
+
+    // 2. Database Health Verification
+    final dbResult = results[0] as Result<bool>;
+
+    if (dbResult is Failure<bool>) {
+      logger.e('💥 Database Check Failed', error: dbResult.error);
+      return Failure(DatabaseException(dbResult.error.toString()));
+    }
+
+    if (dbResult is Success<bool> && !dbResult.data) {
+      return Failure(DatabaseException('Database unhealthy'));
+    }
+
+    // 3. Synchronous Warm-up
     ref.read(themeProvider);
     ref.read(localeProvider);
     ref.read(gCodeControllerProvider);
     ref.read(settingsProvider);
-
-    await Future.wait([
-      ref.read(toleranceServiceProvider.future),
-      ref.read(historyProvider.future),
-    ]);
   } catch (e, st) {
-    logger.e('💥 Resource Loading Failed', error: e, stackTrace: st);
+    logger.e('💥 Critical Bootstrap Failure', error: e, stackTrace: st);
     return Failure(e, st);
   }
 
-  // 3. Minimum Splash Time
+  // 4. Force Minimum Splash Duration
   final elapsed = DateTime.now().difference(startTime);
   if (elapsed < AppConfig.minSplashDuration) {
     await Future.delayed(AppConfig.minSplashDuration - elapsed);

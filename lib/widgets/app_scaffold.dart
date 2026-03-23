@@ -3,7 +3,7 @@ import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/core/utils/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
-import 'responsive_container.dart';
+import 'package:cnc_toolbox/widgets/responsive_container.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;

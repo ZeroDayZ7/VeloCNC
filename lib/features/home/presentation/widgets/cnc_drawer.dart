@@ -1,7 +1,7 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/router/app_router.dart';
-import 'package:cnc_toolbox/features/home/domain/constants/tools_list.dart';
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -34,7 +34,7 @@ class CncDrawer extends StatelessWidget {
                     size: 40,
                     color: Colors.blueAccent,
                   ),
-                  const SizedBox(height: 10),
+                  AppSpacings.gapMs,
                   Text(
                     AppInfo.appName,
                     style: TextStyle(
@@ -53,10 +53,10 @@ class CncDrawer extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: tools.length,
+              itemCount: appNavigation.length,
               itemBuilder: (context, index) {
-                final tool = tools[index];
-                final isSelected = location == tool.route.location;
+                final tool = appNavigation[index];
+                final isSelected = tool.isActive(location);
 
                 return ListTile(
                   leading: Icon(
@@ -82,7 +82,7 @@ class CncDrawer extends StatelessWidget {
                     if (isSelected) {
                       context.pop();
                     } else {
-                      tool.route.go(context);
+                      tool.go(context);
                     }
                   },
                 );
@@ -111,7 +111,7 @@ class CncDrawer extends StatelessWidget {
               }
             },
           ),
-          const SizedBox(height: 10),
+          AppSpacings.gapMs,
         ],
       ),
     );

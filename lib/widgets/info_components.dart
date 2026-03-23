@@ -20,7 +20,7 @@ class InfoSection extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        const SizedBox(height: 8),
+        AppSpacings.gapS,
         Text(
           content,
           style: TextStyle(

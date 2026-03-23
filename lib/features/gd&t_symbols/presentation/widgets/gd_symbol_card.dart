@@ -1,4 +1,5 @@
 import 'package:cnc_toolbox/core/router/app_router.dart';
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/gd&t_symbols/domain/gd_symbol_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class GdSymbolCard extends StatelessWidget {
                 child: Center(child: Icon(Icons.image_not_supported)),
               ),
             ),
-            const SizedBox(height: 8),
+            AppSpacings.gapS,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: Text(

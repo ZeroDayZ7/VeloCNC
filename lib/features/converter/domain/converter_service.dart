@@ -1,7 +1,7 @@
 import 'package:cnc_toolbox/core/models/result.dart';
 import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
 
-import '../models/unit_model.dart';
+import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
 
 /// Domain service responsible for the mathematical logic of unit conversion.
 ///

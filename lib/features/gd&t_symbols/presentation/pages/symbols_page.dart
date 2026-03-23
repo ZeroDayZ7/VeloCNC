@@ -4,7 +4,7 @@ import 'package:cnc_toolbox/widgets/app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/gd_symbols_grid.dart'; // import Twojego nowego widżetu
+import 'package:cnc_toolbox/features/gd&t_symbols/presentation/widgets/gd_symbols_grid.dart'; // import Twojego nowego widżetu
 
 class GdSymbolsPage extends StatelessWidget {
   const GdSymbolsPage({super.key});

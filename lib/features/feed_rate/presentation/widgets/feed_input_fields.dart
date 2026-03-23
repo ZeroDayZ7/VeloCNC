@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_provider.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
@@ -36,7 +37,7 @@ class FeedInputFields extends ConsumerWidget {
             if (val != null) notifier.updateSpindleSpeed(val);
           },
         ),
-        const SizedBox(height: 10),
+        AppSpacings.gapMs,
         TextField(
           controller: zController,
           keyboardType: TextInputType.number,
@@ -46,7 +47,7 @@ class FeedInputFields extends ConsumerWidget {
           ),
           onChanged: (v) => notifier.updateTeeth(int.tryParse(v) ?? 1),
         ),
-        const SizedBox(height: 10),
+        AppSpacings.gapMs,
         TextField(
           controller: fzController,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),

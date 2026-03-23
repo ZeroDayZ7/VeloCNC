@@ -22,7 +22,7 @@ class ConverterInputs extends HookConsumerWidget {
     return ListView.separated(
       padding: AppSpacings.edgeInsetsM,
       itemCount: units.length,
-      separatorBuilder: (_, _) => const SizedBox(height: 12),
+      separatorBuilder: (_, _) => AppSpacings.gapMs,
       itemBuilder: (context, index) {
         return _UnitRow(
           key: ValueKey(units[index].id),

@@ -26,7 +26,7 @@ class ErrorApp extends ConsumerWidget {
                 size: 80,
                 color: Theme.of(context).colorScheme.error,
               ),
-              const SizedBox(height: 32),
+              AppSpacings.gapXl,
               Text(
                 LocaleKeys.splash_error_title.tr(),
                 style: const TextStyle(
@@ -56,7 +56,7 @@ class ErrorApp extends ConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              AppSpacings.gapXxl,
 
               // Przycisk "Spróbuj ponownie" z tłumaczeniem
               SizedBox(

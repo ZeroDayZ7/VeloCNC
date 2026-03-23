@@ -79,7 +79,7 @@ class RealSizeCard extends StatelessWidget {
             LocaleKeys.tolerance_real_size.tr(),
             style: Theme.of(context).textTheme.labelLarge,
           ),
-          const SizedBox(height: 8),
+          AppSpacings.gapS,
           Text(
             "Ø$minSize - Ø$maxSize",
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(

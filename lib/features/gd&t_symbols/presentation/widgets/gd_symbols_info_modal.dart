@@ -59,11 +59,11 @@ class _Content extends StatelessWidget {
               LocaleKeys.gd_symbols_modal_p1.tr(),
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
+            AppSpacings.gapMs,
             Text(LocaleKeys.gd_symbols_modal_p2.tr(),
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 24),
+            AppSpacings.gapL,
             SizedBox(
               width: double.infinity,
               child: FilledButton(
