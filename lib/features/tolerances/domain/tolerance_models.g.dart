@@ -25,3 +25,26 @@ Map<String, dynamic> _$ToleranceRangeToJson(_ToleranceRange instance) =>
       'restriction_key': instance.restrictionKey,
       'info_key': instance.infoKey,
     };
+
+_ToleranceData _$ToleranceDataFromJson(Map<String, dynamic> json) =>
+    _ToleranceData(
+      holes: (json['holes'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(
+          k,
+          (e as List<dynamic>)
+              .map((e) => ToleranceRange.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        ),
+      ),
+      shafts: (json['shafts'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(
+          k,
+          (e as List<dynamic>)
+              .map((e) => ToleranceRange.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        ),
+      ),
+    );
+
+Map<String, dynamic> _$ToleranceDataToJson(_ToleranceData instance) =>
+    <String, dynamic>{'holes': instance.holes, 'shafts': instance.shafts};

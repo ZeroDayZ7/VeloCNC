@@ -1,9 +1,9 @@
+import 'package:cnc_toolbox/features/g_codes/domain/g_code_view_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'g_code_model.freezed.dart';
 part 'g_code_model.g.dart';
 
-// 1. Model pojedynczego kodu (zostawiamy tak jak miałeś)
 @freezed
 sealed class GCode with _$GCode {
   const factory GCode({
@@ -16,13 +16,12 @@ sealed class GCode with _$GCode {
   factory GCode.fromJson(Map<String, dynamic> json) => _$GCodeFromJson(json);
 }
 
-// 2. Model stanu całej strony
 @freezed
 sealed class GCodeState with _$GCodeState {
   const factory GCodeState({
     @Default('') String searchQuery,
     @Default([]) List<GCode> allCodes,
-    @Default([]) List<GCode> filteredCodes,
+    @Default([]) List<GCodeViewModel> filteredCodes,
     @Default(true) bool isLoading,
   }) = _GCodeState;
 }

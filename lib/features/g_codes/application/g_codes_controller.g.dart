@@ -13,7 +13,7 @@ part of 'g_codes_controller.dart';
 final gCodeControllerProvider = GCodeControllerProvider._();
 
 final class GCodeControllerProvider
-    extends $NotifierProvider<GCodeController, GCodeState> {
+    extends $AsyncNotifierProvider<GCodeController, GCodeState> {
   GCodeControllerProvider._()
     : super(
         from: null,
@@ -31,32 +31,71 @@ final class GCodeControllerProvider
   @$internal
   @override
   GCodeController create() => GCodeController();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(GCodeState value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<GCodeState>(value),
-    );
-  }
 }
 
-String _$gCodeControllerHash() => r'46438697da4bf95af8e65eeda3e04de808b9d5ec';
+String _$gCodeControllerHash() => r'3f58f61fa057fa12ca763400900dccdbc54ce2d4';
 
-abstract class _$GCodeController extends $Notifier<GCodeState> {
-  GCodeState build();
+abstract class _$GCodeController extends $AsyncNotifier<GCodeState> {
+  FutureOr<GCodeState> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<GCodeState, GCodeState>;
+    final ref = this.ref as $Ref<AsyncValue<GCodeState>, GCodeState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<GCodeState, GCodeState>,
-              GCodeState,
+              AnyNotifier<AsyncValue<GCodeState>, GCodeState>,
+              AsyncValue<GCodeState>,
               Object?,
               Object?
             >;
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(filteredGCodes)
+final filteredGCodesProvider = FilteredGCodesProvider._();
+
+final class FilteredGCodesProvider
+    extends
+        $FunctionalProvider<
+          List<GCodeViewModel>,
+          List<GCodeViewModel>,
+          List<GCodeViewModel>
+        >
+    with $Provider<List<GCodeViewModel>> {
+  FilteredGCodesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'filteredGCodesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$filteredGCodesHash();
+
+  @$internal
+  @override
+  $ProviderElement<List<GCodeViewModel>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  List<GCodeViewModel> create(Ref ref) {
+    return filteredGCodes(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<GCodeViewModel> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<GCodeViewModel>>(value),
+    );
+  }
+}
+
+String _$filteredGCodesHash() => r'8cd38a0911ed7f2b3ee4acc1ec54d71972da85bb';

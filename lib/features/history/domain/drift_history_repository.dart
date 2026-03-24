@@ -1,28 +1,30 @@
 import 'package:cnc_toolbox/core/database/database.dart';
+import 'package:cnc_toolbox/core/models/result.dart';
+import 'package:cnc_toolbox/features/history/domain/feed_history_item.dart';
 import 'package:cnc_toolbox/features/history/domain/i_history_repository.dart';
-import 'package:cnc_toolbox/features/history/models/feed_history_entry.dart';
-
-// lib/features/history/domain/drift_history_repository.dart
 
 class DriftHistoryRepository implements IHistoryRepository {
   final AppDatabase _db;
   DriftHistoryRepository(this._db);
 
   @override
-  Future<List<FeedHistoryEntry>> getFeedHistory({
+  Future<Result<List<FeedHistoryItem>>> getFeedHistory({
     int limit = 10,
     int offset = 0,
   }) async {
-    // ZMIANA: używamy DAO
-    final rows = await _db.driftFeedRateDao.getAllHistory(
-      limit: limit,
-      offset: offset,
-    );
-    return rows.map((row) => row.toDomain()).toList();
+    try {
+      final rows = await _db.driftFeedRateDao.getAllHistory(
+        limit: limit,
+        offset: offset,
+      );
+      return Success(rows.map((row) => row.toDomain()).toList());
+    } catch (e, st) {
+      return Failure(e, st);
+    }
   }
 
   @override
-  Future<void> saveCalculation({
+  Future<Result<void>> saveFeedCalculation({
     required double n,
     required double fz,
     required int z,
@@ -30,35 +32,28 @@ class DriftHistoryRepository implements IHistoryRepository {
     double? d,
     double? dWork,
   }) async {
-    // ZMIANA: używamy DAO
-    await _db.driftFeedRateDao.insertCalculation(
-      n: n,
-      fz: fz,
-      z: z,
-      vf: vf,
-      d: d,
-      dWork: dWork,
-    );
+    try {
+      await _db.driftFeedRateDao.insertCalculation(
+        n: n,
+        fz: fz,
+        z: z,
+        vf: vf,
+        d: d,
+        dWork: dWork,
+      );
+      return const Success(null);
+    } catch (e, st) {
+      return Failure(e, st);
+    }
   }
 
   @override
-  Future<void> deleteEntry(int id) async {
-    // ZMIANA: używamy DAO
-    await _db.driftFeedRateDao.deleteById(id);
-  }
-}
-
-extension on FeedCalculation {
-  FeedHistoryEntry toDomain() {
-    return FeedHistoryEntry(
-      id: id,
-      spindleSpeed: spindleSpeed,
-      feedPerTooth: feedPerTooth,
-      teeth: teeth,
-      resultVf: resultVf,
-      toolDiameter: toolDiameter,
-      featureDiameter: featureDiameter,
-      createdAt: createdAt,
-    );
+  Future<Result<void>> deleteEntry(int id) async {
+    try {
+      await _db.driftFeedRateDao.deleteById(id);
+      return const Success(null);
+    } catch (e, st) {
+      return Failure(e, st);
+    }
   }
 }

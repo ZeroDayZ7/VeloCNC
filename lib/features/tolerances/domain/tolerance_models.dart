@@ -44,3 +44,14 @@ sealed class ToleranceResult with _$ToleranceResult {
     String? infoKey,
   }) = _ToleranceResult;
 }
+
+@freezed
+sealed class ToleranceData with _$ToleranceData {
+  const factory ToleranceData({
+    required Map<String, List<ToleranceRange>> holes,
+    required Map<String, List<ToleranceRange>> shafts,
+  }) = _ToleranceData;
+
+  factory ToleranceData.fromJson(Map<String, dynamic> json) =>
+      _$ToleranceDataFromJson(json);
+}

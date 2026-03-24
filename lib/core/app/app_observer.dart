@@ -1,5 +1,6 @@
 import 'package:cnc_toolbox/core/utils/logger/app_logger.dart';
 import 'package:cnc_toolbox/features/g_codes/domain/g_code_model.dart';
+import 'package:cnc_toolbox/features/g_codes/domain/g_code_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,10 +30,11 @@ final class AppObserver extends ProviderObserver {
         context.provider.name ?? context.provider.runtimeType.toString();
     debugPrint('🔄 Provider updated: $name');
 
-    // Filter out large state objects to keep the console readable
-    if (newValue is GCodeState) {
+    final isLargeState = _isLargeState(newValue);
+
+    if (isLargeState) {
       logger.d(
-        '🔄 Provider updated: $name | [Content hidden: GCodeState is too large]',
+        '🔄 Provider updated: $name | [Content hidden: State is too large]',
         module: 'Riverpod',
       );
       return;
@@ -49,6 +51,22 @@ final class AppObserver extends ProviderObserver {
     logger.d(
       '❌ Provider disposed: ${context.provider.name ?? context.provider.runtimeType}',
       module: 'Riverpod',
+    );
+  }
+
+  bool _isLargeState(Object? value) {
+    final largeTypes = [GCodeState, List<GCodeViewModel>];
+
+    Object? target = value;
+
+    if (value is AsyncValue) {
+      target = value.hasValue ? value.value : null;
+    }
+
+    return largeTypes.any(
+      (type) =>
+          target.runtimeType == type ||
+          target.runtimeType.toString().contains(type.toString()),
     );
   }
 }

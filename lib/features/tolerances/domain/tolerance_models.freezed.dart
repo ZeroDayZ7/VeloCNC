@@ -854,4 +854,276 @@ as String?,
 
 }
 
+
+/// @nodoc
+mixin _$ToleranceData {
+
+ Map<String, List<ToleranceRange>> get holes; Map<String, List<ToleranceRange>> get shafts;
+/// Create a copy of ToleranceData
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ToleranceDataCopyWith<ToleranceData> get copyWith => _$ToleranceDataCopyWithImpl<ToleranceData>(this as ToleranceData, _$identity);
+
+  /// Serializes this ToleranceData to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToleranceData&&const DeepCollectionEquality().equals(other.holes, holes)&&const DeepCollectionEquality().equals(other.shafts, shafts));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(holes),const DeepCollectionEquality().hash(shafts));
+
+@override
+String toString() {
+  return 'ToleranceData(holes: $holes, shafts: $shafts)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ToleranceDataCopyWith<$Res>  {
+  factory $ToleranceDataCopyWith(ToleranceData value, $Res Function(ToleranceData) _then) = _$ToleranceDataCopyWithImpl;
+@useResult
+$Res call({
+ Map<String, List<ToleranceRange>> holes, Map<String, List<ToleranceRange>> shafts
+});
+
+
+
+
+}
+/// @nodoc
+class _$ToleranceDataCopyWithImpl<$Res>
+    implements $ToleranceDataCopyWith<$Res> {
+  _$ToleranceDataCopyWithImpl(this._self, this._then);
+
+  final ToleranceData _self;
+  final $Res Function(ToleranceData) _then;
+
+/// Create a copy of ToleranceData
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? holes = null,Object? shafts = null,}) {
+  return _then(_self.copyWith(
+holes: null == holes ? _self.holes : holes // ignore: cast_nullable_to_non_nullable
+as Map<String, List<ToleranceRange>>,shafts: null == shafts ? _self.shafts : shafts // ignore: cast_nullable_to_non_nullable
+as Map<String, List<ToleranceRange>>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ToleranceData].
+extension ToleranceDataPatterns on ToleranceData {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ToleranceData value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ToleranceData() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ToleranceData value)  $default,){
+final _that = this;
+switch (_that) {
+case _ToleranceData():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ToleranceData value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ToleranceData() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<String, List<ToleranceRange>> holes,  Map<String, List<ToleranceRange>> shafts)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ToleranceData() when $default != null:
+return $default(_that.holes,_that.shafts);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<String, List<ToleranceRange>> holes,  Map<String, List<ToleranceRange>> shafts)  $default,) {final _that = this;
+switch (_that) {
+case _ToleranceData():
+return $default(_that.holes,_that.shafts);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<String, List<ToleranceRange>> holes,  Map<String, List<ToleranceRange>> shafts)?  $default,) {final _that = this;
+switch (_that) {
+case _ToleranceData() when $default != null:
+return $default(_that.holes,_that.shafts);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ToleranceData implements ToleranceData {
+  const _ToleranceData({required final  Map<String, List<ToleranceRange>> holes, required final  Map<String, List<ToleranceRange>> shafts}): _holes = holes,_shafts = shafts;
+  factory _ToleranceData.fromJson(Map<String, dynamic> json) => _$ToleranceDataFromJson(json);
+
+ final  Map<String, List<ToleranceRange>> _holes;
+@override Map<String, List<ToleranceRange>> get holes {
+  if (_holes is EqualUnmodifiableMapView) return _holes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_holes);
+}
+
+ final  Map<String, List<ToleranceRange>> _shafts;
+@override Map<String, List<ToleranceRange>> get shafts {
+  if (_shafts is EqualUnmodifiableMapView) return _shafts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_shafts);
+}
+
+
+/// Create a copy of ToleranceData
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ToleranceDataCopyWith<_ToleranceData> get copyWith => __$ToleranceDataCopyWithImpl<_ToleranceData>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ToleranceDataToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToleranceData&&const DeepCollectionEquality().equals(other._holes, _holes)&&const DeepCollectionEquality().equals(other._shafts, _shafts));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_holes),const DeepCollectionEquality().hash(_shafts));
+
+@override
+String toString() {
+  return 'ToleranceData(holes: $holes, shafts: $shafts)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ToleranceDataCopyWith<$Res> implements $ToleranceDataCopyWith<$Res> {
+  factory _$ToleranceDataCopyWith(_ToleranceData value, $Res Function(_ToleranceData) _then) = __$ToleranceDataCopyWithImpl;
+@override @useResult
+$Res call({
+ Map<String, List<ToleranceRange>> holes, Map<String, List<ToleranceRange>> shafts
+});
+
+
+
+
+}
+/// @nodoc
+class __$ToleranceDataCopyWithImpl<$Res>
+    implements _$ToleranceDataCopyWith<$Res> {
+  __$ToleranceDataCopyWithImpl(this._self, this._then);
+
+  final _ToleranceData _self;
+  final $Res Function(_ToleranceData) _then;
+
+/// Create a copy of ToleranceData
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? holes = null,Object? shafts = null,}) {
+  return _then(_ToleranceData(
+holes: null == holes ? _self._holes : holes // ignore: cast_nullable_to_non_nullable
+as Map<String, List<ToleranceRange>>,shafts: null == shafts ? _self._shafts : shafts // ignore: cast_nullable_to_non_nullable
+as Map<String, List<ToleranceRange>>,
+  ));
+}
+
+
+}
+
 // dart format on

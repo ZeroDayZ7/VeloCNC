@@ -55,4 +55,4 @@ final class ToleranceRepositoryProvider
 }
 
 String _$toleranceRepositoryHash() =>
-    r'9b96e5413c24f1abd3f64f63ac7bf361d490d26b';
+    r'c995c8882e1ea0bb60bed83dfba15022de5674b7';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:cnc_toolbox/core/database/database_provider.dart';
 import 'package:cnc_toolbox/core/models/result.dart';
+import 'package:cnc_toolbox/features/history/data/history_repository_provider.dart';
 import 'package:cnc_toolbox/features/history/domain/feed_history_item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,7 +11,8 @@ part 'history_notifier.g.dart';
 class HistoryNotifier extends _$HistoryNotifier {
   @override
   FutureOr<List<FeedHistoryItem>> build() async {
-    final result = await _fetchAndMapHistory();
+    final repo = ref.watch(historyRepositoryProvider);
+    final result = await repo.getFeedHistory();
 
     return switch (result) {
       Success<List<FeedHistoryItem>>(data: final list) => list,
@@ -20,33 +21,21 @@ class HistoryNotifier extends _$HistoryNotifier {
     };
   }
 
-  Future<Result<List<FeedHistoryItem>>> _fetchAndMapHistory() async {
-    try {
-      final db = ref.read(databaseProvider);
-      final driftData = await db.driftFeedRateDao.getAllHistory();
+  Future<void> deleteItem(int id) async {
+    final repo = ref.read(historyRepositoryProvider);
+    final result = await repo.deleteEntry(id);
 
-      final mappedList = driftData
-          .map(
-            (e) => FeedHistoryItem(
-              vf: e.resultVf,
-              n: e.spindleSpeed,
-              fz: e.feedPerTooth,
-              z: e.teeth,
-              createdAt: e.createdAt,
-              toolDiameter: e.toolDiameter ?? 0.0,
-            ),
-          )
-          .toList();
-
-      return Success(mappedList);
-    } catch (e, st) {
-      return Failure(e, st);
+    if (result is Success) {
+      final currentList = state.value ?? [];
+      final newList = currentList.where((item) => item.id != id).toList();
+      state = AsyncData(newList);
     }
   }
 
   Future<void> refreshHistory() async {
     state = const AsyncLoading();
-    final result = await _fetchAndMapHistory();
+    final repo = ref.read(historyRepositoryProvider);
+    final result = await repo.getFeedHistory();
 
     state = switch (result) {
       Success<List<FeedHistoryItem>>(data: final list) => AsyncData(list),

@@ -14,7 +14,8 @@ class GCodesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(gCodeControllerProvider);
+    final asyncState = ref.watch(gCodeControllerProvider);
+    final filteredCodes = ref.watch(filteredGCodesProvider);
 
     return Scaffold(
       appBar: CncAppBar(
@@ -26,30 +27,32 @@ class GCodesPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: state.isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                const GCodeSearchBar(),
-                Expanded(
-                  child: state.filteredCodes.isEmpty
-                      ? EmptyStateWidget(
-                          icon: Icons.search_off_rounded,
-                          message: LocaleKeys.error_no_results.tr(),
-                        )
-                      : ListView.builder(
-                          itemCount: state.filteredCodes.length,
-                          itemBuilder: (context, index) {
-                            final code = state.filteredCodes[index];
-                            return GCodeTile(
-                              key: ValueKey(code.code),
-                              code: code,
-                            );
-                          },
-                        ),
-                ),
-              ],
+      body: asyncState.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (err, stack) => Center(child: Text(err.toString())),
+        data: (state) => Column(
+          children: [
+            const GCodeSearchBar(),
+            Expanded(
+              child: filteredCodes.isEmpty
+                  ? EmptyStateWidget(
+                      icon: Icons.search_off_rounded,
+                      message: LocaleKeys.error_no_results.tr(),
+                    )
+                  : ListView.builder(
+                      itemCount: filteredCodes.length,
+                      itemBuilder: (context, index) {
+                        final code = filteredCodes[index];
+                        return GCodeTile(
+                          key: ValueKey(code.code),
+                          code: code,
+                        );
+                      },
+                    ),
             ),
+          ],
+        ),
+      ),
     );
   }
 }

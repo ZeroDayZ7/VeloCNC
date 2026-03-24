@@ -15,6 +15,7 @@ class FeedHistorySheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ZMIANA: Poprawna nazwa providera wygenerowana przez Riverpod
     final historyState = ref.watch(historyProvider);
 
     return DraggableScrollableSheet(
@@ -33,14 +34,23 @@ class FeedHistorySheet extends ConsumerWidget {
             children: [
               Padding(
                 padding: AppSpacings.edgeInsetsM,
-                child: Text(
-                  LocaleKeys.common_history.tr(),
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
                   ),
                 ),
               ),
+              Text(
+                LocaleKeys.common_history.tr(),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              AppSpacings.gapM,
               Expanded(
                 child: history.isEmpty
                     ? Center(child: Text(LocaleKeys.common_no_data.tr()))
@@ -49,19 +59,48 @@ class FeedHistorySheet extends ConsumerWidget {
                         itemCount: history.length,
                         itemBuilder: (context, index) {
                           final item = history[index];
-                          return ListTile(
-                            leading: const Icon(Icons.history),
-                            title: Text("${item.vf.toStringAsFixed(1)} mm/min"),
-                            subtitle: Text(
-                              "n: ${item.n}, fz: ${item.fz}, z: ${item.z}",
+
+                          // DODANO: Dismissible do usuwania
+                          return Dismissible(
+                            key: ValueKey(item.id),
+                            direction: DismissDirection.endToStart,
+                            background: Container(
+                              alignment: Alignment.centerRight,
+                              padding: AppSpacings.edgeInsetsL,
+                              color: Colors.red,
+                              child: const Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              ),
                             ),
-                            onTap: () {
-                              // Tutaj ładujemy dane z powrotem do kalkulatora
+                            onDismissed: (_) {
+                              // Wywołujemy usuwanie z Notifiera
                               ref
-                                  .read(feedRateProvider(targetType).notifier)
-                                  .loadFromHistory(item);
-                              Navigator.pop(context);
+                                  .read(historyProvider.notifier)
+                                  .deleteItem(item.id);
                             },
+                            child: ListTile(
+                              leading: const Icon(Icons.history),
+                              title: Text(
+                                "${item.vf.toStringAsFixed(1)} mm/min",
+                              ),
+                              subtitle: Text(
+                                "n: ${item.n.toInt()}, fz: ${item.fz}, z: ${item.z}",
+                              ),
+                              trailing: Text(
+                                DateFormat('HH:mm').format(item.createdAt),
+                                style: TextStyle(
+                                  color: Colors.grey[500],
+                                  fontSize: 12,
+                                ),
+                              ),
+                              onTap: () {
+                                ref
+                                    .read(feedRateProvider(targetType).notifier)
+                                    .loadFromHistory(item);
+                                Navigator.pop(context);
+                              },
+                            ),
                           );
                         },
                       ),

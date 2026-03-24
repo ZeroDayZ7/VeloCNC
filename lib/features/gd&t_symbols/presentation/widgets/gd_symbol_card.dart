@@ -3,7 +3,6 @@ import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/gd&t_symbols/domain/gd_symbol_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:vector_graphics/vector_graphics_compat.dart';
 
 class GdSymbolCard extends StatelessWidget {
   final GdSymbol s;
@@ -25,8 +24,7 @@ class GdSymbolCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            VectorGraphic(
-              loader: AssetBytesLoader(s.symbol),
+            s.symbol.svg(
               height: 68,
               width: 68,
               colorFilter: ColorFilter.mode(
@@ -36,7 +34,7 @@ class GdSymbolCard extends StatelessWidget {
               placeholderBuilder: (_) => const SizedBox(
                 height: 68,
                 width: 68,
-                child: Center(child: Icon(Icons.image_not_supported)),
+                child: Center(child: Icon(Icons.image_not_supported, size: 20)),
               ),
             ),
             AppSpacings.gapS,

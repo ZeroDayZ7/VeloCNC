@@ -1,11 +1,14 @@
 // i_history_repository.dart
-import 'package:cnc_toolbox/features/history/models/feed_history_entry.dart';
+import 'package:cnc_toolbox/core/models/result.dart';
+import 'package:cnc_toolbox/features/history/domain/feed_history_item.dart';
 
 abstract class IHistoryRepository {
-  Future<List<FeedHistoryEntry>> getFeedHistory({int limit = 10, int offset = 0});
-  
-  // Zamiast FeedCalculationsCompanion, przyjmujemy parametry lub DTO
-  Future<void> saveCalculation({
+  Future<Result<List<FeedHistoryItem>>> getFeedHistory({
+    int limit = 10,
+    int offset = 0,
+  });
+
+  Future<Result<void>> saveFeedCalculation({
     required double n,
     required double fz,
     required int z,
@@ -14,5 +17,5 @@ abstract class IHistoryRepository {
     double? dWork,
   });
 
-  Future<void> deleteEntry(int id);
+  Future<Result<void>> deleteEntry(int id);
 }

@@ -280,7 +280,7 @@ as String,
 /// @nodoc
 mixin _$GCodeState {
 
- String get searchQuery; List<GCode> get allCodes; List<GCode> get filteredCodes; bool get isLoading;
+ String get searchQuery; List<GCode> get allCodes; List<GCodeViewModel> get filteredCodes; bool get isLoading;
 /// Create a copy of GCodeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -311,7 +311,7 @@ abstract mixin class $GCodeStateCopyWith<$Res>  {
   factory $GCodeStateCopyWith(GCodeState value, $Res Function(GCodeState) _then) = _$GCodeStateCopyWithImpl;
 @useResult
 $Res call({
- String searchQuery, List<GCode> allCodes, List<GCode> filteredCodes, bool isLoading
+ String searchQuery, List<GCode> allCodes, List<GCodeViewModel> filteredCodes, bool isLoading
 });
 
 
@@ -333,7 +333,7 @@ class _$GCodeStateCopyWithImpl<$Res>
 searchQuery: null == searchQuery ? _self.searchQuery : searchQuery // ignore: cast_nullable_to_non_nullable
 as String,allCodes: null == allCodes ? _self.allCodes : allCodes // ignore: cast_nullable_to_non_nullable
 as List<GCode>,filteredCodes: null == filteredCodes ? _self.filteredCodes : filteredCodes // ignore: cast_nullable_to_non_nullable
-as List<GCode>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as List<GCodeViewModel>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -416,7 +416,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String searchQuery,  List<GCode> allCodes,  List<GCode> filteredCodes,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String searchQuery,  List<GCode> allCodes,  List<GCodeViewModel> filteredCodes,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GCodeState() when $default != null:
 return $default(_that.searchQuery,_that.allCodes,_that.filteredCodes,_that.isLoading);case _:
@@ -437,7 +437,7 @@ return $default(_that.searchQuery,_that.allCodes,_that.filteredCodes,_that.isLoa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String searchQuery,  List<GCode> allCodes,  List<GCode> filteredCodes,  bool isLoading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String searchQuery,  List<GCode> allCodes,  List<GCodeViewModel> filteredCodes,  bool isLoading)  $default,) {final _that = this;
 switch (_that) {
 case _GCodeState():
 return $default(_that.searchQuery,_that.allCodes,_that.filteredCodes,_that.isLoading);}
@@ -454,7 +454,7 @@ return $default(_that.searchQuery,_that.allCodes,_that.filteredCodes,_that.isLoa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String searchQuery,  List<GCode> allCodes,  List<GCode> filteredCodes,  bool isLoading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String searchQuery,  List<GCode> allCodes,  List<GCodeViewModel> filteredCodes,  bool isLoading)?  $default,) {final _that = this;
 switch (_that) {
 case _GCodeState() when $default != null:
 return $default(_that.searchQuery,_that.allCodes,_that.filteredCodes,_that.isLoading);case _:
@@ -469,7 +469,7 @@ return $default(_that.searchQuery,_that.allCodes,_that.filteredCodes,_that.isLoa
 
 
 class _GCodeState implements GCodeState {
-  const _GCodeState({this.searchQuery = '', final  List<GCode> allCodes = const [], final  List<GCode> filteredCodes = const [], this.isLoading = true}): _allCodes = allCodes,_filteredCodes = filteredCodes;
+  const _GCodeState({this.searchQuery = '', final  List<GCode> allCodes = const [], final  List<GCodeViewModel> filteredCodes = const [], this.isLoading = true}): _allCodes = allCodes,_filteredCodes = filteredCodes;
   
 
 @override@JsonKey() final  String searchQuery;
@@ -480,8 +480,8 @@ class _GCodeState implements GCodeState {
   return EqualUnmodifiableListView(_allCodes);
 }
 
- final  List<GCode> _filteredCodes;
-@override@JsonKey() List<GCode> get filteredCodes {
+ final  List<GCodeViewModel> _filteredCodes;
+@override@JsonKey() List<GCodeViewModel> get filteredCodes {
   if (_filteredCodes is EqualUnmodifiableListView) return _filteredCodes;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_filteredCodes);
@@ -519,7 +519,7 @@ abstract mixin class _$GCodeStateCopyWith<$Res> implements $GCodeStateCopyWith<$
   factory _$GCodeStateCopyWith(_GCodeState value, $Res Function(_GCodeState) _then) = __$GCodeStateCopyWithImpl;
 @override @useResult
 $Res call({
- String searchQuery, List<GCode> allCodes, List<GCode> filteredCodes, bool isLoading
+ String searchQuery, List<GCode> allCodes, List<GCodeViewModel> filteredCodes, bool isLoading
 });
 
 
@@ -541,7 +541,7 @@ class __$GCodeStateCopyWithImpl<$Res>
 searchQuery: null == searchQuery ? _self.searchQuery : searchQuery // ignore: cast_nullable_to_non_nullable
 as String,allCodes: null == allCodes ? _self._allCodes : allCodes // ignore: cast_nullable_to_non_nullable
 as List<GCode>,filteredCodes: null == filteredCodes ? _self._filteredCodes : filteredCodes // ignore: cast_nullable_to_non_nullable
-as List<GCode>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as List<GCodeViewModel>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

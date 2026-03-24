@@ -33,12 +33,12 @@ class ToleranceService {
     if (ranges == null) return null;
 
     for (final range in ranges) {
-      if (diameter >= range.min && diameter <= range.max) {
+      if (diameter > range.min && diameter <= range.max) {
         return ToleranceResult(
           upperDeviation: range.upper,
           lowerDeviation: range.lower,
-          minSize: range.lower != null ? diameter + range.lower! : null,
-          maxSize: range.upper != null ? diameter + range.upper! : null,
+          minSize: range.lower != null ? diameter + (range.lower! / 1000) : null,
+          maxSize: range.upper != null ? diameter + (range.upper! / 1000) : null,
           restrictionKey: range.restrictionKey,
           infoKey: range.infoKey,
         );

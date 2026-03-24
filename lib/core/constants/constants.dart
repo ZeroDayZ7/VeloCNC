@@ -1,15 +1,13 @@
+import 'package:cnc_toolbox/core/constants/generated/assets.gen.dart';
+
+typedef AppAssets = Assets;
+
 /// --- APP INFO ---
 abstract class AppInfo {
   static const appName = 'VeloCNC';
   static const appVersion = '1.0.0';
   static const contactEmail = 'support@velocnc.com';
   static const websiteUrl = 'https://velocnc.com';
-}
-
-/// --- ASSETS ---
-abstract class AppAssets {
-  static const tolerancesJson = 'assets/data/tolerances.json';
-  static const gCodesJson = 'assets/data/g_codes.json';
 }
 
 /// --- PREFERENCES KEYS ---
@@ -49,31 +47,4 @@ abstract class AppDurations {
 abstract class AppOpacity {
   static const subtle = 0.08;
   static const disabled = 0.38;
-}
-
-/// --- SYMBOLS ASSETS PATHS ---
-abstract class GdAssets {
-  static const String _basePath = 'assets/images/gd_t_symbols';
-  static const String _vectorPath = '$_basePath/vectors';
-  static const String _illustrationPath = '$_basePath/illustrations';
-
-  static String getVectorPath(String name) => '$_vectorPath/$name.vec';
-  static String getIllustrationPath(String name) => '$_illustrationPath/$name.png';
-
-  static const String straightness = 'straightness'; // prostoliniowość
-  static const String flatness = 'flatness'; // płaskość
-  static const String circularity = 'circularity'; // okrągłość
-  static const String cylindricity = 'cylindricity'; // walcowość
-  static const String profileLine = 'profile_line'; // profil linii
-  static const String profileSurface = 'profile_surface'; // profil powierzchni
-  static const String perpendicularity = 'perpendicularity'; // prostopadłość
-  static const String angularity = 'angularity'; // nachylenie
-  static const String parallelism = 'parallelism'; // równoległość
-  static const String position = 'position'; // pozycja
-  static const String concentricity = 'concentricity'; // współśrodkowość
-  static const String symmetry = 'symmetry'; // symetria
-  static const String circularRunout = 'circular_runout'; // bicie promieniowe
-  static const String totalRunout = 'total_runout'; // bicie całkowite
-
-  static const String datumFeature = 'datum_feature';
 }

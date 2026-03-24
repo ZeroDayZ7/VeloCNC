@@ -1,55 +1,40 @@
 import 'dart:convert';
 
-import 'package:cnc_toolbox/core/constants/constants.dart';
+import 'package:cnc_toolbox/core/constants/generated/assets.gen.dart';
+import 'package:cnc_toolbox/core/models/result.dart';
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'tolerance_repository.g.dart';
 
-/// Interfejs dla repozytorium tolerancji
+typedef ToleranceMap = Map<ToleranceType, Map<String, List<ToleranceRange>>>;
+
 abstract class IToleranceRepository {
-  Future<Map<ToleranceType, Map<String, List<ToleranceRange>>>>
-  loadTolerances();
+  Future<Result<ToleranceMap>> loadTolerances();
 }
 
-/// Implementacja oparta na pliku JSON z Assetów
 class ToleranceRepository implements IToleranceRepository {
   @override
-  Future<Map<ToleranceType, Map<String, List<ToleranceRange>>>>
-  loadTolerances() async {
-    final jsonString = await rootBundle.loadString(AppAssets.tolerancesJson);
-    final Map<String, dynamic> decoded =
-        json.decode(jsonString) as Map<String, dynamic>;
+  Future<Result<ToleranceMap>> loadTolerances() async {
+    try {
+      final jsonString = await rootBundle.loadString(Assets.data.tolerances);
+      final Map<String, dynamic> decoded =
+          json.decode(jsonString) as Map<String, dynamic>;
 
-    return {
-      ToleranceType.hole: _parseSection(
-        decoded['holes'] as Map<String, dynamic>?,
-      ),
-      ToleranceType.shaft: _parseSection(
-        decoded['shafts'] as Map<String, dynamic>?,
-      ),
-    };
-  }
+      final data = ToleranceData.fromJson(decoded);
 
-  Map<String, List<ToleranceRange>> _parseSection(
-    Map<String, dynamic>? section,
-  ) {
-    if (section == null) return {};
+      final ToleranceMap resultMap = {
+        ToleranceType.hole: data.holes,
+        ToleranceType.shaft: data.shafts,
+      };
 
-    return section.map((grade, ranges) {
-      final list = (ranges as List?) ?? [];
-      return MapEntry(
-        grade,
-        list
-            .map((e) => ToleranceRange.fromJson(e as Map<String, dynamic>))
-            .toList(),
-      );
-    });
+      return Success(resultMap);
+    } catch (e, st) {
+      return Failure(e, st);
+    }
   }
 }
 
 @Riverpod(keepAlive: true)
-IToleranceRepository toleranceRepository(Ref ref) {
-  return ToleranceRepository();
-}
+IToleranceRepository toleranceRepository(Ref ref) => ToleranceRepository();
