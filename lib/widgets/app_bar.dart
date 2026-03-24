@@ -37,7 +37,14 @@ class CncAppBar extends StatelessWidget implements PreferredSizeWidget {
                   },
             )
           : null,
-      actions: actions,
+      actions: actions != null
+          ? [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Row(mainAxisSize: MainAxisSize.min, children: actions!),
+              ),
+            ]
+          : null,
       bottom: bottom,
     );
   }

@@ -1,15 +1,16 @@
 import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/core/utils/responsive_utils.dart';
-import 'package:flutter/material.dart';
-
+import 'package:cnc_toolbox/widgets/app_bar.dart';
 import 'package:cnc_toolbox/widgets/responsive_container.dart';
+import 'package:flutter/material.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
   final Widget? sidebar;
-  final Widget? title;
+  final String? titleKey;
   final List<Widget>? actions;
+  final PreferredSizeWidget? bottom;
   final ContainerSize size;
   final bool scrollable;
   final bool useSafeArea;
@@ -18,8 +19,9 @@ class AppScaffold extends StatelessWidget {
     super.key,
     required this.child,
     this.sidebar,
-    this.title,
+    this.titleKey,
     this.actions,
+    this.bottom,
     this.size = ContainerSize.medium,
     this.scrollable = true,
     this.useSafeArea = true,
@@ -28,6 +30,12 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDesktop = context.isDesktop;
+
+    // 1. Definicja lokalna (bez podkreślenia)
+    PreferredSizeWidget? buildAppBar() {
+      if (titleKey == null) return null;
+      return CncAppBar(titleKey: titleKey!, actions: actions, bottom: bottom);
+    }
 
     Widget content = ResponsiveContainer(
       size: size,
@@ -44,12 +52,7 @@ class AppScaffold extends StatelessWidget {
               SizedBox(width: AppBreakpoints.sidebarWidth, child: sidebar),
             if (sidebar != null) const VerticalDivider(width: 1),
             Expanded(
-              child: Scaffold(
-                appBar: title != null
-                    ? AppBar(title: title, actions: actions, centerTitle: false)
-                    : null,
-                body: content,
-              ),
+              child: Scaffold(appBar: buildAppBar(), body: content),
             ),
           ],
         ),
@@ -57,9 +60,7 @@ class AppScaffold extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: title != null
-          ? AppBar(title: title, actions: actions, centerTitle: true)
-          : null,
+      appBar: buildAppBar(),
       drawer: sidebar != null ? Drawer(child: sidebar) : null,
       body: content,
     );

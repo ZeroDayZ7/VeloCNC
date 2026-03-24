@@ -5,7 +5,7 @@ import 'package:cnc_toolbox/features/tolerances/application/tolerance_provider.d
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:cnc_toolbox/features/tolerances/presentation/widgets/tolerance_input_form.dart';
 import 'package:cnc_toolbox/features/tolerances/presentation/widgets/tolerance_result_display.dart';
-import 'package:cnc_toolbox/widgets/app_bar.dart';
+import 'package:cnc_toolbox/widgets/app_scaffold.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,13 +16,13 @@ class TolerancePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final serviceAsync = ref.watch(toleranceServiceProvider);
-    // Słuchamy stanu z kontrolera
     final ctrl = ref.watch(toleranceControllerProvider);
     final notifier = ref.read(toleranceControllerProvider.notifier);
 
-    return Scaffold(
-      appBar: const CncAppBar(titleKey: LocaleKeys.tools_tolerances),
-      body: serviceAsync.when(
+    return AppScaffold(
+      titleKey: LocaleKeys.tools_tolerances,
+      scrollable: false,
+      child: serviceAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, _) => Center(child: Text(err.toString())),
         data: (_) => SingleChildScrollView(
@@ -47,7 +47,6 @@ class TolerancePage extends ConsumerWidget {
               ),
               AppSpacings.gapM,
               ToleranceInputForm(
-                // Przekazujemy wartości ze stanu i callbacki do notifiera
                 diameterInitialValue: ctrl.diameterInput,
                 selectedType: ctrl.type,
                 selectedLetter: ctrl.selectedLetter,

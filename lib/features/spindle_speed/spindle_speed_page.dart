@@ -1,3 +1,4 @@
+import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/widgets/app_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,7 @@ class SpindleSpeedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppScaffold(
-      // Tytuł strony (n - Obroty wrzeciona)
-      title: Text('Spindle Speed'),
-
-      // Rozmiar narrow idealnie pasuje do formularzy kalkulatorów
+      titleKey: LocaleKeys.tools_cutting_speed,
       size: ContainerSize.narrow,
 
       // Placeholder treści

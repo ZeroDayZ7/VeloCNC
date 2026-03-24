@@ -70,7 +70,7 @@ final class FilteredGCodesProvider
         argument: null,
         retry: null,
         name: r'filteredGCodesProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -98,4 +98,4 @@ final class FilteredGCodesProvider
   }
 }
 
-String _$filteredGCodesHash() => r'8cd38a0911ed7f2b3ee4acc1ec54d71972da85bb';
+String _$filteredGCodesHash() => r'8196a12591302a134e791b0b310054beb18b2122';

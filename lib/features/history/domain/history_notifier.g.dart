@@ -33,7 +33,7 @@ final class HistoryNotifierProvider
   HistoryNotifier create() => HistoryNotifier();
 }
 
-String _$historyNotifierHash() => r'9eb2b45ce51c7fdfc1231046e8be71427b927d94';
+String _$historyNotifierHash() => r'4b33b6feff6f5da1df4311bd3862e386113aeb7c';
 
 abstract class _$HistoryNotifier extends $AsyncNotifier<List<FeedHistoryItem>> {
   FutureOr<List<FeedHistoryItem>> build();

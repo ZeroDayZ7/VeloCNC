@@ -3,7 +3,7 @@ import 'package:cnc_toolbox/features/g_codes/application/g_codes_controller.dart
 import 'package:cnc_toolbox/features/g_codes/presentation/widgets/g_code_tile.dart';
 import 'package:cnc_toolbox/features/g_codes/presentation/widgets/g_codes_info_modal.dart';
 import 'package:cnc_toolbox/features/g_codes/presentation/widgets/g_codes_search_bar.dart';
-import 'package:cnc_toolbox/widgets/app_bar.dart';
+import 'package:cnc_toolbox/widgets/app_scaffold.dart';
 import 'package:cnc_toolbox/widgets/empty_state_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +17,16 @@ class GCodesPage extends ConsumerWidget {
     final asyncState = ref.watch(gCodeControllerProvider);
     final filteredCodes = ref.watch(filteredGCodesProvider);
 
-    return Scaffold(
-      appBar: CncAppBar(
-        titleKey: LocaleKeys.tools_g_codes,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => GCodesInfoModal.show(context),
-          ),
-        ],
-      ),
-      body: asyncState.when(
+    return AppScaffold(
+      titleKey: LocaleKeys.tools_g_codes,
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.info_outline),
+          onPressed: () => GCodesInfoModal.show(context),
+        ),
+      ],
+      scrollable: false,
+      child: asyncState.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text(err.toString())),
         data: (state) => Column(
@@ -43,10 +42,7 @@ class GCodesPage extends ConsumerWidget {
                       itemCount: filteredCodes.length,
                       itemBuilder: (context, index) {
                         final code = filteredCodes[index];
-                        return GCodeTile(
-                          key: ValueKey(code.code),
-                          code: code,
-                        );
+                        return GCodeTile(key: ValueKey(code.code), code: code);
                       },
                     ),
             ),

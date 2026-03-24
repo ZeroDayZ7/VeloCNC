@@ -6,7 +6,6 @@ import 'package:cnc_toolbox/features/converter/presentation/widgets/converter_in
 import 'package:cnc_toolbox/features/converter/presentation/widgets/converter_sidebar.dart';
 import 'package:cnc_toolbox/features/converter/presentation/widgets/settings_sheet.dart';
 import 'package:cnc_toolbox/widgets/app_scaffold.dart';
-import 'package:easy_localization/easy_localization.dart'; // Do tłumaczenia klucza
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,7 +26,7 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
     final visibleUnits = settings.getVisibleUnitsForCategory(currentCat);
 
     return AppScaffold(
-      title: Text(LocaleKeys.tools_unit_converter.tr()),
+      titleKey: LocaleKeys.tools_unit_converter,
       actions: [
         IconButton(
           icon: const Icon(Icons.tune),
@@ -37,8 +36,7 @@ class _ConverterPageState extends ConsumerState<ConverterPage> {
       ],
 
       size: ContainerSize.full,
-      scrollable:
-          false,
+      scrollable: false,
       child: Row(
         children: [
           ConverterSidebar(

@@ -1,7 +1,7 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_controller.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
-import 'package:cnc_toolbox/features/history/widgets/history_sheet.dart';
+import 'package:cnc_toolbox/features/history/presentation/history_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

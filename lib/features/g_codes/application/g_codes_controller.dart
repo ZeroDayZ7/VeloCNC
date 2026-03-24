@@ -34,21 +34,16 @@ class GCodeController extends _$GCodeController {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 List<GCodeViewModel> filteredGCodes(Ref ref) {
   final asyncState = ref.watch(gCodeControllerProvider);
   final t = ref.watch(translatorProvider);
 
   return asyncState.maybeWhen(
     data: (state) {
-      final query = state.searchQuery.toLowerCase();
-      return state.allCodes
-          .where((code) {
-            if (query.isEmpty) return true;
+      final query = state.searchQuery.toLowerCase().trim();
 
-            return code.code.toLowerCase().contains(query) ||
-                code.titleKey.toLowerCase().contains(query);
-          })
+      return state.allCodes
           .map(
             (code) => GCodeViewModel(
               code: code.code,
@@ -57,6 +52,13 @@ List<GCodeViewModel> filteredGCodes(Ref ref) {
               example: code.example,
             ),
           )
+          .where((viewModel) {
+            if (query.isEmpty) return true;
+
+            return viewModel.code.toLowerCase().contains(query) ||
+                viewModel.title.toLowerCase().contains(query) ||
+                viewModel.description.toLowerCase().contains(query);
+          })
           .toList();
     },
     orElse: () => [],
