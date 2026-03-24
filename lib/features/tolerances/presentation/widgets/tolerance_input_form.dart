@@ -1,5 +1,7 @@
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
+import 'package:cnc_toolbox/core/utils/debouncer.dart';
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ class ToleranceInputForm extends StatelessWidget {
     required this.numbers,
   });
 
+  static final _debouncer = Debouncer(delay: AppConfig.searchDebounce);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -50,7 +54,9 @@ class ToleranceInputForm extends StatelessWidget {
                 suffixText: LocaleKeys.tolerance_unit_mm.tr(),
                 prefixIcon: const Icon(Icons.straighten),
               ),
-              onChanged: onDiameterChanged,
+              onChanged: (value) {
+                _debouncer.run(() => onDiameterChanged(value));
+              },
             ),
             AppSpacings.gapM,
             Row(

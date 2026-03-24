@@ -2,6 +2,7 @@ import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:cnc_toolbox/widgets/info_components.dart';
+import 'package:cnc_toolbox/widgets/result_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -64,31 +65,10 @@ class RealSizeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      width: double.infinity,
-      padding: AppSpacings.edgeInsetsM,
-      decoration: BoxDecoration(
-        color: colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        children: [
-          Text(
-            LocaleKeys.tolerance_real_size.tr(),
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          AppSpacings.gapS,
-          Text(
-            "Ø$minSize - Ø$maxSize",
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: colorScheme.onPrimaryContainer,
-            ),
-          ),
-        ],
-      ),
+    return CncResultCard(
+      title: LocaleKeys.tolerance_real_size.tr(),
+      value: "Ø$minSize - Ø$maxSize",
+      icon: Icons.straighten,
     );
   }
 }
