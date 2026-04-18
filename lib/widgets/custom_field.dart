@@ -6,6 +6,7 @@ class CustomField extends StatelessWidget {
   final TextEditingController? controller;
   final String? initialValue;
   final Function(String) onChanged;
+  final String? Function(String?)? validator;
 
   const CustomField({
     super.key,
@@ -14,6 +15,7 @@ class CustomField extends StatelessWidget {
     this.controller,
     this.initialValue,
     required this.onChanged,
+    this.validator,
   });
 
   @override
@@ -27,6 +29,7 @@ class CustomField extends StatelessWidget {
         suffixText: suffix,
       ),
       onChanged: onChanged,
+      validator: validator,
     );
   }
 }

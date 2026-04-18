@@ -11,5 +11,8 @@ sealed class FeedRateState with _$FeedRateState {
     @Default(0.0) double toolDiameter,
     @Default(0.0) double featureDiameter,
     @Default(true) bool isInternal,
+    // Pola wynikowe
+    @Default(0.0) double resultVf,
+    @Default(0.0) double resultF,
   }) = _FeedRateState;
 }

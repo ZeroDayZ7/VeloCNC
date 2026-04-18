@@ -16,23 +16,28 @@ class FeedRateNotifier extends _$FeedRateNotifier {
   @override
   FeedRateState build(FeedType type) => const FeedRateState();
 
-  // --- Akcje Biznesowe ---
+  void calculate() {
+    final vf = ref.read(feedRateVfProvider(type));
+    final avf = ref.read(adjustedFeedRateProvider(type));
+    final f = ref.read(feedRateFProvider(type));
+
+    state = state.copyWith(
+      resultVf: type == FeedType.arc ? avf : vf,
+      resultF: f,
+    );
+  }
 
   Future<void> save() async {
     final log = ref.read(appLoggerProvider);
     final repo = ref.read(historyRepositoryProvider);
-    final vf = ref.read(feedRateVfProvider(type));
-    final avf = ref.read(adjustedFeedRateProvider(type));
 
-    if (vf <= 0) return;
-
-    final finalVf = type == FeedType.arc ? avf : vf;
+    if (state.resultVf <= 0) return;
 
     final result = await repo.saveFeedCalculation(
       n: state.spindleSpeed,
       fz: state.feedPerTooth,
       z: state.numberOfTeeth,
-      vf: finalVf,
+      vf: state.resultVf,
       d: state.toolDiameter > 0 ? state.toolDiameter : null,
       dWork: state.featureDiameter > 0 ? state.featureDiameter : null,
     );
@@ -41,47 +46,45 @@ class FeedRateNotifier extends _$FeedRateNotifier {
       case Success():
         log.i("Saved calculation to history", module: "FEED_RATE");
         ref.read(historyProvider.notifier).refreshHistory();
-
       case Failure(error: final e):
         log.e("Save to history failed", module: "DATABASE", error: e);
     }
   }
-
-  // --- Metody Aktualizacji Stanu ---
 
   void loadFromHistory(FeedHistoryItem entry) {
     state = state.copyWith(
       spindleSpeed: entry.n,
       feedPerTooth: entry.fz,
       numberOfTeeth: entry.z,
-      toolDiameter: 0,
-      featureDiameter: 0,
+      toolDiameter: entry.toolDiameter,
+      featureDiameter: entry.featureDiameter ?? 0.0,
     );
+    calculate();
   }
 
   void updateSpindleSpeed(String rawValue) {
     final val = AppNumberFormatter.tryParse(rawValue);
-    if (val != null) state = state.copyWith(spindleSpeed: val);
+    state = state.copyWith(spindleSpeed: val ?? 0.0);
   }
 
   void updateFeedPerTooth(String rawValue) {
     final val = AppNumberFormatter.tryParse(rawValue);
-    if (val != null) state = state.copyWith(feedPerTooth: val);
+    state = state.copyWith(feedPerTooth: val ?? 0.0);
   }
 
   void updateTeeth(String rawValue) {
     final val = int.tryParse(rawValue);
-    if (val != null) state = state.copyWith(numberOfTeeth: val);
+    state = state.copyWith(numberOfTeeth: val ?? 0);
   }
 
   void updateToolDia(String rawValue) {
     final val = AppNumberFormatter.tryParse(rawValue);
-    if (val != null) state = state.copyWith(toolDiameter: val);
+    state = state.copyWith(toolDiameter: val ?? 0.0);
   }
 
   void updateFeatureDia(String rawValue) {
     final val = AppNumberFormatter.tryParse(rawValue);
-    if (val != null) state = state.copyWith(featureDiameter: val);
+    state = state.copyWith(featureDiameter: val ?? 0.0);
   }
 
   void toggleWorkType(bool isInternal) =>

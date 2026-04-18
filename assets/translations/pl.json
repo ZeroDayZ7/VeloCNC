@@ -22,11 +22,13 @@
     "tap_drill": "Wiertła pod gwint"
   },
   "common": {
+    "calculate": "Oblicz",
     "history": "Ostatnie obliczenia",
     "understand": "Rozumiem",
     "close": "Zamknij",
     "back": "Powrót",
-    "no_data": "Brak danych"
+    "no_data": "Brak danych",
+    "cancel": "Anuluj"
   },
   "feed_rate": {
     "history_tooltip": "Historia obliczeń",

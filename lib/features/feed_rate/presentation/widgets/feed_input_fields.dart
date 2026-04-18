@@ -24,7 +24,7 @@ class FeedInputFields extends ConsumerWidget {
 
     return Column(
       children: [
-        TextField(
+        TextFormField(
           controller: nController,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: const InputDecoration(
@@ -32,9 +32,10 @@ class FeedInputFields extends ConsumerWidget {
             suffixText: "obr/min",
           ),
           onChanged: notifier.updateSpindleSpeed,
+          validator: (v) => (v == null || v.isEmpty) ? "" : null,
         ),
         AppSpacings.gapMs,
-        TextField(
+        TextFormField(
           controller: zController,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
@@ -42,9 +43,10 @@ class FeedInputFields extends ConsumerWidget {
             suffixText: "szt.",
           ),
           onChanged: notifier.updateTeeth,
+          validator: (v) => (v == null || v.isEmpty) ? "" : null,
         ),
         AppSpacings.gapMs,
-        TextField(
+        TextFormField(
           controller: fzController,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: const InputDecoration(
@@ -52,6 +54,7 @@ class FeedInputFields extends ConsumerWidget {
             suffixText: "mm",
           ),
           onChanged: notifier.updateFeedPerTooth,
+          validator: (v) => (v == null || v.isEmpty) ? "" : null,
         ),
       ],
     );
