@@ -9,6 +9,7 @@ double threadingRpm(Ref ref) {
   final state = ref.watch(threadingProvider);
 
   if (state.selectedSubgroup == null || state.selectedThread == null) return 0;
+  if (state.selectedThread!.diameter <= 0) return 0;
 
   final vc = state.toolMaterial == 'VHM'
       ? state.selectedSubgroup!.vcVhm
@@ -25,6 +26,9 @@ double threadingHoleSize(Ref ref) {
   final state = ref.watch(threadingProvider);
 
   if (state.selectedThread == null) return 0;
+  if (state.selectedThread!.diameter <= 0 || state.selectedThread!.pitch <= 0) {
+    return 0;
+  }
 
   if (state.isCutting) {
     return ThreadingMath.holeSizeCutting(

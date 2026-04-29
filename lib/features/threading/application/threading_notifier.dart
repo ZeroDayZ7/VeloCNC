@@ -1,6 +1,7 @@
 import 'package:cnc_toolbox/features/threading/data/models/material_iso.dart';
 import 'package:cnc_toolbox/features/threading/data/models/thread_standard.dart';
 import 'package:cnc_toolbox/features/threading/data/models/threading_state.dart';
+import 'package:cnc_toolbox/features/threading/data/repositories/thread_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'threading_notifier.g.dart';
@@ -9,6 +10,20 @@ part 'threading_notifier.g.dart';
 class ThreadingNotifier extends _$ThreadingNotifier {
   @override
   ThreadingState build() => const ThreadingState();
+
+  Future<void> initMaterials() async {
+    final repo = ref.read(threadRepositoryProvider);
+    final materials = await repo.loadMaterials();
+
+    if (materials.isNotEmpty) {
+      state = state.copyWith(
+        selectedMaterial: materials.first,
+        selectedSubgroup: materials.first.subgroups.isNotEmpty
+            ? materials.first.subgroups.first
+            : null,
+      );
+    }
+  }
 
   void selectMaterial(IsoMaterialGroup material) {
     state = state.copyWith(
