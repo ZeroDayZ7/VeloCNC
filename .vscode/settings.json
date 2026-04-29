@@ -1,21 +1,4 @@
 {
-  "dart.lineLength": 80,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll": "explicit"
-  },
-  "[dart]": {
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "always",
-      "source.fixAll": "always"
-    },
-    "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "editor.selectionHighlight": false
-  },
-  "dart.analysisExcludedFolders": ["build", ".dart_tool"],
-  "dart.updateImportsOnRename": true,
-  "dart.completeFunctionCalls": true,
   // (Explorer)
   "files.exclude": {
     "**/.dart_tool": true,
@@ -39,8 +22,8 @@
     "LICENSE": true,
     "devtools_options.yaml": true,
     "flutter_launcher_icons.yaml": true,
-    "**/*.freezed.dart": true,
-    "**/*.g.dart": true,
+    // "**/*.freezed.dart": true,
+    // "**/*.g.dart": true,
     "android": true,
     "cnc_toolbox.iml": true,
     "raw_assets/": true
@@ -85,5 +68,22 @@
   "files.watcherExclude": {
     "**/*.g.dart": true,
     "**/*.freezed.dart": true
-  }
+  },
+  "dart.lineLength": 80,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "[dart]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+      "source.fixAll": "always"
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.selectionHighlight": false
+  },
+  "dart.analysisExcludedFolders": ["build", ".dart_tool"],
+  "dart.updateImportsOnRename": true,
+  "dart.completeFunctionCalls": true
 }

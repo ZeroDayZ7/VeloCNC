@@ -9,14 +9,16 @@ part 'tolerance_controller.g.dart';
 
 @Riverpod(keepAlive: true)
 class ToleranceController extends _$ToleranceController {
+  late final ToleranceService _service;
+
   @override
   FutureOr<TolerancePageState> build() async {
-    final service = await ref.watch(toleranceServiceProvider.future);
-    return _initialState(service);
+    _service = await ref.watch(toleranceServiceProvider.future);
+    return _initialState();
   }
 
-  TolerancePageState _initialState(ToleranceService service) {
-    final letters = service.getLetters(ToleranceType.hole);
+  TolerancePageState _initialState() {
+    final letters = _service.getLetters(ToleranceType.hole);
     final initialLetter = letters.contains(ToleranceDefaults.holeLetter)
         ? ToleranceDefaults.holeLetter
         : (letters.isNotEmpty ? letters.first : null);
@@ -25,7 +27,7 @@ class ToleranceController extends _$ToleranceController {
     String? initialNumber;
 
     if (initialLetter != null) {
-      numbers = service.getNumbersForLetter(ToleranceType.hole, initialLetter);
+      numbers = _service.getNumbersForLetter(ToleranceType.hole, initialLetter);
       initialNumber = numbers.contains(ToleranceDefaults.grade)
           ? ToleranceDefaults.grade
           : (numbers.isNotEmpty ? numbers.first : null);
@@ -42,8 +44,7 @@ class ToleranceController extends _$ToleranceController {
 
   void updateType(ToleranceType newType) {
     state = state.whenData((s) {
-      final service = ref.read(toleranceServiceProvider).requireValue;
-      final letters = service.getLetters(newType);
+      final letters = _service.getLetters(newType);
 
       String? letter;
       if (newType == ToleranceType.hole) {
@@ -90,8 +91,7 @@ class ToleranceController extends _$ToleranceController {
   TolerancePageState _updateNumbersForState(TolerancePageState currentState) {
     if (currentState.selectedLetter == null) return currentState;
 
-    final service = ref.read(toleranceServiceProvider).requireValue;
-    final numbers = service.getNumbersForLetter(
+    final numbers = _service.getNumbersForLetter(
       currentState.type,
       currentState.selectedLetter!,
     );
@@ -114,8 +114,7 @@ class ToleranceController extends _$ToleranceController {
       return currentState.copyWith(result: null);
     }
 
-    final service = ref.read(toleranceServiceProvider).requireValue;
-    final result = service.calculate(
+    final result = _service.calculate(
       diameter,
       currentState.selectedLetter!,
       currentState.selectedNumber!,

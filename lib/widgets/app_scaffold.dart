@@ -31,7 +31,6 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDesktop = context.isDesktop;
 
-    // 1. Definicja lokalna (bez podkreślenia)
     PreferredSizeWidget? buildAppBar() {
       if (titleKey == null) return null;
       return CncAppBar(titleKey: titleKey!, actions: actions, bottom: bottom);

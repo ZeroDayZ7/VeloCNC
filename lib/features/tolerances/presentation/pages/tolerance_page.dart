@@ -24,7 +24,7 @@ class TolerancePage extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, _) => Center(child: Text(err.toString())),
         data: (state) => SingleChildScrollView(
-          padding: AppSpacings.edgeInsetsM,
+          padding: AppSpacings.edgeInsetsS,
           child: Column(
             children: [
               SegmentedButton<ToleranceType>(
