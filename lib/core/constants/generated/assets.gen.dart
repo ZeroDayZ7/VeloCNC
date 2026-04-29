@@ -20,11 +20,22 @@ class $AssetsDataGen {
   /// File path: assets/data/g_codes.json
   String get gCodes => 'assets/data/g_codes.json';
 
+  /// File path: assets/data/iso-513-material-engine.json
+  String get iso513MaterialEngine => 'assets/data/iso-513-material-engine.json';
+
+  /// File path: assets/data/iso_513_materials.json
+  String get iso513Materials => 'assets/data/iso_513_materials.json';
+
   /// File path: assets/data/tolerances.json
   String get tolerances => 'assets/data/tolerances.json';
 
   /// List of all assets
-  List<String> get values => [gCodes, tolerances];
+  List<String> get values => [
+    gCodes,
+    iso513MaterialEngine,
+    iso513Materials,
+    tolerances,
+  ];
 }
 
 class $AssetsImagesGen {

@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "standard": "ISO 513:2012",
+  "materials_db": [
+    {
+      "group_id": "P",
+      "name": "Stal",
+      "color": "#0000FF",
+      "subgroups": [
+        {
+          "id": "P01-P10",
+          "type": "Niskowęglowa",
+          "hardness_max_hb": 180,
+          "v_c_hss": 25,
+          "v_c_vhm": 100
+        },
+        {
+          "id": "P20-P30",
+          "type": "Średniowęglowa / Stopowa",
+          "hardness_max_hb": 280,
+          "v_c_hss": 15,
+          "v_c_vhm": 70
+        },
+        {
+          "id": "P40-P50",
+          "type": "Wysokostopowa / Narzędziowa",
+          "hardness_max_hb": 350,
+          "v_c_hss": 10,
+          "v_c_vhm": 40
+        }
+      ],
+      "factors": {
+        "swelling_ratio": 1.0,
+        "safety_margin_mm": 0.0,
+        "recommended_fill_pct": 75
+      }
+    },
+    {
+      "group_id": "M",
+      "name": "Stal Nierdzewna",
+      "color": "#FFFF00",
+      "subgroups": [
+        {
+          "id": "M10-M20",
+          "type": "Ferrytyczna / Martenzytyczna",
+          "hardness_max_hb": 230,
+          "v_c_hss": 12,
+          "v_c_vhm": 50
+        },
+        {
+          "id": "M30-M40",
+          "type": "Austenityczna / Duplex",
+          "hardness_max_hb": 300,
+          "v_c_hss": 8,
+          "v_c_vhm": 30
+        }
+      ],
+      "factors": {
+        "swelling_ratio": 1.05,
+        "safety_margin_mm": 0.05,
+        "recommended_fill_pct": 70
+      }
+    },
+    {
+      "group_id": "K",
+      "name": "Żeliwo",
+      "color": "#FF0000",
+      "subgroups": [
+        {
+          "id": "K01-K20",
+          "type": "Szare (GG)",
+          "hardness_max_hb": 250,
+          "v_c_hss": 20,
+          "v_c_vhm": 90
+        },
+        {
+          "id": "K30-K40",
+          "type": "Sferoidalne (GGG)",
+          "hardness_max_hb": 300,
+          "v_c_hss": 15,
+          "v_c_vhm": 60
+        }
+      ],
+      "factors": {
+        "swelling_ratio": 0.98,
+        "safety_margin_mm": 0.0,
+        "recommended_fill_pct": 75
+      }
+    },
+    {
+      "group_id": "N",
+      "name": "Metale Nieżelazne",
+      "color": "#00FF00",
+      "subgroups": [
+        {
+          "id": "N01-N15",
+          "type": "Aluminium (Czyste / Plastyczne)",
+          "hardness_max_hb": 100,
+          "v_c_hss": 40,
+          "v_c_vhm": 150
+        },
+        {
+          "id": "N20-N30",
+          "type": "Alu Si > 10% / Miedź / Mosiądz",
+          "hardness_max_hb": 180,
+          "v_c_hss": 30,
+          "v_c_vhm": 120
+        }
+      ],
+      "factors": {
+        "swelling_ratio": 1.02,
+        "safety_margin_mm": 0.0,
+        "recommended_fill_pct": 75
+      }
+    },
+    {
+      "group_id": "S",
+      "name": "Superstopy i Tytan",
+      "color": "#8B4513",
+      "subgroups": [
+        {
+          "id": "S01-S15",
+          "type": "Stopy Tytanu",
+          "hardness_max_hb": 350,
+          "v_c_hss": 6,
+          "v_c_vhm": 25
+        },
+        {
+          "id": "S20-S30",
+          "type": "Żaroodporne (Inconel / Hastelloy)",
+          "hardness_max_hb": 400,
+          "v_c_hss": 4,
+          "v_c_vhm": 15
+        }
+      ],
+      "factors": {
+        "swelling_ratio": 1.08,
+        "safety_margin_mm": 0.1,
+        "recommended_fill_pct": 65
+      }
+    },
+    {
+      "group_id": "H",
+      "name": "Materiały Twarde",
+      "color": "#808080",
+      "subgroups": [
+        {
+          "id": "H01-H15",
+          "type": "Stal Hartowana < 55 HRC",
+          "hardness_max_hrc": 55,
+          "v_c_hss": 2,
+          "v_c_vhm": 15
+        },
+        {
+          "id": "H20-H35",
+          "type": "Stal Hartowana > 55 HRC",
+          "hardness_max_hrc": 63,
+          "v_c_hss": 0,
+          "v_c_vhm": 8
+        }
+      ],
+      "factors": {
+        "swelling_ratio": 1.0,
+        "safety_margin_mm": 0.15,
+        "recommended_fill_pct": 60
+      }
+    }
+  ],
+  "global_logic": {
+    "units": "metric",
+    "formulas": {
+      "rpm": "(v_c * 1000) / (PI * d)",
+      "feed_tap": "rpm * pitch",
+      "hole_forming": "d - (0.45 * pitch)",
+      "hole_cutting": "d - pitch"
+    }
+  }
+}

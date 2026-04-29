@@ -1,21 +1,4 @@
 {
-  "dart.lineLength": 80,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll": "explicit"
-  },
-  "[dart]": {
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "always",
-      "source.fixAll": "always"
-    },
-    "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "editor.selectionHighlight": false
-  },
-  "dart.analysisExcludedFolders": ["build", ".dart_tool"],
-  "dart.updateImportsOnRename": true,
-  "dart.completeFunctionCalls": true,
   // (Explorer)
   "files.exclude": {
     "**/.dart_tool": true,
@@ -24,13 +7,14 @@
     ".metadata": true,
     "**/.kotlin": true,
     "**/build": true,
-    // "analysis_options.yaml": true,
+    "analysis_options.yaml": true,
     "obywatel_app.iml": true,
     "ios": true,
     "linux": true,
     "macos": true,
     "web": true,
     "windows": true,
+    "scripts/": true,
     "test": true,
     ".gitattributes": true,
     "pubspec.lock": true,
@@ -41,7 +25,8 @@
     // "**/*.freezed.dart": true,
     // "**/*.g.dart": true,
     "android": true,
-    "cnc_toolbox.iml": true
+    "cnc_toolbox.iml": true,
+    "raw_assets/": true
   },
 
   // (Search)
@@ -75,12 +60,30 @@
     "**/*.freezed.dart": true,
     "**/*.g.dart": true,
     "**/*.txt": true,
-    "cnc_toolbox.iml": true
+    "cnc_toolbox.iml": true,
+    "raw_assets/": true
   },
   "search.useIgnoreFiles": true,
   "search.useGlobalIgnoreFiles": true,
   "files.watcherExclude": {
     "**/*.g.dart": true,
     "**/*.freezed.dart": true
-  }
+  },
+  "dart.lineLength": 80,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "[dart]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+      "source.fixAll": "always"
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.selectionHighlight": false
+  },
+  "dart.analysisExcludedFolders": ["build", ".dart_tool"],
+  "dart.updateImportsOnRename": true,
+  "dart.completeFunctionCalls": true
 }

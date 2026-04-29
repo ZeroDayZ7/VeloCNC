@@ -19,14 +19,16 @@
     "tolerances": "Tolerancje pasowania",
     "gd_symbols": "Symbole GD&T",
     "g_codes": "G Codes",
-    "tap_drill": "Wiertła pod gwint"
+    "tap_drill": "Kalkulator gwintowania"
   },
   "common": {
+    "calculate": "Oblicz",
     "history": "Ostatnie obliczenia",
     "understand": "Rozumiem",
     "close": "Zamknij",
     "back": "Powrót",
-    "no_data": "Brak danych"
+    "no_data": "Brak danych",
+    "cancel": "Anuluj"
   },
   "feed_rate": {
     "history_tooltip": "Historia obliczeń",
@@ -65,7 +67,7 @@
     "tolerances": "Oblicz tolerancje i pasowania otworów oraz wałków",
     "gd_symbols": "Tolerancje geometryczne kształtu i położenia",
     "g_codes": "Podręcznik referencyjny kodów G CNC",
-    "tap_drill": "Dobierz odpowiednie wiertło pod gwint"
+    "tap_drill": "Wymiar przygotowania pod gwint"
   },
   "gd_symbols": {
     "title": "Symbole GD&T",

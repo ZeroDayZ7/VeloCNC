@@ -58,7 +58,7 @@ final class FeedRateNotifierProvider
   }
 }
 
-String _$feedRateNotifierHash() => r'8f07a2a567d1953942342c822fccf854562f110a';
+String _$feedRateNotifierHash() => r'589bb1fe979d448bebfb5fd1d200863f1f891730';
 
 final class FeedRateNotifierFamily extends $Family
     with
