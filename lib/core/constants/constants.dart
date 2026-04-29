@@ -48,3 +48,27 @@ abstract class AppOpacity {
   static const subtle = 0.08;
   static const disabled = 0.38;
 }
+
+/// --- UNIT IDENTIFIERS ---
+abstract class UnitIds {
+  static const meter = 'm';
+  static const millimeter = 'mm';
+  static const micrometer = 'um';
+  static const kilometer = 'km';
+  static const inch = 'inch';
+
+  static const symbolMeter = 'm';
+  static const symbolMillimeter = 'mm';
+  static const symbolMicrometer = 'µm';
+  static const symbolKilometer = 'km';
+  static const symbolInch = 'in';
+}
+
+/// --- CONVERSION FACTORS ---
+abstract class UnitConstants {
+  static const double mToM = 1;
+  static const double mmToM = 0.001;
+  static const double umToM = 0.000001;
+  static const double kmToM = 1000.0;
+  static const double inchToM = 0.0254;
+}

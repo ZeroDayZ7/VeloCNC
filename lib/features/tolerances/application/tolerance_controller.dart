@@ -10,10 +10,8 @@ part 'tolerance_controller.g.dart';
 @Riverpod(keepAlive: true)
 class ToleranceController extends _$ToleranceController {
   @override
-  TolerancePageState build() {
-    final service = ref.watch(toleranceServiceProvider).value;
-    if (service == null) return const TolerancePageState();
-
+  FutureOr<TolerancePageState> build() async {
+    final service = await ref.watch(toleranceServiceProvider.future);
     return _initialState(service);
   }
 
@@ -43,77 +41,86 @@ class ToleranceController extends _$ToleranceController {
   }
 
   void updateType(ToleranceType newType) {
-    final service = ref.read(toleranceServiceProvider).requireValue;
-    final letters = service.getLetters(newType);
+    state = state.whenData((s) {
+      final service = ref.read(toleranceServiceProvider).requireValue;
+      final letters = service.getLetters(newType);
 
-    String? letter;
-    if (newType == ToleranceType.hole) {
-      letter = letters.contains(ToleranceDefaults.holeLetter)
-          ? ToleranceDefaults.holeLetter
-          : (letters.isNotEmpty ? letters.first : null);
-    } else {
-      letter = letters.contains(ToleranceDefaults.shaftLetter)
-          ? ToleranceDefaults.shaftLetter
-          : (letters.isNotEmpty ? letters.first : null);
-    }
+      String? letter;
+      if (newType == ToleranceType.hole) {
+        letter = letters.contains(ToleranceDefaults.holeLetter)
+            ? ToleranceDefaults.holeLetter
+            : (letters.isNotEmpty ? letters.first : null);
+      } else {
+        letter = letters.contains(ToleranceDefaults.shaftLetter)
+            ? ToleranceDefaults.shaftLetter
+            : (letters.isNotEmpty ? letters.first : null);
+      }
 
-    state = state.copyWith(
-      type: newType,
-      selectedLetter: letter,
-      availableLetters: letters,
-      result: null,
-    );
-    _updateNumbers();
+      final newState = s.copyWith(
+        type: newType,
+        selectedLetter: letter,
+        availableLetters: letters,
+        result: null,
+      );
+      return _updateNumbersForState(newState);
+    });
   }
 
   void updateDiameter(String value) {
-    state = state.copyWith(diameterInput: value);
-    _calculate();
+    state = state.whenData((s) {
+      final newState = s.copyWith(diameterInput: value);
+      return _calculateForState(newState);
+    });
   }
 
   void updateLetter(String? letter) {
-    state = state.copyWith(selectedLetter: letter, result: null);
-    _updateNumbers();
+    state = state.whenData((s) {
+      final newState = s.copyWith(selectedLetter: letter, result: null);
+      return _updateNumbersForState(newState);
+    });
   }
 
   void updateNumber(String? number) {
-    state = state.copyWith(selectedNumber: number);
-    _calculate();
+    state = state.whenData((s) {
+      final newState = s.copyWith(selectedNumber: number);
+      return _calculateForState(newState);
+    });
   }
 
-  void _updateNumbers() {
-    if (state.selectedLetter == null) return;
+  TolerancePageState _updateNumbersForState(TolerancePageState currentState) {
+    if (currentState.selectedLetter == null) return currentState;
+
     final service = ref.read(toleranceServiceProvider).requireValue;
     final numbers = service.getNumbersForLetter(
-      state.type,
-      state.selectedLetter!,
+      currentState.type,
+      currentState.selectedLetter!,
     );
 
-    state = state.copyWith(
+    final nextState = currentState.copyWith(
       availableNumbers: numbers,
       selectedNumber: numbers.contains(ToleranceDefaults.grade)
           ? ToleranceDefaults.grade
           : (numbers.isNotEmpty ? numbers.first : null),
     );
-    _calculate();
+
+    return _calculateForState(nextState);
   }
 
-  void _calculate() {
-   final diameter = AppNumberFormatter.tryParse(state.diameterInput);
+  TolerancePageState _calculateForState(TolerancePageState currentState) {
+    final diameter = AppNumberFormatter.tryParse(currentState.diameterInput);
     if (diameter == null ||
-        state.selectedLetter == null ||
-        state.selectedNumber == null) {
-      state = state.copyWith(result: null);
-      return;
+        currentState.selectedLetter == null ||
+        currentState.selectedNumber == null) {
+      return currentState.copyWith(result: null);
     }
 
     final service = ref.read(toleranceServiceProvider).requireValue;
     final result = service.calculate(
       diameter,
-      state.selectedLetter!,
-      state.selectedNumber!,
-      state.type,
+      currentState.selectedLetter!,
+      currentState.selectedNumber!,
+      currentState.type,
     );
-    state = state.copyWith(result: result);
+    return currentState.copyWith(result: result);
   }
 }
