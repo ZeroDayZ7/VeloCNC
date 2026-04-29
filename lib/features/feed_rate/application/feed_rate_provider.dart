@@ -1,7 +1,7 @@
 import 'package:cnc_toolbox/core/models/result.dart';
 import 'package:cnc_toolbox/core/utils/app_number_formatter.dart';
 import 'package:cnc_toolbox/core/utils/logger/logger_provider.dart';
-import 'package:cnc_toolbox/features/feed_rate/application/feed_rate_computed.dart';
+import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_calculator.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_rate_state.dart';
 import 'package:cnc_toolbox/features/feed_rate/domain/feed_type.dart';
 import 'package:cnc_toolbox/features/history/data/history_repository_provider.dart';
@@ -17,14 +17,27 @@ class FeedRateNotifier extends _$FeedRateNotifier {
   FeedRateState build(FeedType type) => const FeedRateState();
 
   void calculate() {
-    final vf = ref.read(feedRateVfProvider(type));
-    final avf = ref.read(adjustedFeedRateProvider(type));
-    final f = ref.read(feedRateFProvider(type));
-
-    state = state.copyWith(
-      resultVf: type == FeedType.arc ? avf : vf,
-      resultF: f,
+    final vf = FeedRateCalculator.calculateMillingFeed(
+      spindleSpeed: state.spindleSpeed,
+      feedPerTooth: state.feedPerTooth,
+      numberOfTeeth: state.numberOfTeeth,
     );
+
+    final f = (state.feedPerTooth > 0 && state.numberOfTeeth > 0)
+        ? state.feedPerTooth * state.numberOfTeeth
+        : 0.0;
+
+    double finalVf = vf;
+    if (type == FeedType.arc) {
+      finalVf = FeedRateCalculator.calculateAdjustedFeed(
+        baseFeed: vf,
+        toolDiameter: state.toolDiameter,
+        featureDiameter: state.featureDiameter,
+        isInternal: state.isInternal,
+      );
+    }
+
+    state = state.copyWith(resultVf: finalVf, resultF: f);
   }
 
   Future<void> save() async {
@@ -33,26 +46,34 @@ class FeedRateNotifier extends _$FeedRateNotifier {
 
     if (state.resultVf <= 0) return;
 
-    final result = await repo.saveFeedCalculation(
-      n: state.spindleSpeed,
-      fz: state.feedPerTooth,
-      z: state.numberOfTeeth,
-      vf: state.resultVf,
-      d: state.toolDiameter > 0 ? state.toolDiameter : null,
-      dWork: state.featureDiameter > 0 ? state.featureDiameter : null,
-    );
+    final operation = await AsyncValue.guard(() async {
+      final res = await repo.saveFeedCalculation(
+        n: state.spindleSpeed,
+        fz: state.feedPerTooth,
+        z: state.numberOfTeeth,
+        vf: state.resultVf,
+        d: state.toolDiameter > 0 ? state.toolDiameter : null,
+        dWork: state.featureDiameter > 0 ? state.featureDiameter : null,
+      );
 
-    switch (result) {
-      case Success():
+      return switch (res) {
+        Success(data: final d) => d,
+        Failure(error: final e) => throw Exception(e.toString()),
+      };
+    });
+
+    operation.whenOrNull(
+      data: (_) {
         log.i("Saved calculation to history", module: "FEED_RATE");
         ref.read(historyProvider.notifier).refreshHistory();
-      case Failure(error: final e):
-        log.e("Save to history failed", module: "DATABASE", error: e);
-    }
+      },
+      error: (e, _) =>
+          log.e("Save to history failed", module: "DATABASE", error: e),
+    );
   }
 
   void loadFromHistory(FeedHistoryItem entry) {
-    state = state.copyWith(
+    state = FeedRateState(
       spindleSpeed: entry.n,
       feedPerTooth: entry.fz,
       numberOfTeeth: entry.z,
@@ -87,6 +108,7 @@ class FeedRateNotifier extends _$FeedRateNotifier {
     state = state.copyWith(featureDiameter: val ?? 0.0);
   }
 
-  void toggleWorkType(bool isInternal) =>
-      state = state.copyWith(isInternal: isInternal);
+  void toggleWorkType(bool isInternal) {
+    state = state.copyWith(isInternal: isInternal);
+  }
 }
