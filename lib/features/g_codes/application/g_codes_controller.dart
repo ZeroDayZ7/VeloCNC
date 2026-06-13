@@ -41,9 +41,12 @@ List<GCodeViewModel> filteredGCodes(Ref ref) {
 
   return asyncState.maybeWhen(
     data: (state) {
+      final allCodes = state.allCodes;
       final query = state.searchQuery.toLowerCase().trim();
 
-      return state.allCodes
+      if (allCodes.isEmpty) return [];
+
+      return allCodes
           .map(
             (code) => GCodeViewModel(
               code: code.code,

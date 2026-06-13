@@ -45,6 +45,7 @@ class ToleranceInputForm extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              key: ValueKey('diameter_${selectedType}_initial'),
               initialValue: diameterInitialValue,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,

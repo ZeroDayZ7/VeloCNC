@@ -27,9 +27,15 @@
       "problemMatcher": ["$dart-build_runner"]
     },
     {
-      "label": "Flutter: Generate Assets & Locales",
+      "label": "Flutter: Generate Locale Keys",
       "type": "shell",
-      "command": "dart run scripts/generate_locale_keys.dart && dart run scripts/generate_vector_graphics.dart",
+      "command": "dart run scripts/generate_locale_keys.dart",
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Generate Vector Graphics",
+      "type": "shell",
+      "command": "dart run scripts/generate_vector_graphics.dart",
       "problemMatcher": []
     },
     {
@@ -43,8 +49,9 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "Flutter: Generate Icons",
+        "Flutter: Generate Locale Keys",
+        "Flutter: Generate Vector Graphics",
         "Flutter: Build Runner",
-        "Flutter: Generate Assets & Locales",
         "Flutter: Fix & Analyze"
       ],
       "problemMatcher": [],

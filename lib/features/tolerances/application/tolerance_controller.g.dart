@@ -13,7 +13,7 @@ part of 'tolerance_controller.dart';
 final toleranceControllerProvider = ToleranceControllerProvider._();
 
 final class ToleranceControllerProvider
-    extends $NotifierProvider<ToleranceController, TolerancePageState> {
+    extends $AsyncNotifierProvider<ToleranceController, TolerancePageState> {
   ToleranceControllerProvider._()
     : super(
         from: null,
@@ -31,30 +31,24 @@ final class ToleranceControllerProvider
   @$internal
   @override
   ToleranceController create() => ToleranceController();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(TolerancePageState value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<TolerancePageState>(value),
-    );
-  }
 }
 
 String _$toleranceControllerHash() =>
-    r'6b77240b20355fa4853c64a7dcb1f47d7fc96dad';
+    r'79ca67887907a9e207278fd6c8b93888dc0250f3';
 
-abstract class _$ToleranceController extends $Notifier<TolerancePageState> {
-  TolerancePageState build();
+abstract class _$ToleranceController
+    extends $AsyncNotifier<TolerancePageState> {
+  FutureOr<TolerancePageState> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<TolerancePageState, TolerancePageState>;
+    final ref =
+        this.ref as $Ref<AsyncValue<TolerancePageState>, TolerancePageState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<TolerancePageState, TolerancePageState>,
-              TolerancePageState,
+              AnyNotifier<AsyncValue<TolerancePageState>, TolerancePageState>,
+              AsyncValue<TolerancePageState>,
               Object?,
               Object?
             >;

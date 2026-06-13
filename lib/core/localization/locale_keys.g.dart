@@ -22,11 +22,13 @@ abstract class  LocaleKeys {
   static const tools_g_codes = 'tools.g_codes';
   static const tools_tap_drill = 'tools.tap_drill';
   static const tools = 'tools';
+  static const common_calculate = 'common.calculate';
   static const common_history = 'common.history';
   static const common_understand = 'common.understand';
   static const common_close = 'common.close';
   static const common_back = 'common.back';
   static const common_no_data = 'common.no_data';
+  static const common_cancel = 'common.cancel';
   static const common = 'common';
   static const feed_rate_history_tooltip = 'feed_rate.history_tooltip';
   static const feed_rate_save_params_tooltip = 'feed_rate.save_params_tooltip';

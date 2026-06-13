@@ -27,12 +27,7 @@ class AboutSection extends ConsumerWidget {
           shape: RoundedRectangleBorder(borderRadius: AppRadii.radiusL),
           title: Text(LocaleKeys.about.tr()),
           content: ConstrainedBox(
-            constraints: const BoxConstraints(
-              // Maksymalna szerokość dla desktopu/tabletów
-              maxWidth: 450,
-              // Minimalna szerokość, żeby dialog nie był "chudy" przy krótkim tekście
-              minWidth: 300,
-            ),
+            constraints: const BoxConstraints(maxWidth: 450, minWidth: 300),
             child: IntrinsicWidth(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -98,7 +93,7 @@ class _Content extends StatelessWidget {
           icon: Icons.language_outlined,
           label: LocaleKeys.website.tr(),
           value: AppInfo.websiteUrl,
-          onLaunch: onLaunch, // Przekazujemy onLaunch by dodać ikonę
+          onLaunch: onLaunch,
           onTap: () => onLaunch(AppInfo.websiteUrl),
         ),
         const Divider(height: 32),

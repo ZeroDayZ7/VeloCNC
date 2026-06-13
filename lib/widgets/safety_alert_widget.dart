@@ -1,3 +1,5 @@
+import 'package:cnc_toolbox/core/theme/app_colors.dart';
+import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -9,23 +11,26 @@ class SafetyAlertWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: AppSpacings.m),
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: AppSpacings.edgeInsetsMs,
         decoration: BoxDecoration(
-          color: Colors.orange.withValues(alpha:0.1),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.orange),
+          color: AppColors.statusWarning.withValues(alpha: 0.1),
+          borderRadius: AppRadii.radiusM,
+          border: Border.all(color: AppColors.statusWarning),
         ),
         child: Row(
           children: [
-            const Icon(Icons.warning_amber_rounded, color: Colors.orange),
-            const SizedBox(width: 12),
+            const Icon(
+              Icons.warning_amber_rounded,
+              color: AppColors.statusWarning,
+            ),
+            AppSpacings.gapMs,
             Expanded(
               child: Text(
                 alertKey.tr(),
                 style: const TextStyle(
-                  color: Colors.orange,
+                  color: AppColors.statusWarning,
                   fontWeight: FontWeight.bold,
                 ),
               ),

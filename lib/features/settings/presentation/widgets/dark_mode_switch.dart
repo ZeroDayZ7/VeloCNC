@@ -9,8 +9,9 @@ class DarkModeSwitch extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeProvider);
-    final isDarkMode = themeMode == ThemeMode.dark;
+    final isDarkMode = ref.watch(
+      themeProvider.select((mode) => mode == ThemeMode.dark),
+    );
 
     return SwitchListTile(
       secondary: const Icon(Icons.dark_mode_outlined),

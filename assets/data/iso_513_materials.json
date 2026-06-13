@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "last_update": "2026-04-29",
+  "iso_main_groups": [
+    {
+      "id": "P",
+      "name_pl": "Stal",
+      "name_en": "Steel",
+      "color_hex": "#0000FF",
+      "description": "Wszystkie rodzaje stali i staliwa z wyjątkiem stali nierdzewnej austenitycznej.",
+      "application_groups": [
+        {
+          "code": "P01",
+          "characteristics": "Wysoka prędkość, wysoka odporność na zużycie, niska udarność.",
+          "hardness_range": "HB < 180"
+        },
+        {
+          "code": "P20",
+          "characteristics": "Zbalansowana odporność i udarność - standard przemysłowy.",
+          "hardness_range": "HB 180-280"
+        }
+      ],
+      "threading_factors": {
+        "swelling_factor": 1.0,
+        "recommended_fill_pct": 75
+      }
+    },
+    {
+      "id": "M",
+      "name_pl": "Stal nierdzewna",
+      "name_en": "Stainless Steel",
+      "color_hex": "#FFFF00",
+      "description": "Stale nierdzewne austenityczne i ferrytyczno-austenityczne.",
+      "application_groups": [
+        { "code": "M10", "hardness_range": "HB 150-250" },
+        { "code": "M30", "hardness_range": "HB 200-300" }
+      ],
+      "threading_factors": {
+        "swelling_factor": 1.05,
+        "recommended_fill_pct": 70
+      }
+    }
+  ],
+  "tool_materials": [
+    {
+      "id": "HSS",
+      "name": "Stal szybkotnąca",
+      "cutting_speeds": {
+        "P": { "min": 10, "max": 25 },
+        "M": { "min": 5, "max": 12 },
+        "K": { "min": 15, "max": 30 },
+        "N": { "min": 20, "max": 60 }
+      }
+    },
+    {
+      "id": "VHM",
+      "name": "Węglik spiekany",
+      "cutting_speeds": {
+        "P": { "min": 60, "max": 120 },
+        "M": { "min": 30, "max": 80 }
+      }
+    }
+  ]
+}

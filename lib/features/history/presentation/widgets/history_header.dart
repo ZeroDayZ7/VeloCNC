@@ -61,7 +61,7 @@ class HistoryHeader extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Anuluj"),
+            child: Text(LocaleKeys.common_cancel.tr()),
           ),
           TextButton(
             onPressed: () {

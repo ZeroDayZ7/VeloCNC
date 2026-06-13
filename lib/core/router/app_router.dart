@@ -11,7 +11,7 @@ import 'package:cnc_toolbox/features/gd&t_symbols/presentation/pages/symbols_pag
 import 'package:cnc_toolbox/features/home/presentation/pages/home_page.dart';
 import 'package:cnc_toolbox/features/settings/presentation/pages/settings_page.dart';
 import 'package:cnc_toolbox/features/spindle_speed/spindle_speed_page.dart';
-import 'package:cnc_toolbox/features/tap_drill/presentation/pages/tap_drill_page.dart';
+import 'package:cnc_toolbox/features/threading/presentation/pages/threading_page.dart';
 import 'package:cnc_toolbox/features/tolerances/presentation/pages/tolerance_page.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +124,7 @@ class TapDrillRoute extends GoRouteData with $TapDrillRoute, ToolRouteMixin {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const TapDrillPage();
+      const ThreadingPage();
 }
 
 class ConverterRoute extends GoRouteData with $ConverterRoute, ToolRouteMixin {

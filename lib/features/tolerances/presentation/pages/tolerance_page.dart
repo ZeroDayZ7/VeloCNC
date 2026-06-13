@@ -1,7 +1,6 @@
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/core/theme/app_design.dart';
 import 'package:cnc_toolbox/features/tolerances/application/tolerance_controller.dart';
-import 'package:cnc_toolbox/features/tolerances/application/tolerance_provider.dart';
 import 'package:cnc_toolbox/features/tolerances/domain/tolerance_models.dart';
 import 'package:cnc_toolbox/features/tolerances/presentation/widgets/tolerance_input_form.dart';
 import 'package:cnc_toolbox/features/tolerances/presentation/widgets/tolerance_result_display.dart';
@@ -15,18 +14,17 @@ class TolerancePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final serviceAsync = ref.watch(toleranceServiceProvider);
-    final ctrl = ref.watch(toleranceControllerProvider);
+    final stateAsync = ref.watch(toleranceControllerProvider);
     final notifier = ref.read(toleranceControllerProvider.notifier);
 
     return AppScaffold(
       titleKey: LocaleKeys.tools_tolerances,
       scrollable: false,
-      child: serviceAsync.when(
+      child: stateAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, _) => Center(child: Text(err.toString())),
-        data: (_) => SingleChildScrollView(
-          padding: AppSpacings.edgeInsetsM,
+        data: (state) => SingleChildScrollView(
+          padding: AppSpacings.edgeInsetsS,
           child: Column(
             children: [
               SegmentedButton<ToleranceType>(
@@ -42,24 +40,24 @@ class TolerancePage extends ConsumerWidget {
                     icon: const Icon(Icons.panorama_fish_eye),
                   ),
                 ],
-                selected: {ctrl.type},
+                selected: {state.type},
                 onSelectionChanged: (set) => notifier.updateType(set.first),
               ),
               AppSpacings.gapM,
               ToleranceInputForm(
-                diameterInitialValue: ctrl.diameterInput,
-                selectedType: ctrl.type,
-                selectedLetter: ctrl.selectedLetter,
-                selectedNumber: ctrl.selectedNumber,
-                letters: ctrl.availableLetters,
-                numbers: ctrl.availableNumbers,
+                diameterInitialValue: state.diameterInput,
+                selectedType: state.type,
+                selectedLetter: state.selectedLetter,
+                selectedNumber: state.selectedNumber,
+                letters: state.availableLetters,
+                numbers: state.availableNumbers,
                 onDiameterChanged: notifier.updateDiameter,
                 onLetterChanged: notifier.updateLetter,
                 onNumberChanged: notifier.updateNumber,
               ),
               AppSpacings.gapL,
-              if (ctrl.result != null)
-                ToleranceResultDisplay(res: ctrl.result!),
+              if (state.result != null)
+                ToleranceResultDisplay(res: state.result!),
             ],
           ),
         ),

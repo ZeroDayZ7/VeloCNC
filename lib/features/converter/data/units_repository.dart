@@ -1,4 +1,5 @@
 // lib/features/converter/data/units_repository.dart
+import 'package:cnc_toolbox/core/constants/constants.dart';
 import 'package:cnc_toolbox/core/localization/locale_keys.g.dart';
 import 'package:cnc_toolbox/features/converter/models/unit_model.dart';
 
@@ -19,11 +20,11 @@ UnitDefinition _linear(String id, String label, String symbol, double ratio) {
 
 /// Unit definitions for length, where **Meters (m)** is the base unit.
 final List<UnitDefinition> lengthUnits = [
-  _linear('m', LocaleKeys.converter_units_m, 'm', 1.0),
-  _linear('mm', LocaleKeys.converter_units_mm, 'mm', 0.001),
-  _linear('um', LocaleKeys.converter_units_um, 'µm', 0.000001),
-  _linear('km', LocaleKeys.converter_units_km, 'km', 1000.0),
-  _linear('inch', LocaleKeys.converter_units_inch, 'in', 0.0254),
+  _linear(UnitIds.meter, LocaleKeys.converter_units_m, UnitIds.symbolMeter, UnitConstants.mToM),
+  _linear(UnitIds.millimeter, LocaleKeys.converter_units_mm, UnitIds.symbolMillimeter, UnitConstants.mmToM),
+  _linear(UnitIds.micrometer, LocaleKeys.converter_units_um, UnitIds.symbolMicrometer, UnitConstants.umToM),
+  _linear(UnitIds.kilometer, LocaleKeys.converter_units_km, UnitIds.symbolKilometer, UnitConstants.kmToM),
+  _linear(UnitIds.inch, LocaleKeys.converter_units_inch, UnitIds.symbolInch, UnitConstants.inchToM),
 ];
 
 /// Unit definitions for temperature.
